@@ -34,7 +34,7 @@ export default function Dashboard({navigation}: Props) {
                           drawerContent={(props) => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="FakeScreen" component={FakeScreen} options={({navigation}) => ({
                 headerShown: true,
-                headerLeft: () => (<Button icon="account"
+                headerLeft: () => (<Button icon="forwardburger"
                                            onPress={() => navigation.toggleDrawer()}/>),
             })}
             />

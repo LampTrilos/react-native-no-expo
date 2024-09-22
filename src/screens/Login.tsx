@@ -8,7 +8,7 @@ import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 //import { theme } from '../core/theme';
 import  customTheme  from '../assets/Theme';
-import { emailValidator, passwordValidator } from '../core/utils';
+import { usernameValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
 
 type Props = {
@@ -17,15 +17,15 @@ type Props = {
 
 const LoginScreen = ({ navigation }: Props) => {
 
-    const [email, setEmail] = useState({ value: '', error: '' });
+    const [username, setUsername] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
 
     const onLoginPressed = () => {
-        const emailError = emailValidator(email.value);
+        const usernameError = usernameValidator(username.value);
         const passwordError = passwordValidator(password.value);
 
-        if (emailError || passwordError) {
-            setEmail({ ...email, error: emailError });
+        if (usernameError || passwordError) {
+            setUsername({ ...username, error: usernameError });
             setPassword({ ...password, error: passwordError });
             return;
         }
@@ -35,20 +35,20 @@ const LoginScreen = ({ navigation }: Props) => {
 
     return (
         <Background>
-            <BackButton goBack={() => navigation.navigate('HomeScreen')} />
-            <Logo />
-            <Header style={{  color: customTheme.colors.primary}}>Entry Exit System</Header>
+            {/*<BackButton goBack={() => navigation.navigate('HomeScreen')} />*/}
+            <View style={styles.container}>
+            <Logo/>
+            <Header >Entry Exit System</Header>
             <TextInput
-                label="Email"
+                label="Username"
                 returnKeyType="next"
-                value={email.value}
-                onChangeText={text => setEmail({ value: text, error: '' })}
-                error={!!email.error}
-                errorText={email.error}
+                value={username.value}
+                onChangeText={text => setUsername({ value: text, error: '' })}
+                error={!!username.error}
+                errorText={username.error}
                 autoCapitalize="none"
-                autoCompleteType="email"
-                textContentType="emailAddress"
-                keyboardType="email-address"
+                textContentType="username"
+                keyboardType="default"
             />
 
             <TextInput
@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation }: Props) => {
             {/*</View>*/}
 
             <Button mode="contained" onPress={onLoginPressed}>
-                Login
+                Είσοδος
             </Button>
 
             {/*<View style={styles.row}>*/}
@@ -79,11 +79,19 @@ const LoginScreen = ({ navigation }: Props) => {
             {/*        <Text style={styles.link}>Sign up</Text>*/}
             {/*    </TouchableOpacity>*/}
             {/*</View>*/}
+            </View>
         </Background>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        padding: 15,
+        borderRadius: 15,
+    },
     forgotPassword: {
         width: '100%',
         alignItems: 'flex-end',

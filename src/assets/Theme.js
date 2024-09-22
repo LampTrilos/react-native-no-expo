@@ -8,7 +8,7 @@ const customTheme = {
   //customTheme,
   //colors: customTheme.colors,
   colors: {
-    "primary": "rgb(13,33,172)",
+    "primary": "rgb(6,15,95)",
     "onPrimary": "rgb(255, 255, 255)",
     "primaryContainer": "rgb(223, 224, 255)",
     "onPrimaryContainer": "rgb(0, 13, 95)",
@@ -26,7 +26,7 @@ const customTheme = {
     "onErrorContainer": "rgb(65, 0, 2)",
     "background": "rgb(255, 251, 255)",
     "onBackground": "rgb(27, 27, 31)",
-    "surface": "rgb(255, 251, 255)",
+    "surface": "rgb(255,254,254)", //The inner colour of input texts
     "onSurface": "rgb(27, 27, 31)",
     "surfaceVariant": "rgb(227, 225, 236)",
     "onSurfaceVariant": "rgb(70, 70, 79)",

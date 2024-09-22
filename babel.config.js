@@ -1,6 +1,7 @@
 module.exports = {
-  //presets: ['@babel/preset-typescript', 'module:@react-native/babel-preset'],
-  presets: ['module:@react-native/babel-preset'],
+  //presets: [, 'module:@react-native/babel-preset'],
+  presets: ['module:@react-native/babel-preset', '@babel/preset-typescript'],
+  //react-native-reanimated/plugin has to be listed last.
   plugins: [
     'react-native-paper/babel',
     'react-native-reanimated/plugin'
@@ -8,7 +9,7 @@ module.exports = {
   // env: {
   //   production: {
   //     //plugins: ['react-native-paper/babel', 'react-native-reanimated/plugin']
-  //     //react-native-reanimated/plugin has to be listed last.
+  //
   //   },
   // },
 };

@@ -6,6 +6,7 @@ import React from "react";
 
 
 import { Avatar, Button, Card, Text } from 'react-native-paper';
+import {View} from "react-native";
 
 
 
@@ -14,11 +15,12 @@ export default function Index() {
     const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
     return (
-        // <View>
-        //     <Text>
-        //         333333
-        //     </Text>
-        // </View>
+        <>
+        <View>
+            <Text>
+                333333
+            </Text>
+        </View>
         <Card>
             <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
             <Card.Content>
@@ -31,5 +33,6 @@ export default function Index() {
                 <Button>Ok</Button>
             </Card.Actions>
         </Card>
+        </>
     );
 };

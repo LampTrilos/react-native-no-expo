@@ -7,30 +7,34 @@ import {useEffect, useState} from "react";
 import {SafeAreaView, StatusBar} from 'react-native';
 import Drawer from 'react-native-paper';
 import Index from "./screens/Index.tsx";
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import { createStackNavigator } from '@react-navigation/stack';
 import { Drawer as PaperDrawer } from 'react-native-paper';
-//https://www.adhamroumie.com/blog/add-inavigation-to-the-dashboard-in-your-drawer-with-react-navigation/
+import { PaperProvider, MD3LightTheme, adaptNavigationTheme } from 'react-native-paper';
+import Login from "./screens/Login.tsx";
 
+//https://www.adhamroumie.com/blog/add-inavigation-to-the-dashboard-in-your-drawer-with-react-navigation/
 
 function App(): React.JSX.Element {
     //const [active, setActive] = useState('');
     const Drawer = createDrawerNavigator();
     const Stack = createStackNavigator();
 
+    const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: DefaultTheme });
+
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle={'light-content'}/>
-          <Index/>
-           <NavigationContainer>
+          <Login></Login>
+           {/*<NavigationContainer theme={LightTheme}>*/}
                {/*<Stack.Navigator initialRouteName="Home">*/}
                {/*    <Stack.Screen name="Home" component={Index} />*/}
                {/*</Stack.Navigator>*/}
-               <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-                   <Drawer.Screen name="Home" component={Index} />
-               </Drawer.Navigator>
-           </NavigationContainer>
+           {/*    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>*/}
+           {/*        <Drawer.Screen name="Home" component={Index} />*/}
+           {/*    </Drawer.Navigator>*/}
+           {/*</NavigationContainer>*/}
       </SafeAreaView>
 );
 }

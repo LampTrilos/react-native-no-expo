@@ -1,7 +1,7 @@
 
 const customTheme = {
   "colors": {
-    "primary": "rgb(71, 85, 182)",
+    "primary": "rgb(13,33,172)",
     "onPrimary": "rgb(255, 255, 255)",
     "primaryContainer": "rgb(223, 224, 255)",
     "onPrimaryContainer": "rgb(0, 13, 95)",

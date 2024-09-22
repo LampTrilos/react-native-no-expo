@@ -1,3 +1,10 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+   "extends": "@react-native/typescript-config/tsconfig.json"
+  //My addition
+//  "compilerOptions": {
+//    "strict": true,
+//    "esModuleInterop": true,
+//    "jsx": "react-native"
+//    // Other options...
+//  }
 }

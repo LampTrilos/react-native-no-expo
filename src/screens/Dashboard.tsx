@@ -9,7 +9,7 @@ import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 
 
-export default function Index() {
+export default function Dashboard() {
 
     const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 

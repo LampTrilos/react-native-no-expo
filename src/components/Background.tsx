@@ -7,11 +7,12 @@ import {
 
 type Props = {
   children: React.ReactNode;
+  imageUrl: string
 };
 
-const Background = ({ children }: Props) => (
+const Background = ({ children, imageUrl }: Props) => (
   <ImageBackground
-    source={require('../assets/Server_room.jpg')}
+    source={imageUrl}
     resizeMode="stretch"
     style={styles.background}
   >

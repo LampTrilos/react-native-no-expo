@@ -16,7 +16,7 @@ type Props = {
 };
 
 const LoginScreen = ({ navigation }: Props) => {
-
+    //Necessary state for user input
     const [username, setUsername] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
 
@@ -29,12 +29,15 @@ const LoginScreen = ({ navigation }: Props) => {
             setPassword({ ...password, error: passwordError });
             return;
         }
-
+        //If all is well, navigate to the next Screen
         navigation.navigate('Dashboard');
     };
 
+    //The image our Screen will pass to the Background component
+    const imagePassed = require('../assets/Server_room.jpg')
+
     return (
-        <Background>
+        <Background imageUrl={imagePassed}>
             {/*<BackButton goBack={() => navigation.navigate('HomeScreen')} />*/}
             <View style={styles.container}>
             <Logo/>

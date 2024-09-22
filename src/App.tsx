@@ -24,12 +24,12 @@ function App(): React.JSX.Element {
         <StatusBar barStyle={'light-content'}/>
           <Index/>
            <NavigationContainer>
-               <Stack.Navigator initialRouteName="Home">
-                   <Stack.Screen name="Home" component={Index} />
-               </Stack.Navigator>
-           {/*    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>*/}
-           {/*        <Drawer.Screen name="Home" component={Index} />*/}
-           {/*    </Drawer.Navigator>*/}
+               {/*<Stack.Navigator initialRouteName="Home">*/}
+               {/*    <Stack.Screen name="Home" component={Index} />*/}
+               {/*</Stack.Navigator>*/}
+               <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
+                   <Drawer.Screen name="Home" component={Index} />
+               </Drawer.Navigator>
            </NavigationContainer>
       </SafeAreaView>
 );

@@ -9,16 +9,18 @@ import customTheme from './assets/Theme'
 import 'react-native-gesture-handler';
 
 //The theme of the App can be found at /assets/Theme.js
-const theme = {
-    ...DefaultTheme,
-    colors: customTheme.colors,
- };
+// const theme = {
+//     // ...DefaultTheme,
+//     // colors: customTheme.colors,
+//     // roundness: 1
+//     customTheme
+//  };
 
 
 export default function Main() {
     return (
         // <StoreProvider store={store}>
-            <PaperProvider theme={theme}>
+            <PaperProvider theme={customTheme}>
                 <App/>
             </PaperProvider>
         // </StoreProvider>

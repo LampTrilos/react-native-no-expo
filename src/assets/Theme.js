@@ -1,6 +1,13 @@
+import {DefaultTheme} from 'react-native-paper';
 
+//This is passed to Main.tsx
 const customTheme = {
-  "colors": {
+  ...DefaultTheme,
+  version: 3,
+  roundness: 2,
+  //customTheme,
+  //colors: customTheme.colors,
+  colors: {
     "primary": "rgb(13,33,172)",
     "onPrimary": "rgb(255, 255, 255)",
     "primaryContainer": "rgb(223, 224, 255)",
@@ -42,6 +49,7 @@ const customTheme = {
     "onSurfaceDisabled": "rgba(27, 27, 31, 0.38)",
     "backdrop": "rgba(47, 48, 56, 0.4)"
   }
+
 }
 
 export default customTheme;

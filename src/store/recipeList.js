@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../hooks/axiosCall";
+import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../utils/axiosCall";
 import {recipesCategories, recipesList} from "../store/testRecipes";
 
 export const recipeListSlice = createSlice({

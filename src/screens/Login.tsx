@@ -8,8 +8,8 @@ import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 //import { theme } from '../core/theme';
 import  customTheme  from '../assets/Theme';
-import { usernameValidator, passwordValidator } from '../core/utils';
-import { Navigation } from '../types';
+import { usernameValidator, passwordValidator } from '../utils/utils';
+import { Navigation } from '../utils/types.tsx';
 
 type Props = {
     navigation: Navigation;
@@ -17,8 +17,8 @@ type Props = {
 
 const LoginScreen = ({ navigation }: Props) => {
     //Necessary state for user input
-    const [username, setUsername] = useState({ value: '', error: '' });
-    const [password, setPassword] = useState({ value: '', error: '' });
+    const [username, setUsername] = useState({ value: 'sadfasdf', error: '' });
+    const [password, setPassword] = useState({ value: 'asdfasf', error: '' });
 
     const onLoginPressed = () => {
         const usernameError = usernameValidator(username.value);
@@ -37,6 +37,7 @@ const LoginScreen = ({ navigation }: Props) => {
     const imagePassed = require('../assets/Server_room.jpg')
 
     return (
+
         <Background imageUrl={imagePassed}>
             {/*<BackButton goBack={() => navigation.navigate('HomeScreen')} />*/}
             <View style={styles.container}>

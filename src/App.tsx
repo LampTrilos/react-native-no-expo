@@ -33,10 +33,6 @@ function App(): React.JSX.Element {
                   <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }} />
                   <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>
               </Stack.Navigator>
-              {/*<Drawer.Navigator initialRouteName="Dashboard" drawerContent={(props) => <CustomDrawerContent {...props} />}>*/}
-              {/*    <Drawer.Screen name="Login" component={Login}  options={{ headerShown: false }} />*/}
-              {/*    <Drawer.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>*/}
-              {/*</Drawer.Navigator>*/}
           </NavigationContainer>
       </SafeAreaView>
 );

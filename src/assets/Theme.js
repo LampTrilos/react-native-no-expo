@@ -8,14 +8,24 @@ const customTheme = {
   //customTheme,
   //colors: customTheme.colors,
   colors: {
-    "primary": "rgb(6,15,95)",
+    //Includes buttons,
+    "primary": "rgb(2,7,62)",
     "onPrimary": "rgb(255, 255, 255)",
     "primaryContainer": "rgb(223, 224, 255)",
     "onPrimaryContainer": "rgb(0, 13, 95)",
+
     "secondary": "rgb(91, 93, 114)",
     "onSecondary": "rgb(255, 255, 255)",
-    "secondaryContainer": "rgb(224, 225, 249)",
-    "onSecondaryContainer": "rgb(24, 26, 44)",
+    //Includes Drawer
+    "drawerContainer": "rgb(1,3,39)",
+    "onDrawerContainer": "rgb(255, 255, 255)",
+    //Includes Drawer item,
+    "secondaryContainer":"rgb(255, 255, 255)",
+    "onSecondaryContainer": "rgb(1,3,39)",
+    //The inactive Drawer item
+    "surfaceVariant": "rgb(227, 225, 236)",
+    "onSurfaceVariant":  "rgb(255, 255, 255)",
+
     "tertiary": "rgb(119, 83, 108)",
     "onTertiary": "rgb(255, 255, 255)",
     "tertiaryContainer": "rgb(255, 215, 240)",
@@ -26,10 +36,10 @@ const customTheme = {
     "onErrorContainer": "rgb(65, 0, 2)",
     "background": "rgb(255, 251, 255)",
     "onBackground": "rgb(27, 27, 31)",
-    "surface": "rgb(255,254,254)", //The inner colour of input texts
+    //The inner colour of input texts
+    "surface": "rgb(255,254,254)",
     "onSurface": "rgb(27, 27, 31)",
-    "surfaceVariant": "rgb(227, 225, 236)",
-    "onSurfaceVariant": "rgb(70, 70, 79)",
+
     "outline": "rgb(118, 118, 128)",
     "outlineVariant": "rgb(199, 197, 208)",
     "shadow": "rgb(0, 0, 0)",
@@ -39,6 +49,7 @@ const customTheme = {
     "inversePrimary": "rgb(187, 195, 255)",
     "elevation": {
       "level0": "transparent",
+      //Background of Card
       "level1": "rgb(246, 243, 251)",
       "level2": "rgb(240, 238, 249)",
       "level3": "rgb(235, 233, 247)",

@@ -41,7 +41,7 @@ const LoginScreen = ({ navigation }: Props) => {
         <Background imageUrl={imagePassed}>
             {/*<BackButton goBack={() => navigation.navigate('HomeScreen')} />*/}
             <View style={styles.container}>
-            <Logo/>
+            <Logo marginBottom={0}/>
             <Header >Entry Exit System</Header>
             <TextInput
                 label="Username"

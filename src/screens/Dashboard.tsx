@@ -46,7 +46,7 @@ export default function Dashboard({navigation}: Props) {
                           drawerContent={(props) => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="FakeScreen" component={FakeScreen} options={({navigation}) => ({
                 headerShown: true,
-                headerLeft: () => (<Button icon="forwardburger"
+                headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),
             })}
             />
@@ -71,6 +71,7 @@ function CustomDrawerContent(props) {
             <PaperDrawer.Section style={{paddingTop: 22 }}>
                 <PaperDrawer.Item
                     label="Dashboard"
+                    icon={"view-dashboard"}
                     theme={{ fonts: { labelLarge: { fontWeight: '550', fontSize: 19}}}}
                     active={active === 'first'}
                     onPress={() => {
@@ -80,6 +81,7 @@ function CustomDrawerContent(props) {
                 />
                 <PaperDrawer.Item
                     label="Border Control - Entry"
+                    icon={"passport"}
                     theme={{ fonts: { labelLarge: { fontWeight: '550', fontSize: 19 }}}}
                     active={active === 'second'}
                     onPress={() => {
@@ -89,6 +91,7 @@ function CustomDrawerContent(props) {
                 />
                 <PaperDrawer.Item
                     label="Border Control - Exit"
+                    icon={"passport"}
                     theme={{ fonts: { labelLarge: { fontWeight: '550', fontSize: 19 }}}}
                     active={active === 'second'}
                     onPress={() => {

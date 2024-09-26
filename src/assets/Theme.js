@@ -24,7 +24,10 @@ const customTheme = {
     "onSecondaryContainer": "rgb(1,3,39)",
     //The inactive Drawer item
     "surfaceVariant": "rgb(227, 225, 236)",
-    "onSurfaceVariant":  "rgb(255, 255, 255)",
+    //The hints above the fields in Login Screen
+    "onSurfaceVariant":  "rgb(75,88,98)",
+    //The icon colour
+    "iconColour" : "rgb(255,255,255)",
 
     "tertiary": "rgb(119, 83, 108)",
     "onTertiary": "rgb(255, 255, 255)",

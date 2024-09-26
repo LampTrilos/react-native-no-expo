@@ -10,8 +10,8 @@ import {
     Card,
     DefaultTheme,
     Drawer as PaperDrawer,
-    Icon,
-    Text
+    Icon, IconButton,
+    Text, Tooltip
 } from 'react-native-paper';
 import {Navigation} from '../utils/types.tsx';
 import {createDrawerNavigator, DrawerContent, DrawerContentScrollView, DrawerItem} from "@react-navigation/drawer";
@@ -50,6 +50,16 @@ export default function Dashboard({navigation}: Props) {
                 headerShown: true,
                 headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),
+                headerRight: () => (
+                    <Tooltip title="Test User" enterTouchDelay={10}>
+                        <IconButton
+                            icon="account" // You can change this to any Material icon name
+                            iconColor={customTheme.colors.iconColour}
+                            size={25}      // Custom icon size
+                            onPress={() => console.log('Pressed')}
+                            style={styles.iconButton} // Custom button style
+                        />
+                    </Tooltip>),
             })}
             />
             <Drawer.Screen name="FakeScreen2" component={FakeScreen} options={{headerShown: false}}/>
@@ -109,5 +119,10 @@ function CustomDrawerContent(props) {
 const styles = StyleSheet.create({
     drawer: {
         backgroundColor: customTheme.colors.drawerContainer,
+    },
+    iconButton: {
+        backgroundColor: customTheme.colors.drawerContainer, // Custom background color\
+        //borderRadius: 50, // Makes the button round
+        //padding: 10,      // Add some padding
     },
 });

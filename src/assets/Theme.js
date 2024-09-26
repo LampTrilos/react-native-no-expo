@@ -34,6 +34,7 @@ const customTheme = {
     "onError": "rgb(255, 255, 255)",
     "errorContainer": "rgb(255, 218, 214)",
     "onErrorContainer": "rgb(65, 0, 2)",
+    //Background of main Screens
     "background": "rgb(255, 251, 255)",
     "onBackground": "rgb(27, 27, 31)",
     //The inner colour of input texts
@@ -50,7 +51,8 @@ const customTheme = {
     "elevation": {
       "level0": "transparent",
       //Background of Card
-      "level1": "rgb(246, 243, 251)",
+      //This is the Card  level
+      "level1": "rgb(237,239,241)",
       "level2": "rgb(240, 238, 249)",
       "level3": "rgb(235, 233, 247)",
       "level4": "rgb(233, 231, 246)",

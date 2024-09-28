@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import CustomTheme from "../../assets/Theme"
+import CustomTheme from "../../../assets/Theme"
 import PersonInformationNFC from "./PersonInformationNFC.tsx";
 import SearchResults from "./SearchResults.tsx";
 import PassportScan from "./PassportScan.tsx";
@@ -22,7 +22,8 @@ export default function PassportCheck() {
                 <SearchResults style={styles.subscreen}/>
             </View>
         </View>
-    );
+    )
+        ;
 };
 
 const styles = StyleSheet.create({

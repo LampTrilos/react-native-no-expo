@@ -7,9 +7,9 @@ import {createDrawerNavigator} from "@react-navigation/drawer";
 import {DrawerActions} from '@react-navigation/native';
 import FakeScreen from "./FakeScreen.tsx";
 import customTheme from '../assets/Theme'
-import PassportCheck from "./PassportCheck/PassportCheck.tsx";
 import CustomDrawerContent from "../components/TheDrawerContent.tsx";
-import { StyleSheet } from "react-native";
+import {StyleSheet} from "react-native";
+import BottomTabs from "../screens/DataGathering/BottomTabs.tsx"
 
 type Props = {
     navigation: Navigation;
@@ -33,7 +33,7 @@ export default function Dashboard({navigation}: Props) {
                           initialRouteName="FakeScreen"
                           drawerContent={(props) =>
                               <CustomDrawerContent {...props} />}>
-            <Drawer.Screen name="PassportCheck" component={PassportCheck} options={({navigation}) => ({
+            <Drawer.Screen name="PassportCheck" component={BottomTabs} options={({navigation}) => ({
                 headerShown: true,
                 headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ScrollView, Image, StyleSheet} from 'react-native';
 import {Text, Card} from 'react-native-paper';
-import CustomTheme from "../../assets/Theme"
+import CustomTheme from "../../../assets/Theme"
 
 
 export default function PersonInformationNFC({style, person}) {

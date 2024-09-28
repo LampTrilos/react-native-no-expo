@@ -1,24 +1,15 @@
-// import {
-//     View,
-// } from "react-native";
-
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import {
-    adaptNavigationTheme,
-    Avatar,
-    Button,
-    Card,
-    DefaultTheme,
-    Drawer as PaperDrawer,
-    Icon,
-    Text
+    Button, IconButton, Tooltip
 } from 'react-native-paper';
 import {Navigation} from '../utils/types.tsx';
-import {createDrawerNavigator, DrawerContent, DrawerContentScrollView, DrawerItem} from "@react-navigation/drawer";
-import {NavigationContainer} from "@react-navigation/native";
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import {DrawerActions} from '@react-navigation/native';
 import FakeScreen from "./FakeScreen.tsx";
-import FakeScreen2 from "./FakeScreen2.tsx";
-import Logo from '../components/Logo';
+import customTheme from '../assets/Theme'
+import CustomDrawerContent from "../components/TheDrawerContent.tsx";
+import {StyleSheet} from "react-native";
+import BottomTabs from "../screens/DataGathering/BottomTabs.tsx"
 
 type Props = {
     navigation: Navigation;
@@ -27,80 +18,46 @@ type Props = {
 export default function Dashboard({navigation}: Props) {
     const Drawer = createDrawerNavigator();
 
-    // const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: DefaultTheme });
-    return (
+    // On load of the page, we open the Drawer programmatically
+    const drawerRef = useRef(null);
+    useEffect(() => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    }, []);
 
-        <Drawer.Navigator screenOptions={{drawerType: 'slide'}} initialRouteName="FakeScreen"
-                          drawerContent={(props) => <CustomDrawerContent {...props} />}>
-            <Drawer.Screen name="FakeScreen" component={FakeScreen} options={({navigation}) => ({
+
+    return (
+        <Drawer.Navigator drawerRef={drawerRef} screenOptions={{
+            drawerType: 'slide',
+            drawerStyle: styles.drawer
+        }}
+                          initialRouteName="FakeScreen"
+                          drawerContent={(props) =>
+                              <CustomDrawerContent {...props} />}>
+            <Drawer.Screen name="PassportCheck" component={BottomTabs} options={({navigation}) => ({
                 headerShown: true,
-                headerLeft: () => (<Button icon="forwardburger"
+                headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),
+                headerRight: () => (
+                    <Tooltip title="Test User" enterTouchDelay={10}>
+                        <IconButton
+                            icon="account" // You can change this to any Material icon name
+                            iconColor={customTheme.colors.iconColour}
+                            size={25}      // Custom icon size
+                            onPress={() => console.log('Pressed')}
+                            style={styles.iconButton} // Custom button style
+                        />
+                    </Tooltip>),
             })}
             />
-            <Drawer.Screen name="FakeScreen2" component={FakeScreen2} options={{headerShown: false}}/>
+            <Drawer.Screen name="FakeScreen2" component={FakeScreen} options={{headerShown: false}}/>
             {/*<Drawer.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>*/}
         </Drawer.Navigator>)
-
-
-    // First Stack of the app is composed of the Login screen and the Dashboard of the app*
-    {/*<NavigationContainer independent={true}>*/
-    }
-    {/*</NavigationContainer>*/
-    }
-    {/*<Card>*/
-    }
-    {/*    <Card.Title title="Card Title" subtitle="Card Subtitle"  />*/
-    }
-    {/*    <Card.Content>*/
-    }
-    {/*        <Text variant="titleLarge">Card title</Text>*/
-    }
-    {/*        <Text variant="bodyMedium">Card content</Text>*/
-    }
-    {/*    </Card.Content>*/
-    }
-    {/*    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />*/
-    }
-    {/*    <Card.Actions>*/
-    }
-    {/*        <Button>Cancel</Button>*/
-    }
-    {/*        <Button>Ok</Button>*/
-    }
-    {/*    </Card.Actions>*/
-    }
-    {/*</Card>*/
-    }
-    //);
 };
-
-// Custom Drawer Content
-function CustomDrawerContent(props) {
-    const [active, setActive] = React.useState('first');
-    return (
-        <>
-            <PaperDrawer.Section>
-                <Logo/>
-            </PaperDrawer.Section>
-            <PaperDrawer.Section>
-                <PaperDrawer.Item
-                    label="First Item"
-                    active={active === 'first'}
-                    onPress={() => {
-                        setActive('first');
-                        props.navigation.navigate('FakeScreen');
-                    }}
-                />
-                <PaperDrawer.Item
-                    label="Second Item"
-                    active={active === 'second'}
-                    onPress={() => {
-                        setActive('second');
-                        props.navigation.navigate('FakeScreen2');
-                    }}
-                />
-            </PaperDrawer.Section>
-        </>
-    );
-}
+const styles = StyleSheet.create({
+    drawer: {
+        backgroundColor: customTheme.colors.drawerContainer,
+    },
+    iconButton: {
+        backgroundColor: customTheme.colors.drawerContainer, // Custom background color\
+    },
+});

@@ -1,9 +1,9 @@
-
 import React from "react";
 import {StyleSheet, View} from "react-native";
 import CustomTheme from "../../assets/Theme"
-import PersonInformation from "./PersonInformation.tsx";
+import PersonInformationNFC from "./PersonInformationNFC.tsx";
 import SearchResults from "./SearchResults.tsx";
+import PassportScan from "./PassportScan.tsx";
 
 export default function PassportCheck() {
     const personData = {
@@ -13,18 +13,30 @@ export default function PassportCheck() {
     };
 
     return (
-        <View style={styles.container}>
-            <SearchResults style={styles.subscreen}/>
-            <PersonInformation person={personData} style={styles.subscreen}/>
+        <View style={styles.containerColumn}>
+            <View style={styles.containerRow}>
+                <PassportScan style={styles.subscreen}/>
+                <PersonInformationNFC person={personData} style={styles.subscreen}/>
+            </View>
+            <View style={styles.containerRow}>
+                <SearchResults style={styles.subscreen}/>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    containerRow: {
         flex: 1,
         flexDirection: 'row', // This makes the children arrange in a row
         backgroundColor: CustomTheme.colors.background,
+        marginBottom: 5,
+    },
+    containerColumn: {
+        flex: 1,
+        flexDirection: 'column', // This makes the children arrange in a row
+        backgroundColor: CustomTheme.colors.background,
+        marginTop: 5,
     },
     subscreen: {
         flex: 1,

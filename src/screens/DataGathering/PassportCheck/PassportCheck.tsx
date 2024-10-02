@@ -6,6 +6,8 @@ import SearchResults from "./SearchResults.tsx";
 import PassportScan from "./PassportScan.tsx";
 
 export default function PassportCheck() {
+
+
     const personData = {
         surname: 'Doe',
         name: 'John',

@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
@@ -10,6 +10,9 @@ import BackButton from '../components/BackButton';
 import  customTheme  from '../assets/Theme';
 import { usernameValidator, passwordValidator } from '../utils/utils';
 import { Navigation } from '../utils/types.tsx';
+import {useDispatch} from "react-redux";
+import {User, UserClass} from "../utils/model.ts";
+import {setUser} from "../store/userData";
 
 type Props = {
     navigation: Navigation;
@@ -30,6 +33,14 @@ const LoginScreen = ({ navigation }: Props) => {
             return;
         }
         //If all is well, navigate to the next Screen
+        const dispatch = useDispatch();
+
+        // TODOMake an axios call to fetch the currentUser
+        //And set that user to the store
+        //const handleSetUser = (newUser: User) => {
+            dispatch(setUser(new UserClass('Telikos user', '234532', '08:00 - 19:00')));
+        //};
+
         navigation.navigate('Dashboard');
     };
 

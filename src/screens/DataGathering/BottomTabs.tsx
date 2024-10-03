@@ -1,6 +1,7 @@
 import {BottomNavigation, Text} from "react-native-paper";
 import React from "react";
 import PassportCheck from "./PassportCheck/PassportCheck.tsx";
+import SearchResults from "./PassportCheck/SearchResults/SearchResults.tsx";
 
 export default function BottomTabs() {
 
@@ -8,7 +9,7 @@ export default function BottomTabs() {
     const PassportRoute = () => <PassportCheck/>;
     const BiometricsRoute = () => <Text>Biometrics</Text>;
     const PhotoRoute = () => <Text>Photo</Text>;
-    const ResultsRoute = () => <Text>Results</Text>;
+    const ResultsRoute = () => <SearchResults/>;
 
     const [index, setIndex] = React.useState(0);
     const routes = [

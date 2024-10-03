@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
     subscreen: {
         flex: 1,
         margin: 5,
+        marginBottom: 80
     }
 })

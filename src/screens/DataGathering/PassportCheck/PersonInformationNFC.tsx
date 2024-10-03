@@ -28,10 +28,10 @@ export default function PersonInformationNFC({style, person}) {
 
     return (
         <View style={style}>
-            <Card>
+            <Card style={{height: '97%'}}>
                 <Card.Title title="Person Information from NFC" titleStyle={{fontSize: 17, fontWeight: 'bold'}}
                             style={{padding: -5}}/>
-                <Card.Content>
+                <Card.Content >
                     <View style={styles.containerRow}>
                         <View style={styles.containerColumn}>
                             <Image
@@ -83,7 +83,7 @@ export default function PersonInformationNFC({style, person}) {
                         {isPassportExpired && (
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <IconButton icon="alert-circle" color="red" size={24} />
-                                <Text style={{ color: 'red', fontSize: 14 }}>Date is past today</Text>
+                                <Text style={{ color: 'red', fontSize: 14 }}>Document is invalid due to expiration date</Text>
                             </View>
                         )}
                     </View>
@@ -101,12 +101,14 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         alignItems: 'flex-start', // Ensures content aligns at the top
         justifyContent: 'flex-start', // Spreads columns apart if needed
+        paddingVertical: 15
     },
     containerColumn: {
         //flex: 1,
         flexDirection: 'column', // This makes the children arrange in a row
         backgroundColor: CustomTheme.colors.background,
         marginLeft: 5,
+        paddingHorizontal: 10
     },
     image: {
         width: 150,

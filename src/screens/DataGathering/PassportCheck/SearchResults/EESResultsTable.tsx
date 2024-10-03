@@ -53,7 +53,37 @@ export default function SearchResults({style}) {
             fat: 6,
         },
         {
-            key: 14,
+            key: 145,
+            name: 'Gingerbread',
+            calories: 305,
+            fat: 3.7,
+        },
+        {
+            key: 444,
+            name: 'Gingerbread',
+            calories: 305,
+            fat: 3.7,
+        },
+        {
+            key: 114,
+            name: 'Cupcake',
+            calories: 356,
+            fat: 16,
+        },
+        {
+            key: 124,
+            name: 'Eclair',
+            calories: 262,
+            fat: 16,
+        },
+        {
+            key: 134,
+            name: 'Frozen yogurt',
+            calories: 159,
+            fat: 6,
+        },
+        {
+            key: 174,
             name: 'Gingerbread',
             calories: 305,
             fat: 3.7,
@@ -71,7 +101,7 @@ export default function SearchResults({style}) {
     return (
         <View style={style}>
             <Card>
-                <Card.Title title="Police Checks" titleStyle={{fontSize: 17, fontWeight: 'bold'}}/>
+                <Card.Title title="EES Results" titleStyle={{fontSize: 17, fontWeight: 'bold'}}/>
                 <Card.Content>
                     <ScrollView>
                             <DataTable>

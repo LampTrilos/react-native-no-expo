@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../utils/axiosCall";
-import {UserClass} from "../utils/model";
+import {newUser, UserClass} from "../utils/model";
 
 export const userDataSlice = createSlice({
     name: 'userData',
     initialState: {
         value: {
-            user: new UserClass('Arxikos user', '234532', '08:00 - 19:00')
+            user: newUser('Arxikos user', '234532', '08:00 - 19:00')
         },
     },
     reducers: {

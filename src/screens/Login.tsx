@@ -11,8 +11,9 @@ import  customTheme  from '../assets/Theme';
 import { usernameValidator, passwordValidator } from '../utils/utils';
 import { Navigation } from '../utils/types.tsx';
 import {useDispatch} from "react-redux";
-import {User, UserClass} from "../utils/model.ts";
+import {newUser} from "../utils/model.ts";
 import {setUser} from "../store/userData";
+
 
 type Props = {
     navigation: Navigation;
@@ -22,7 +23,7 @@ const LoginScreen = ({ navigation }: Props) => {
     //Necessary state for user input
     const [username, setUsername] = useState({ value: 'sadfasdf', error: '' });
     const [password, setPassword] = useState({ value: 'asdfasf', error: '' });
-
+    const dispatch = useDispatch();
     const onLoginPressed = () => {
         const usernameError = usernameValidator(username.value);
         const passwordError = passwordValidator(password.value);
@@ -32,15 +33,13 @@ const LoginScreen = ({ navigation }: Props) => {
             setPassword({ ...password, error: passwordError });
             return;
         }
+
+
+        //TODO Make an axios call to fetch the currentUser
+        //const currentUser = new UserClass('Telikos user', '234532', '08:00 - 19:00')
+        const currentUser = newUser('Telikos user', '234532', '08:00 - 19:00');
+        dispatch(setUser(currentUser));
         //If all is well, navigate to the next Screen
-        const dispatch = useDispatch();
-
-        // TODOMake an axios call to fetch the currentUser
-        //And set that user to the store
-        //const handleSetUser = (newUser: User) => {
-            dispatch(setUser(new UserClass('Telikos user', '234532', '08:00 - 19:00')));
-        //};
-
         navigation.navigate('Dashboard');
     };
 
@@ -109,4 +108,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default memo(LoginScreen);
+export default LoginScreen;

@@ -74,7 +74,7 @@ export default function PersonInformationNFC({style, person}) {
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Valid until:</Text>
-                                <Text>{person.validUntil}</Text>
+                                <Text>{person.validUntil.toLocaleDateString()}</Text>
                             </View>
                         </View>
                     </View>

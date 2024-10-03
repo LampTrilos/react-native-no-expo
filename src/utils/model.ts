@@ -7,14 +7,21 @@ export interface User {
     shift: string;
 }
 
-export class UserClass implements User {
-    constructor(
-        public fullName: string,
-        public userId: string,
-        //Vardia of the current user
-        public shift: string,
-    ) {}
-}
+// Factory function
+export const newUser = (fullName: string, userId: string, shift: string): User => ({
+    fullName,
+    userId,
+    shift,
+});
+
+// export class UserClass implements User {
+//     constructor(
+//         public fullName: string,
+//         public userId: string,
+//         //Vardia of the current user
+//         public shift: string,
+//     ) {}
+// }
 //------------------------End of the loggedIn user------------------------//
 //--------------The business flow of the PassportCheck procedure------------------------//
 //The allowed statuses

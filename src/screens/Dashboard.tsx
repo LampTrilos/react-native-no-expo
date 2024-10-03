@@ -8,10 +8,10 @@ import {DrawerActions} from '@react-navigation/native';
 import FakeScreen from "./FakeScreen.tsx";
 import customTheme from '../assets/Theme'
 import CustomDrawerContent from "../components/TheDrawerContent.tsx";
-import {StyleSheet} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import BottomTabs from "../screens/DataGathering/BottomTabs.tsx"
 import {useDispatch, useSelector} from "react-redux";
-import {ControlStatusTypes, controlStatusTypes, User, UserClass} from "../utils/model.ts";
+import {ControlStatusTypes} from "../utils/model.ts";
 import {setUser} from "../store/userData";
 import ControlStatus, {setStatus} from "../store/controlStatus";
 
@@ -29,7 +29,7 @@ export default function Dashboard({navigation}: Props) {
     }, []);
 
     //Store section about the logged in user
-    const currentUser = useSelector(state => state.groceryList.value);
+    const currentUser = useSelector(state => state.userDataStore.value.user);
     //------------------End of store user section--------------------//
 
     //-------------------Status store section------------------------//
@@ -54,7 +54,12 @@ export default function Dashboard({navigation}: Props) {
                 headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),
                 headerRight: () => (
-                    <Tooltip title={currentUser.fullName + "\n" + currentUser.shift} enterTouchDelay={10}>
+                    <Tooltip title={
+                        <>
+                            <Text>{currentUser.fullName + ", "}</Text>
+                            <Text>{currentUser.shift}</Text>
+                        </>
+                    } enterTouchDelay={10}>
                         <IconButton
                             icon="account" // You can change this to any Material icon name
                             iconColor={customTheme.colors.iconColour}

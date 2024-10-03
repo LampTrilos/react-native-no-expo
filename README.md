@@ -1,3 +1,7 @@
+1) To be able to use the finger scanner on T80:
+   Open the T80 Hub and enable T80 HUB and T80 FP
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started

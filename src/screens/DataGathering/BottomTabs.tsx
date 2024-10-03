@@ -8,18 +8,21 @@ export default function BottomTabs() {
     const PassportRoute = () => <PassportCheck/>;
     const BiometricsRoute = () => <Text>Biometrics</Text>;
     const PhotoRoute = () => <Text>Photo</Text>;
+    const ResultsRoute = () => <Text>Results</Text>;
 
     const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
+    const routes = [
         {key: 'Passport', title: 'Passport', focusedIcon: 'passport-biometric',},
         {key: 'Biometrics', title: 'Biometrics', focusedIcon: 'fingerprint'},
         {key: 'Photo', title: 'Photo', focusedIcon: 'camera'},
-    ]);
+        {key: 'Results', title: 'Results', focusedIcon: 'account-search'},
+    ];
 
     const renderScene = BottomNavigation.SceneMap({
         Passport: PassportRoute,
         Biometrics: BiometricsRoute,
         Photo: PhotoRoute,
+        Results: ResultsRoute,
     });
 
     //-----------------End of Bottom navigation routes------------------//

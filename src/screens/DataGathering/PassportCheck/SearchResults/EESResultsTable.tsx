@@ -71,7 +71,7 @@ export default function SearchResults({style}) {
     return (
         <View style={style}>
             <Card>
-                <Card.Title title="Search Results" titleStyle={{fontSize: 17, fontWeight: 'bold'}}/>
+                <Card.Title title="Police Checks" titleStyle={{fontSize: 17, fontWeight: 'bold'}}/>
                 <Card.Content>
                     <ScrollView>
                             <DataTable>

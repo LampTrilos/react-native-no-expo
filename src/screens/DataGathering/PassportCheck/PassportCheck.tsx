@@ -9,9 +9,17 @@ export default function PassportCheck() {
 
 
     const personData = {
-        surname: 'Doe',
-        name: 'John',
-        dateOfBirth: new Date(1985, 9, 14) // October 14, 1985
+        familyName: 'Doe',
+        firstName: 'John',
+        nationality: 'Armenian',
+        dateOfBirth: new Date(1985, 9, 14), // October 14, 1985
+        gender: 'Shemale',
+        type: 'PP',
+        issueCountry: 'ISR',
+        documentNumber: 'GTS3850245',
+        validUntil: new Date(1975, 3, 14),
+        chipChecked: false,
+        mrzChecked: true
     };
 
     return (

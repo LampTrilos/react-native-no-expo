@@ -4,7 +4,8 @@ import {Card, DataTable} from 'react-native-paper';
 
 export default function SearchResults({style}) {
     const [page, setPage] = React.useState<number>(0);
-    const [numberOfItemsPerPageList] = React.useState([10, 20, 30]);
+    //List of paging options, apparently setting an outrageous numbers disables the paginator, which is fine
+    const [numberOfItemsPerPageList] = React.useState([500]);
     const [itemsPerPage, onItemsPerPageChange] = React.useState(
         numberOfItemsPerPageList[0]
     );

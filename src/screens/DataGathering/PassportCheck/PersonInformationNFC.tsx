@@ -82,7 +82,7 @@ export default function PersonInformationNFC({style, person}) {
                         {/* Show red exclamation mark and red text if passportExpiry is past */}
                         {isPassportExpired && (
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <IconButton icon="alert-circle" color="red" size={24} />
+                                <IconButton icon="alert-circle" iconColor="red" size={24} />
                                 <Text style={{ color: 'red', fontSize: 14 }}>Document is invalid due to expiration date</Text>
                             </View>
                         )}

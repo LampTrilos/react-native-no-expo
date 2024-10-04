@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
     subscreen: {
         flex: 1,
         margin: 5,
-        marginBottom: 80
+        marginBottom: 10,
+        //height: '98%',
+        overflow: 'hidden'
     }
 })

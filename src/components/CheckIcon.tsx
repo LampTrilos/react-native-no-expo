@@ -6,11 +6,11 @@ import {IconButton} from "react-native-paper";
 //Also shows a small text . All atributes are passed as props
 export default function CheckIcon({attributeChecked, textShown}) {
     return (
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: -25}}>
             {attributeChecked ? (
-                <IconButton icon="check" color="green" size={24}/>
+                <IconButton icon="check" iconColor="green" size={24}/>
             ) : (
-                <IconButton icon="close" color="red" size={24}/>
+                <IconButton icon="close" iconColor="red" size={24}/>
             )}
             <Text style={{fontSize: 14}}>{textShown}</Text>
         </View>);

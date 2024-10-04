@@ -1,8 +1,8 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
-import CustomTheme from "../../../../assets/Theme"
-import EESResultsTable from "./EESResultsTable";
-import PoliceChecksTable from "./PoliceChecksTable";
+import CustomTheme from "../../../assets/Theme"
+import EESResultsTable from "./EESResultsTable.tsx";
+import PoliceChecksTable from "./PoliceChecksTable.tsx";
 
 export default function SearchResults() {
 

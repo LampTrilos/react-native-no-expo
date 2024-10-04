@@ -1,13 +1,14 @@
 import {BottomNavigation, Text} from "react-native-paper";
 import React from "react";
 import PassportCheck from "./PassportCheck/PassportCheck.tsx";
-import SearchResults from "./PassportCheck/SearchResults/SearchResults.tsx";
+import SearchResults from "./SearchResults/SearchResults.tsx";
+import FakeScreen from "../FakeScreen.tsx";
 
 export default function BottomTabs() {
 
     //Bottom navigation attributes
     const PassportRoute = () => <PassportCheck/>;
-    const BiometricsRoute = () => <Text>Biometrics</Text>;
+    const BiometricsRoute = () => <FakeScreen/>;
     const PhotoRoute = () => <Text>Photo</Text>;
     const ResultsRoute = () => <SearchResults/>;
 

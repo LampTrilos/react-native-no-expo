@@ -28,7 +28,7 @@ export default function PersonInformationNFC({style, person}) {
 
     return (
         <View style={style}>
-            <Card style={{height: '97%'}}>
+            <Card style={{height: '100%'}}>
                 <Card.Title title="Person Information from NFC" titleStyle={{fontSize: 17, fontWeight: 'bold'}}
                             style={{padding: -5}}/>
                 <Card.Content >

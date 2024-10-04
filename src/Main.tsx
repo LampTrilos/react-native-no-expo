@@ -12,11 +12,11 @@ import 'react-native-gesture-handler';
 
 export default function Main() {
     return (
-        // <StoreProvider store={store}>
+         <StoreProvider store={store}>
             <PaperProvider theme={customTheme}>
                 <App/>
             </PaperProvider>
-        // </StoreProvider>
+         </StoreProvider>
     );
 }
 

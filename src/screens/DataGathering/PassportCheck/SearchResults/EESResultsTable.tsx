@@ -4,7 +4,8 @@ import {Card, DataTable} from 'react-native-paper';
 
 export default function SearchResults({style}) {
     const [page, setPage] = React.useState<number>(0);
-    const [numberOfItemsPerPageList] = React.useState([10, 20, 30]);
+    //List of paging options, apparently setting an outrageous numbers disables the paginator, which is fine
+    const [numberOfItemsPerPageList] = React.useState([500]);
     const [itemsPerPage, onItemsPerPageChange] = React.useState(
         numberOfItemsPerPageList[0]
     );
@@ -53,7 +54,37 @@ export default function SearchResults({style}) {
             fat: 6,
         },
         {
-            key: 14,
+            key: 145,
+            name: 'Gingerbread',
+            calories: 305,
+            fat: 3.7,
+        },
+        {
+            key: 444,
+            name: 'Gingerbread',
+            calories: 305,
+            fat: 3.7,
+        },
+        {
+            key: 114,
+            name: 'Cupcake',
+            calories: 356,
+            fat: 16,
+        },
+        {
+            key: 124,
+            name: 'Eclair',
+            calories: 262,
+            fat: 16,
+        },
+        {
+            key: 134,
+            name: 'Frozen yogurt',
+            calories: 159,
+            fat: 6,
+        },
+        {
+            key: 174,
             name: 'Gingerbread',
             calories: 305,
             fat: 3.7,
@@ -70,8 +101,8 @@ export default function SearchResults({style}) {
 
     return (
         <View style={style}>
-            <Card>
-                <Card.Title title="Search Results" titleStyle={{fontSize: 17, fontWeight: 'bold'}}/>
+            <Card >
+                <Card.Title title="EES Results" titleStyle={{fontSize: 17, fontWeight: 'bold'}}/>
                 <Card.Content>
                     <ScrollView>
                             <DataTable>

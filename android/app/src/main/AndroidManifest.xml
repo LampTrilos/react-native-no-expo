@@ -1,6 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Camera Permission -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- Biometric Permission (for API level 28 and above) -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <!-- Optional: For devices below API level 28 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+
 
     <application
       android:name=".MainApplication"
@@ -21,6 +28,13 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+      </activity>
+      <!-- The main Multimodal Screen of Neurotec Sample -->
+      <activity
+        android:name=".multibiometric.multimodal.MultiModalActivity"
+        android:label="Biometrics"
+        android:exported="true">  <!-- Set exported to true if it needs to be accessible by other apps -->
+        <!-- Optional: You can add intent filters if needed -->
       </activity>
     </application>
 </manifest>

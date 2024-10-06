@@ -6,10 +6,11 @@ import {NativeModules} from 'react-native';
 
 
 export default function FakeScreen() {
-    const {CalendarModule} = NativeModules;
-    CalendarModule.createCalendarEvent('testName', 'testLocation');
+    const {TestModule} = NativeModules;
+    TestModule.logSomething('testName', 'testLocation');
     const onPress = () => {
-        CalendarModule.createCalendarEvent('testName', 'testLocation');
+        //CalendarModule.createCalendarEvent('testName', 'testLocation');
+        //CalendarModule.startMultiModalActivity();
     };
     return (
         <>

@@ -17,4 +17,12 @@ class CalendarModule(reactContext: ReactApplicationContext) : ReactContextBaseJa
         Log.d("CalendarModule", "Create event called with name: $name and location: $location")
     }
 
+    //Test method to start multi modal activity
+//    @ReactMethod
+//    fun startMultiModalActivity() {
+//        val intent = Intent(reactApplicationContext, MultiModalActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK // Ensure the activity is launched from a non-activity context
+//        reactApplicationContext.startActivity(intent)
+//    }
+
 }

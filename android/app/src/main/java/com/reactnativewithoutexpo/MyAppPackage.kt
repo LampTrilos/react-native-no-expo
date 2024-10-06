@@ -1,19 +1,24 @@
-package com.reactnativewithoutexpo // replace your-app-name with your app’s name
+package com.reactnativewithoutexpo
 
-import android.view.View
+import android.util.Log
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
 
+// replace your-app-name with your app’s name
+
 class MyAppPackage : ReactPackage {
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+        return emptyList()
+    }
 
-    override fun createViewManagers(
-        reactContext: ReactApplicationContext
-    ): MutableList<ViewManager<View, ReactShadowNode<*>>> = mutableListOf()
+    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+        Log.d("-----------------------------------@@> create BiometricModule", "set reactContext")
+        val modules: MutableList<NativeModule> = ArrayList()
 
-    override fun createNativeModules(
-        reactContext: ReactApplicationContext
-    ): MutableList<NativeModule> = listOf(CalendarModule(reactContext)).toMutableList()
+        modules.add(BiometricModule(reactContext))
+
+        return modules
+    }
 }

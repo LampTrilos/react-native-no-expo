@@ -22,5 +22,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+        <!-- The label is just a pointer. The true name of each activity needs to be declared to res.values.string.xml-->
+<!--      <activity-->
+<!--        android:name="com.reactnativewithoutexpo.MultiModalActivity"-->
+<!--        android:label="@string/faceRec"-->
+<!--      />-->
     </application>
 </manifest>

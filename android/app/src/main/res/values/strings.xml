@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReactNativeWithoutExpo</string>
+    <string name="faceRec">FaceRecognition</string>
 </resources>

@@ -12,12 +12,18 @@ buildscript {
 		google()
 		jcenter()
 	}
-	dependencies {
-		classpath 'com.android.tools.build:gradle:3.2.1'
-	}
+//	dependencies {
+//		classpath 'com.android.tools.build:gradle:3.2.1'
+//	}
 }
 
 android {
+	//Because native .so libraries mismatched
+	ndkVersion rootProject.ext.ndkVersion
+	buildToolsVersion rootProject.ext.buildToolsVersion
+	//ndkVersion = "26.1.10909125"
+
+
 	//Error In order to compile Java 9+ source, please set compileSdkVersion to 30 or above
 	//So change
 	//compileSdkVersion 27
@@ -34,8 +40,10 @@ android {
 		}
 	}
 	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_6
-		targetCompatibility JavaVersion.VERSION_1_6
+//		sourceCompatibility JavaVersion.VERSION_1_6
+//		targetCompatibility JavaVersion.VERSION_1_6
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
 	}
 	lintOptions {
 		abortOnError false

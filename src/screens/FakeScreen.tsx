@@ -7,9 +7,13 @@ import {NativeModules} from 'react-native';
 
 export default function FakeScreen() {
     const {CalendarModule} = NativeModules;
+    const {BiometricModule} = NativeModules;
     CalendarModule.createCalendarEvent('testName', 'testLocation');
+    console.log('Calling Biometric Module.........................ASDFASDFSADFASDFSAFD')
+    BiometricModule.navigateToMultiModalActivity();
     const onPress = () => {
-        CalendarModule.createCalendarEvent('testName', 'testLocation');
+        //CalendarModule.createCalendarEvent('testName', 'testLocation');
+
     };
     return (
         <>

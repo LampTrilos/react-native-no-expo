@@ -2,9 +2,9 @@ description = "Samples utils"
 
 apply plugin: 'com.android.library'
 
-def productRootDir = ".."
-def productBinDir = new File(productRootDir, "Bin")
-def productBinAndroidDir = new File(productBinDir, "Android")
+//def productRootDir = ".."
+//def productBinDir = new File(productRootDir, "Bin")
+//def productBinAndroidDir = new File(productBinDir, "Android")
 
 buildscript {
 	System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
@@ -72,7 +72,23 @@ dependencies {
 	//api "com.android.support:support-v4:27.1.1"
 
 	//To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
-	implementation fileTree(dir: '../libs', include: ['*.jar'])
+	//implementation fileTree(dir: '../libs', include: ['*.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-core-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-licensing-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-licensing-gui-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-gui-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-media-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-media-processing-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['jna.jar'])
+	//implementation fileTree(dir: '../libs', include: ['neurotec-licensing-gui-android.aar'])
+//	api ":neurotec-core-android"
+//	api ":neurotec-licensing-android"
+//	api ":neurotec-gui-android"
+//	api ":neurotec-media-android"
+//	api ":neurotec-media-processing-android"
+//	api ":jna"
+	//api "com.android.support:support-v4:27.1.1"
+	//api(name:'neurotec-licensing-gui-android', ext:'aar')
 }
 
 repositories {
@@ -80,7 +96,8 @@ repositories {
 	google()
 	jcenter()
 	mavenCentral()
-	flatDir {
-		dirs "${productBinAndroidDir}/"
-	}
+//	flatDir {
+//		//dirs "${productBinAndroidDir}/"
+//		dirs "../libs" // This points to the directory one level up
+//	}
 }

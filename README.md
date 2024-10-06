@@ -1,6 +1,8 @@
 1) To be able to use the finger scanner on T80:
    Open the T80 Hub and enable T80 HUB and T80 FP
 
+!!!!!!!
+Removed lib++ from android/libs as it caused a mismatch problem
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 

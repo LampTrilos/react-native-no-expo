@@ -120,6 +120,7 @@ dependencies {
 
     //To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
     implementation fileTree(dir: '../libs', include: ['*.jar'])
+    //implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

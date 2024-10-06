@@ -1,12 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Camera Permission -->
     <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Biometric Permission (for API level 28 and above) -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
-    <!-- Optional: For devices below API level 28 -->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+<!--    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>-->
 
 
     <application
@@ -29,6 +38,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+        <activity
+            android:name="com.neurotec.licensing.gui.ActivationActivity"
+            android:theme="@android:style/Theme.Holo.Light">
+        </activity>
       <!-- The main Multimodal Screen of Neurotec Sample -->
       <activity
         android:name=".multibiometric.multimodal.MultiModalActivity"
@@ -36,5 +49,58 @@
         android:exported="true">  <!-- Set exported to true if it needs to be accessible by other apps -->
         <!-- Optional: You can add intent filters if needed -->
       </activity>
+        <activity
+            android:name=".multibiometric.multimodal.FaceActivity"
+            android:label="@string/face_app_name"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true">
+        </activity>
+
+        <activity
+            android:name=".multibiometric.multimodal.FingerActivity"
+            android:label="@string/finger_app_name"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true">
+        </activity>
+
+        <!-- Preferences -->
+        <activity
+            android:name=".multibiometric.preferences.MultimodalPreferences"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" />
+        </activity>
+
+        <activity
+            android:name=".multibiometric.preferences.ConnectionPreferences"
+            android:label="@string/face_app_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" />
+        </activity>
+
+        <activity
+            android:name=".multibiometric.preferences.FacePreferences"
+            android:label="@string/face_app_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity" />
+        </activity>
+
+        <activity
+            android:name=".multibiometric.preferences.FingerPreferences"
+            android:label="@string/finger_app_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.FingerActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.FingerActivity" />
+        </activity>
     </application>
 </manifest>

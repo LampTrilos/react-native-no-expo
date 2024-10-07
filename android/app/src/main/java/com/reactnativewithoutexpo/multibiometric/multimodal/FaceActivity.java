@@ -88,6 +88,9 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 			}
 		}
 		face.setCaptureOptions(options);
+		//My code Lampros because for some reason it was null
+//		mFaceView = new NFaceView(this);
+		//End of my code
 		mFaceView.setFace(face);
 		subject.getFaces().add(face);
 		capture(subject, (FacePreferences.isShowIcaoWarnings(this) || FacePreferences.isShowIcaoTextWarnings(this)) ? EnumSet.of(NBiometricOperation.ASSESS_QUALITY) : null);

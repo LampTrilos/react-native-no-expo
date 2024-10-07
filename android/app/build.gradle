@@ -105,10 +105,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
-    //Because it clashes with the same jar that is also in the libs or neurotec-sample, perhaps just remove it alltogether from app/libs
-//    configurations {
-//        all*.exclude group: 'com.neurotec.biometrics', module: 'neurotec-biometrics-android'
-//    }
+
 }
 
 dependencies {
@@ -119,8 +116,55 @@ dependencies {
     implementation project(":neurotec-sample-app")
 
     //To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
-    implementation fileTree(dir: '../libs', include: ['*.jar'])
+    //implementation fileTree(dir: '../libs', include: ['*.jar'])
     //implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
+    implementation fileTree(dir: '../libs', include: [
+            'acssmc.jar',
+            'androidSCardV1.2.jar',
+            'jna.jar',
+            'neurotec-biometrics-android.jar',
+            'neurotec-biometrics-client-android.jar',
+            'neurotec-core-android.jar',
+            'neurotec-devices-android.jar',
+            'neurotec-devices-fscanners-ekemp-android.jar',
+            'neurotec-devices-fscanners-greenbit-android.jar',
+            'neurotec-devices-fscanners-secugen-android.jar',
+            'neurotec-devices-fscanners-suprema-biomini-android.jar',
+            'neurotec-devices-media-android.jar',
+            'neurotec-devices-multimodal-credenceid-android.jar',
+            'neurotec-gui-android.jar',
+            'neurotec-licensing-android.jar',
+            'neurotec-media-android.jar',
+            'neurotec-media-processing-android.jar'
+            //'neurotec-licensing-gui-android.jar', //Not since we are impementing the .aar and both cant coexist
+            //'neurotec-biometrics-gui-android.jar', //Not since we are impementing the .aar and both cant coexist
+    ])
+    implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
+    implementation (name:'neurotec-licensing-gui-android', ext:'aar')
+
+
+
+
+
+
+
+    //To include ndf databases that are needed for the neurotec sample Activities
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetect45.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetect90.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetect180.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsAttributes.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsOrientation.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsOrientation90.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsFeaturePointsTrack.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsLiveness.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesCreateTemplateSmall.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesCreateTemplateMedium.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsFeaturePointsDetect.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesCreateTemplateQuality.ndf'])
+//    implementation fileTree(dir: '../libs/ndfs', include: ['Fingers.ndf'])
+
+
+
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
@@ -133,4 +177,10 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.implementation
     into 'libs'
+}
+// To detect the aars in the parent folder
+repositories {
+    flatDir {
+        dirs '../libs'  // Pointing to the parent libs directory
+    }
 }

@@ -9,7 +9,7 @@ export default function BottomTabs() {
 
     //Bottom navigation attributes
     const PassportRoute = () => <PassportCheck/>;
-    const PhotoRoute = () => <FakeScreen2/>;
+    const PhotoRoute = () => <FaceCapture/>;
     const BiometricsRoute = () => <FaceCapture/>;
     const ResultsRoute = () => <SearchResults/>;
 

@@ -1,6 +1,6 @@
 import {Image, StyleSheet, View} from 'react-native';
 import {Card} from "react-native-paper";
-
+//Use https://github.com/mat2718/vision-camera-mrz-scanner?tab=readme-ov-file
 const PassportScan = ({style}) => (
     <View style={style}>
         <Card>

@@ -3,7 +3,8 @@ import {View, ScrollView, Image, StyleSheet} from 'react-native';
 import {Text, Card, IconButton} from 'react-native-paper';
 import CustomTheme from "../../../assets/Theme"
 import CheckIcon from "../../../components/CheckIcon.tsx";
-
+//This is much more recent but only has 1 star https://github.com/LongNguyen2312/react-native-nfc-passport-info
+//Try this even though it is old: https://github.com/tradle/react-native-passport-reader/tree/master
 
 export default function PersonInformationNFC({style, person}) {
     // Assuming person is passed as a prop with name, surname, and dateOfBirth properties

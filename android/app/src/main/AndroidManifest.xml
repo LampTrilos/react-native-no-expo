@@ -3,7 +3,10 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- NFC Permission -->
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-permission android:name="android.permission.NFC" />
+    <!-- End of NFC Permission -->
     <!-- Camera Permission -->
     <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Biometric Permission (for API level 28 and above) -->

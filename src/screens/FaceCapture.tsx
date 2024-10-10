@@ -5,7 +5,7 @@ import {NativeModules} from 'react-native';
 
 
 
-export default function FakeScreen() {
+export default function FaceCapture() {
     const {CalendarModule} = NativeModules;
     const {BiometricModule} = NativeModules;
     CalendarModule.createCalendarEvent('testName', 'testLocation');

@@ -5,7 +5,7 @@ import {
 import {Navigation} from '../utils/types.tsx';
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import {DrawerActions} from '@react-navigation/native';
-import FakeScreen from "./FakeScreen.tsx";
+import FaceCapture from "./FaceCapture.tsx";
 import customTheme from '../assets/Theme'
 import CustomDrawerContent from "../components/TheDrawerContent.tsx";
 import {StyleSheet, Text, View} from "react-native";
@@ -46,7 +46,7 @@ export default function Dashboard({navigation}: Props) {
             drawerType: 'slide',
             drawerStyle: styles.drawer
         }}
-                          initialRouteName="FakeScreen"
+                          initialRouteName="FaceCapture"
                           drawerContent={(props) =>
                               <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="PassportCheck" component={BottomTabs} options={({navigation}) => ({
@@ -70,7 +70,7 @@ export default function Dashboard({navigation}: Props) {
                     </Tooltip>),
             })}
             />
-            <Drawer.Screen name="FakeScreen2" component={FakeScreen} options={{headerShown: false}}/>
+            <Drawer.Screen name="FakeScreen2" component={FaceCapture} options={{headerShown: false}}/>
             {/*<Drawer.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>*/}
         </Drawer.Navigator>)
 };

@@ -64,7 +64,6 @@
         <activity
             android:name=".multibiometric.multimodal.FaceActivity"
             android:label="@string/face_app_name"
-            android:screenOrientation="portrait"
             android:hardwareAccelerated="true">
         </activity>
 

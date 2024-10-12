@@ -30,6 +30,7 @@ class CameraActivity : AppCompatActivity(), CameraMLKitFragment.CameraMLKitCallb
         val intent = Intent()
         intent.putExtra(IntentData.KEY_MRZ_INFO, mrzInfo)
         setResult(Activity.RESULT_OK, intent)
+        println("CAMERA ACTIVITY KOTLIN: $mrzInfo")
         finish()
     }
 

@@ -30,13 +30,10 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
+        <!-- Passport Reader app activities -->
         <activity android:name=".passport.ui.activities.SelectionActivity"
             android:screenOrientation="fullSensor"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".passport.ui.activities.CameraActivity"
             android:screenOrientation="fullSensor"
@@ -47,11 +44,11 @@
         </activity>
 
         <activity android:name=".passport.ui.activities.NfcActivity"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="fullSensor"
             android:keepScreenOn="true">
 
         </activity>
-
+        <!-- End of Passport Reader app activities -->
 
       <activity
         android:name=".MainActivity"

@@ -1,5 +1,5 @@
 description = "Samples utils"
-
+//This signals it is not the main application
 apply plugin: 'com.android.library'
 
 //def productRootDir = ".."
@@ -106,3 +106,4 @@ repositories {
 		dirs "../libs" // This points to the directory one level up
 	}
 }
+

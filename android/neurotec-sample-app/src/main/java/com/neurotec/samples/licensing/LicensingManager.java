@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.neurotec.licensing.NLicense;
@@ -99,13 +100,15 @@ public final class LicensingManager {
 	}
 
 	public static boolean isActivated(String license) {
-		if (license == null) throw new NullPointerException("license");
-		try {
-			return NLicense.isComponentActivated(license);
-		} catch (IOException e) {
-			Log.e(TAG, "IOException", e);
-			return false;
-		}
+		//Experiment cause Operation is not activated
+		return true;
+//		if (license == null) throw new NullPointerException("license");
+//		try {
+//			return NLicense.isComponentActivated(license);
+//		} catch (IOException e) {
+//			Log.e(TAG, "IOException", e);
+//			return false;
+//		}
 	}
 
 	public static boolean isFaceExtractionActivated() {
@@ -277,7 +280,9 @@ public final class LicensingManager {
 			result &= available;
 			Log.i(TAG, String.format("Obtaining '%s' license %s.", component, available ? "succeeded" : "failed"));
 		}
-		return result;
+		//Experiment cause Operation is not activated
+		//return result;
+		return true;
 	}
 
 	public List<String> obtainLicenses(Context context, String[] licenses) throws IOException {
@@ -294,9 +299,10 @@ public final class LicensingManager {
 		boolean result = false;
 		for (String license : licenses) {
 			boolean available = NLicense.obtain(address, port, license);
-			if (available) {
+			//Experiment cause Operation is not activated, so we just add all the licenses
+			//if (available) {
 				obtainedLicenses.add(license);
-			}
+			//}
 			Log.i(TAG, String.format("Obtaining '%s' license %s.", license, available ? "succeeded" : "failed"));
 		}
 		return obtainedLicenses;

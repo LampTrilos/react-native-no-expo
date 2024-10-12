@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "834749282348",
+    "project_id": "androidpassportreader-bb74e",
+    "storage_bucket": "androidpassportreader-bb74e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834749282348:android:11c64ac5876d75f9d2f989",
+        "android_client_info": {
+          "package_name": "com.jillaraz.passportreader"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD66LSVVf9mvEP5NFCEaufOEJuekD010Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

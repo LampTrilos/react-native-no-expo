@@ -1,3 +1,4 @@
+//This signals it is the main application
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
@@ -114,6 +115,11 @@ dependencies {
     //To make available the neurotec sample classes in utils folder
     //Besides this, you also need to declare it in the root settings.gradle
     implementation project(":neurotec-sample-app")
+
+    //To make available the passport-reader-app sample classes in utils folder
+    //Besides this, you also need to declare it in the root settings.gradle
+    implementation project(":passport-reader-app")
+
 
     //To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
     //implementation fileTree(dir: '../libs', include: ['*.jar'])

@@ -10,6 +10,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        //Sometimes the library is not in maven but jitpack
+        maven { url 'https://jitpack.io' }
 //        flatDir {
 //            dirs '../libs'
 //        }

@@ -61,25 +61,22 @@ class MainActivity : ReactActivity() {
         println("MAIN ACTIVITY: ADFADF ASDFVASVF SDFVDSVF SDFV MRZ DATA IS:")
         println(data)
         if (resultCode == RESULT_OK) {
-            // Get MRZ data from the Intent
-            //val mrzInfo: MRZInfo = data.getParcelableExtra(IntentData.KEY_MRZ_INFO)
-            //val mrzInfo: Parcelable? = data?.getParcelableExtra(IntentData.KEY_MRZ_INFO)
+            // Get MRZ data from the Intent, if it exists
             val mrzInfo = data?.getSerializableExtra(IntentData.KEY_MRZ_INFO) as? MRZInfo
-            // Pass it back to JavaScript
-            val params = Arguments.createMap()
-            params.putString(
-                "mrzData",
-                mrzInfo.toString()
-            ) // Assuming MRZInfo has a suitable toString method
-            // Send the data to JS via PassportModule
-//            passportModule = PassportModule(reactApplicationContext())
-//            passportModule.sendMRZData(mrzInfo.toString())
-            // Send the mrzData directly to javascript, bypassing the PassportModule
-            val reactContext = reactApplicationContext()
-            if (reactContext.hasActiveCatalystInstance()) {
-                reactContext
-                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                    .emit("onMRZDataReceived", params)
+            //If we sent mrz data, send the corresponding event
+            if (mrzInfo != null) {
+                // Pass it back to JavaScript
+                val params = Arguments.createMap()
+                params.putString(
+                    "mrzData",
+                    mrzInfo.toString()
+                )
+                val reactContext = reactApplicationContext()
+                if (reactContext.hasActiveCatalystInstance()) {
+                    reactContext
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                        .emit("onMRZDataReceived", params)
+                }
             }
         }
         //}

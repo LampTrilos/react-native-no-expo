@@ -57,7 +57,7 @@ export default function PersonInformationNFC({style, person}) {
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Date of Birth:</Text>
-                                <Text>{person.dateOfBirth.toLocaleDateString()}</Text>
+                                <Text>{new Date(person.dateOfBirth).toLocaleDateString()}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Gender:</Text>
@@ -75,7 +75,7 @@ export default function PersonInformationNFC({style, person}) {
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Valid until:</Text>
-                                <Text>{person.validUntil.toLocaleDateString()}</Text>
+                                <Text>{new Date(person.validUntil).toLocaleDateString()}</Text>
                             </View>
                         </View>
                     </View>

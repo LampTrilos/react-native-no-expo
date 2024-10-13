@@ -1,9 +1,8 @@
 import {useEffect} from "react";
 import {Image, StyleSheet, View} from 'react-native';
 import {Card} from "react-native-paper";
-import { NativeModules } from 'react-native';
-//const { NativeEventEmitter, PassportModule } = NativeModules;
-const { PassportModule } = NativeModules;
+import { NativeModules, NativeEventEmitter } from 'react-native';
+const {PassportModule } = NativeModules;
 
 
 
@@ -19,19 +18,21 @@ const PassportScan = ({ style }) => {
         openCamera();
         })
 
-//     useEffect(() => {
-//         const eventEmitter = new NativeEventEmitter(NativeModules.PassportModule);
-//
-//         // Subscribe to the event
-//         const subscription = eventEmitter.addListener('onMRZDataReceived', (data) => {
-//             console.log('MRZ Data:', data.mrzData);
-//         });
-//
-//         // Cleanup subscription on unmount
-//         return () => {
-//             subscription.remove();
-//         };
-//     }, []); // Empty dependency array means this effect runs once when the component mounts
+    useEffect(() => {
+        //const eventEmitter = new NativeEventEmitter(PassportModule);
+        // Use DeviceEventManagerModule directly instead of PassportModule
+        const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
+
+        // Subscribe to the event
+        const subscription = eventEmitter.addListener('onMRZDataReceived', (data) => {
+            console.log('MRZ Data:', data.mrzData);
+        });
+
+        // Cleanup subscription on unmount
+        return () => {
+            subscription.remove();
+        };
+    }, []); // Empty dependency array means this effect runs once when the component mounts
 
 return (
     <View style={style}>

@@ -10,6 +10,7 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
+import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.jillaraz.passportreader.common.IntentData
 import org.jmrtd.lds.icao.MRZInfo
 import kotlin.math.log
@@ -53,6 +54,7 @@ class MainActivity : ReactActivity() {
     }
 
     //Callback listener to check for events from custom activities so our js pages get notified
+    //This is needed because the CameraActivity closes and doesn't exist after the mrz is fired
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         //if (requestCode == 200) {
@@ -61,16 +63,24 @@ class MainActivity : ReactActivity() {
         if (resultCode == RESULT_OK) {
             // Get MRZ data from the Intent
             //val mrzInfo: MRZInfo = data.getParcelableExtra(IntentData.KEY_MRZ_INFO)
-            val mrzInfo: Parcelable? = data?.getParcelableExtra(IntentData.KEY_MRZ_INFO)
+            //val mrzInfo: Parcelable? = data?.getParcelableExtra(IntentData.KEY_MRZ_INFO)
+            val mrzInfo = data?.getSerializableExtra(IntentData.KEY_MRZ_INFO) as? MRZInfo
             // Pass it back to JavaScript
             val params = Arguments.createMap()
             params.putString(
                 "mrzData",
                 mrzInfo.toString()
             ) // Assuming MRZInfo has a suitable toString method
-            // Send the data to JS
-            passportModule = PassportModule(reactApplicationContext())
-            passportModule.sendMRZData(mrzInfo.toString())
+            // Send the data to JS via PassportModule
+//            passportModule = PassportModule(reactApplicationContext())
+//            passportModule.sendMRZData(mrzInfo.toString())
+            // Send the mrzData directly to javascript, bypassing the PassportModule
+            val reactContext = reactApplicationContext()
+            if (reactContext.hasActiveCatalystInstance()) {
+                reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                    .emit("onMRZDataReceived", params)
+            }
         }
         //}
     }

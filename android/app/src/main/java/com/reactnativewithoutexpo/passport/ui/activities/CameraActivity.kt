@@ -10,6 +10,7 @@ import org.jmrtd.lds.icao.MRZInfo
 
 import com.reactnativewithoutexpo.R
 import com.reactnativewithoutexpo.passport.ui.fragments.CameraMLKitFragment
+import java.io.Serializable
 
 class CameraActivity : AppCompatActivity(), CameraMLKitFragment.CameraMLKitCallback {
 
@@ -28,7 +29,9 @@ class CameraActivity : AppCompatActivity(), CameraMLKitFragment.CameraMLKitCallb
 
     override fun onPassportRead(mrzInfo: MRZInfo) {
         val intent = Intent()
-        intent.putExtra(IntentData.KEY_MRZ_INFO, mrzInfo)
+        //intent.putExtra(IntentData.KEY_MRZ_INFO, mrzInfo)
+        //Because it wouldn't be cast correctly by Main Activity
+        intent.putExtra(IntentData.KEY_MRZ_INFO, mrzInfo as Serializable)
         setResult(Activity.RESULT_OK, intent)
         println("CAMERA ACTIVITY KOTLIN: $mrzInfo")
         finish()

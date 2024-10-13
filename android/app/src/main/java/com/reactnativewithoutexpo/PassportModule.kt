@@ -23,14 +23,16 @@ class PassportModule internal constructor(reactContext: ReactApplicationContext?
             Log.d("PassportModule", "Called PassportModule Module!!SADFASDF asfdASDAFAF asdFSADFSAFsad.. Activity is  not null")
             val intent =
                 Intent(activity, com.reactnativewithoutexpo.passport.ui.activities.CameraActivity::class.java)
+            //This ensures that the activity will return something
             //activity.startActivity(intent)
-            // Make sure to use a request code when a result is returned
             activity.startActivityForResult(intent, 200)
         }
     }
 
     // Method to send MRZ data to JavaScript
+    // For now the flow is PassportModule --> CameraActivity --> MainActivity --> PassportModule
     fun sendMRZData(mrzData: String?) {
+        println("PassportModule, sending mrz data")
         println(mrzData)
         // Check if the ReactContext is not null
         if (reactApplicationContext.hasActiveCatalystInstance()) {

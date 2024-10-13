@@ -44,7 +44,7 @@ export interface PassportData {
     type:  string;
     issueCountry:  string;
     documentNumber:  string;
-    validUntil: String;
+    dateOfExpiry: String;
     chipChecked: boolean;
     mrzChecked: boolean;
 }
@@ -54,7 +54,7 @@ export enum GenderTypes {
     FEMALE = "Female",
 }
 // Factory function for nfc data
-export const newPassportData = (familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string,validUntil: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({
+export const newPassportData = (familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({
     familyName,
     firstName,
     nationality,
@@ -63,7 +63,7 @@ export const newPassportData = (familyName: string,firstName:  string,nationalit
     type,
     issueCountry,
     documentNumber,
-    validUntil,
+    dateOfExpiry,
     chipChecked,
     mrzChecked
 });

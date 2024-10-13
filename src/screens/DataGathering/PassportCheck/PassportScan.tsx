@@ -2,11 +2,17 @@ import {useEffect} from "react";
 import {Image, StyleSheet, View} from 'react-native';
 import {Card} from "react-native-paper";
 import { NativeModules, NativeEventEmitter } from 'react-native';
+import {parseMRZ} from "../../../utils/utils.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {setMRZData} from "../../../store/CurrentCheck";
 const {PassportModule } = NativeModules;
 
 
 
 const PassportScan = ({ style }) => {
+    //-------------Store section about the currentCheck(Person)---------------------//
+    const dispatch = useDispatch();
+    //-------------End of store section about the currentCheck(Person)---------------------//
 
     // Function to open the camera, it calls the PassportModule
     const openCamera = () => {
@@ -25,6 +31,10 @@ const PassportScan = ({ style }) => {
         // Subscribe to the event
         const subscription = eventEmitter.addListener('onMRZDataReceived', (data) => {
             console.log('MRZ Data:', data.mrzData);
+            const parsedMRData = parseMRZ(data.mrzData)
+            console.log(parsedMRData)
+            //Update the state about the current Check with the scanned MRZ Data
+            dispatch(setMRZData(parsedMRData));
         });
 
         // Cleanup subscription on unmount

@@ -270,9 +270,12 @@ class CameraMLKitFragment : CameraFragment() {
             }
             mHandler.post {
                 try {
-                    binding?.statusViewBottom?.text = getString(R.string.status_bar_failure, timeRequired)
-                    binding?.statusViewBottom?.setTextColor(Color.RED)
-                    binding?.statusViewTop?.text = ""
+                    //Do not show any red text until the mrz is successfully scanned
+                    //binding?.statusViewBottom?.text = getString(R.string.status_bar_failure, timeRequired)
+                    //binding?.statusViewBottom?.setTextColor(Color.RED)
+                    //To show a tip at the top of the screen
+                    binding?.statusViewTop?.visibility = View.VISIBLE
+                    binding?.statusViewTop?.text = getString(R.string.status_bar_tip)
                 } catch (e: IllegalStateException) {
                     //The fragment is destroyed
                 }

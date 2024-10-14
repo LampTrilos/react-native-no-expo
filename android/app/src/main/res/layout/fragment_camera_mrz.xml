@@ -18,39 +18,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000">
-    <!-- Additon  Banner TextView to show instructions-->
-    <TextView
-        android:id="@+id/status_view_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:padding="16dp"
-        android:text=""
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:gravity="center"/>
 
     <io.fotoapparat.view.CameraView
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-<!--    <TextView android:id="@+id/status_view_top"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_above="@+id/status_view_bottom"-->
-<!--        android:layout_margin="14dp"-->
-<!--        android:background="#0000"-->
-<!--        android:textColor="@color/status_text"-->
-<!--        android:textSize="14sp"-->
-<!--        android:autoLink="web"-->
-<!--        android:clickable="true" />-->
+
+
+    <TextView
+        android:id="@+id/status_view_top"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_above="@+id/status_view_bottom"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="#2C68BC"
+        android:textColor="@color/status_text"
+        android:textSize="22sp"
+        android:autoLink="web"
+        android:clickable="false" />
+
 
     <TextView android:id="@+id/status_view_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="14dp"
+        android:layout_margin="4dp"
         android:background="#0000"
         android:text=""
         android:textColor="@color/status_text"

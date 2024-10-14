@@ -6,6 +6,7 @@ import PassportScan from "./PassportScan.tsx";
 //import {GenderTypes, newPassportData} from "../../../utils/model.ts";
 import {useDispatch, useSelector} from "react-redux";
 
+//This page appears after the StartCheck page, after the user has selected to start the document check procedure
 export default function PassportCheck() {
 
 

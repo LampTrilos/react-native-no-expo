@@ -121,15 +121,16 @@ dependencies {
     implementation project(":neurotec-sample-app")
     implementation project(':passport-reader-app')
 
-    //To make available the passport-reader-app sample classes in utils folder
-    //Besides this, you also need to declare it in the root settings.gradle
-    //implementation project(":passport-reader-app")
+
     //Libraries needed for UI of passport-reader-app that was moved to the main app
+    implementation 'com.madgag.spongycastle:prov:1.58.0.0'
+    implementation ('org.ejbca.cvc:cert-cvc:1.4.13'){
+        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
+    }
+    implementation 'org.jmrtd:jmrtd:0.7.35'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
     //Camera
     implementation 'io.fotoapparat:fotoapparat:2.7.0'
-    //NFC Passport
-    implementation 'org.jmrtd:jmrtd:0.7.35'
-    //RX
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation 'net.sf.scuba:scuba-sc-android:0.0.23'
@@ -137,14 +138,6 @@ dependencies {
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
     // ML Kit dependencies
     implementation 'com.google.firebase:firebase-core:21.1.1'
-    implementation 'com.google.firebase:firebase-ml-common:22.1.2'
-    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
-    implementation 'com.madgag.spongycastle:prov:1.58.0.0'
-    implementation ('org.ejbca.cvc:cert-cvc:1.4.13'){
-        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
-    }
-    //This one was added from scratch because the CardView library was missing
-    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.8.0'
     //End of libraries needed for UI of passport-reader-app
 

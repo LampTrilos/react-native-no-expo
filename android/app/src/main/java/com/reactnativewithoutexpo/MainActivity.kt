@@ -12,6 +12,7 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnable
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.jillaraz.passportreader.common.IntentData
+import com.jillaraz.passportreader.data.Passport
 import org.jmrtd.lds.icao.MRZInfo
 import kotlin.math.log
 

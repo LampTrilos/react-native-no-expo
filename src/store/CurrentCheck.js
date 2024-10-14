@@ -30,6 +30,6 @@ export const currentCheckSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setMRZData } = currentCheckSlice.actions
+export const { setMRZData, setNFCData } = currentCheckSlice.actions
 
 export default currentCheckSlice.reducer

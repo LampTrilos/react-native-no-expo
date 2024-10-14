@@ -20,16 +20,6 @@
     android:layout_height="match_parent"
     tools:mContext="com.jillaraz.passportreader.ui.activities.CameraActivity" >
 
-    <!-- Additon  Banner TextView to show instructions-->
-    <TextView
-            android:id="@+id/bannerTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#2196F3"
-            android:padding="16dp"
-            android:text="Παρακαλώ στοχεύστε την MRZ του εγγράφου"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:gravity="center"/>
+
 
 </FrameLayout>

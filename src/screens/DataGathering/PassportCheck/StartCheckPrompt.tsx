@@ -1,8 +1,9 @@
 import React from "react";
 import {Button, Card, Text} from "react-native-paper";
-import {NativeModules} from 'react-native';
+import {NativeModules, StyleSheet, View} from 'react-native';
 import {Navigation} from "../../../utils/types.tsx";
-
+import Header from '../../../components/Header';
+import customTheme from "../../../assets/Theme";
 
 type Props = {
     navigation: Navigation;
@@ -15,20 +16,26 @@ export default function StartCheckPrompt({ navigation }: Props) {
         navigation.navigate('PassportCheck');
     };
     return (
-        <>
-            <Card >
-                <Card.Title title="Card Title" subtitle="Card Subtitle"  />
-                {/*<Card.Content>*/}
 
-                {/*    <Text variant="titleLarge">Card title</Text>*/}
-                {/*    <Text variant="bodyMedium">Card content</Text>*/}
-                {/*</Card.Content>*/}
-                {/*<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />*/}
-                <Card.Actions>
-                    <Button>Cancel</Button>
-                    <Button onPress={onPress}>Ok</Button>
-                </Card.Actions>
-            </Card>
-        </>
+            <View style={styles.container}>
+                {/*<Header >Entry Exit System</Header>*/}
+                <Button mode="contained" onPress={onPress} style={styles.button}>
+                    Εκκίνιση Ελέγχου
+                </Button>
+            </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        padding: 15,
+        borderRadius: 15,
+    },
+    button: {
+        top: '45%'
+    }
+});

@@ -1,5 +1,6 @@
 package com.reactnativewithoutexpo.passport.ui.activities
 
+import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Bitmap
@@ -22,6 +23,7 @@ import com.reactnativewithoutexpo.R
 import com.reactnativewithoutexpo.passport.ui.fragments.NfcFragment
 import com.reactnativewithoutexpo.passport.ui.fragments.PassportDetailsFragment
 import com.reactnativewithoutexpo.passport.ui.fragments.PassportPhotoFragment
+import java.io.Serializable
 
 
 class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFragmentListener, PassportDetailsFragment.PassportDetailsFragmentListener, PassportPhotoFragment.PassportPhotoFragmentListener {

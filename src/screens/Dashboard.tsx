@@ -9,7 +9,7 @@ import FaceCapture from "./FaceCapture.tsx";
 import customTheme from '../assets/Theme'
 import CustomDrawerContent from "../components/TheDrawerContent.tsx";
 import {StyleSheet, Text, View} from "react-native";
-import BottomTabs from "../screens/DataGathering/BottomTabs.tsx"
+import PassportNavigator from "../screens/DataGathering/PassportCheck/PassportNavigator.tsx"
 import {useDispatch, useSelector} from "react-redux";
 import {ControlStatusTypes} from "../utils/model.ts";
 import {setUser} from "../store/userData";
@@ -49,7 +49,7 @@ export default function Dashboard({navigation}: Props) {
                           initialRouteName="FaceCapture"
                           drawerContent={(props) =>
                               <CustomDrawerContent {...props} />}>
-            <Drawer.Screen name="PassportCheck" component={BottomTabs} options={({navigation}) => ({
+            <Drawer.Screen name="PassportNavigator" component={PassportNavigator} options={({navigation}) => ({
                 headerShown: true,
                 headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),

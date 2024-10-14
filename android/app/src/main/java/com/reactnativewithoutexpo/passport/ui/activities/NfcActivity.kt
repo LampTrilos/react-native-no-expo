@@ -2,6 +2,7 @@ package com.reactnativewithoutexpo.passport.ui.activities
 
 import android.app.Activity
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.nfc.NfcAdapter
@@ -11,8 +12,13 @@ import android.provider.Settings
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import android.widget.Toast
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.google.gson.Gson
 import com.jillaraz.passportreader.common.IntentData
 import com.jillaraz.passportreader.data.Passport
+import com.reactnativewithoutexpo.MainApplication
 
 import net.sf.scuba.smartcards.CardServiceException
 
@@ -23,8 +29,13 @@ import com.reactnativewithoutexpo.R
 import com.reactnativewithoutexpo.passport.ui.fragments.NfcFragment
 import com.reactnativewithoutexpo.passport.ui.fragments.PassportDetailsFragment
 import com.reactnativewithoutexpo.passport.ui.fragments.PassportPhotoFragment
+import java.io.File
+import java.io.FileOutputStream
 import java.io.Serializable
 
+import com.facebook.react.ReactApplication
+import com.facebook.react.ReactNativeHost
+import com.facebook.react.ReactInstanceManager
 
 class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFragmentListener, PassportDetailsFragment.PassportDetailsFragmentListener, PassportPhotoFragment.PassportPhotoFragmentListener {
 
@@ -119,13 +130,40 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
 //    }
     override fun onPassportRead(passport: Passport?) {
     val intent = Intent()
-    //Because it wouldn't be cast correctly by Main Activity
-    intent.putExtra(IntentData.KEY_PASSPORT, passport as Serializable)
+    intent.putExtra(IntentData.KEY_PASSPORT, passport)
     setResult(Activity.RESULT_OK, intent)
     println("NFC ACTIVITY KOTLIN: $passport")
+    //The passport cannot be sent back to MainActivity cause of the size, so we emit it directly to Javascript
+    if (passport != null) {
+        emitNFCScanResult(passport)
+    }
+
     //With finish it will return to Main Activity, where the listener awaits
     finish()
     }
+
+    //The passport cannot be sent back to MainActivity cause of the size, so we emit it directly to Javascript
+    private fun emitNFCScanResult(passportInfo: Passport) {
+        // Convert the passportInfo to JSON string
+        val gson = Gson()
+        val passportJson = gson.toJson(passportInfo)
+
+        // Create a params map
+        val params = Arguments.createMap()
+        params.putString("nfcData", passportJson)
+
+
+        val reactNativeHost = (application as MainApplication).reactNativeHost
+        // Get the ReactApplicationContext from your application
+        val reactApplicationContext = (application as MainApplication).reactNativeHost.reactInstanceManager.currentReactContext
+
+        // Emit the event back to JavaScript
+        reactApplicationContext?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+            ?.emit("onNFCDataReceived", params)
+    }
+
+
+
 
     override fun onCardException(cardException: Exception?) {
         //Toast.makeText(this, cardException.toString(), Toast.LENGTH_SHORT).show();

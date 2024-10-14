@@ -36,10 +36,11 @@ const PassportScan = ({ style }) => {
             //Update the state about the current Check with the scanned MRZ Data
             dispatch(setMRZData(parsedMRZData));
             //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
+             PassportModule.navigateToNFCActivity(data.mrzData);
         });
 
         const subscriptionNFC = eventEmitter.addListener('onNFCDataReceived', (data) => {
-            console.log('MRZ Data:', data.nfcData);
+            console.log('NFC Data:', data.nfcData);
             const parsedNFCData = parseMRZ(data.nfcData)
             console.log(parsedNFCData)
             //Update the state about the current Check with the scanned MRZ Data

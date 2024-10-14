@@ -140,7 +140,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.android.material:material:1.8.0'
     //End of libraries needed for UI of passport-reader-app
-
+    implementation 'com.google.code.gson:gson:2.8.9' // or the latest version
 
 
 

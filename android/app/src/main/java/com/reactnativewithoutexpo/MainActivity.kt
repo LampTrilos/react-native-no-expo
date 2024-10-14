@@ -15,6 +15,7 @@ import com.jillaraz.passportreader.common.IntentData
 import com.jillaraz.passportreader.data.Passport
 import org.jmrtd.lds.icao.MRZInfo
 import kotlin.math.log
+import com.google.gson.Gson
 
 
 class MainActivity : ReactActivity() {
@@ -83,11 +84,14 @@ class MainActivity : ReactActivity() {
             }
             //Else if we sent passport data, send the corresponding event
             else if (passportInfo != null) {
+                //Create a json for the passport object
+                val gson = Gson()
+                val passportJson = gson.toJson(passportInfo)
                 // Pass it back to JavaScript
                 val params = Arguments.createMap()
                 params.putString(
                         "nfcData",
-                        passportInfo.toString()
+                    passportJson
                 )
                 val reactContext = reactApplicationContext()
                 if (reactContext.hasActiveCatalystInstance()) {

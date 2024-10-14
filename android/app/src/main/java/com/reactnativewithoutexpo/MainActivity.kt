@@ -63,6 +63,8 @@ class MainActivity : ReactActivity() {
         if (resultCode == RESULT_OK) {
             // Get MRZ data from the Intent, if it exists
             val mrzInfo = data?.getSerializableExtra(IntentData.KEY_MRZ_INFO) as? MRZInfo
+            // Get MRZ data from the Intent, if it exists
+            val passportInfo = data?.getSerializableExtra(IntentData.KEY_PASSPORT) as? Passport
             //If we sent mrz data, send the corresponding event
             if (mrzInfo != null) {
                 // Pass it back to JavaScript
@@ -76,6 +78,21 @@ class MainActivity : ReactActivity() {
                     reactContext
                         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
                         .emit("onMRZDataReceived", params)
+                }
+            }
+            //Else if we sent passport data, send the corresponding event
+            else if (passportInfo != null) {
+                // Pass it back to JavaScript
+                val params = Arguments.createMap()
+                params.putString(
+                        "nfcData",
+                        passportInfo.toString()
+                )
+                val reactContext = reactApplicationContext()
+                if (reactContext.hasActiveCatalystInstance()) {
+                    reactContext
+                            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                            .emit("onNFCDataReceived", params)
                 }
             }
         }

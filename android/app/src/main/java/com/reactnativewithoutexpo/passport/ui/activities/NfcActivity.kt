@@ -111,9 +111,18 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
         val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         nfcAdapter.disableForegroundDispatch(this)
     }
-
+//When the passport is successfully read
+//    override fun onPassportRead(passport: Passport?) {
+//        showFragmentDetails(passport!!)
+//    }
     override fun onPassportRead(passport: Passport?) {
-        showFragmentDetails(passport!!)
+    val intent = Intent()
+    //Because it wouldn't be cast correctly by Main Activity
+    intent.putExtra(IntentData.KEY_PASSPORT, passport as Serializable)
+    setResult(Activity.RESULT_OK, intent)
+    println("NFC ACTIVITY KOTLIN: $passport")
+    //With finish it will return to Main Activity, where the listener awaits
+    finish()
     }
 
     override fun onCardException(cardException: Exception?) {

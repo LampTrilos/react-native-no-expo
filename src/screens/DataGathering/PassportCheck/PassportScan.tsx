@@ -29,17 +29,27 @@ const PassportScan = ({ style }) => {
 
         const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
         // Subscribe to the event
-        const subscription = eventEmitter.addListener('onMRZDataReceived', (data) => {
+        const subscriptionMRZ = eventEmitter.addListener('onMRZDataReceived', (data) => {
             console.log('MRZ Data:', data.mrzData);
-            const parsedMRData = parseMRZ(data.mrzData)
-            console.log(parsedMRData)
+            const parsedMRZData = parseMRZ(data.mrzData)
+            console.log(parsedMRZData)
             //Update the state about the current Check with the scanned MRZ Data
-            dispatch(setMRZData(parsedMRData));
+            dispatch(setMRZData(parsedMRZData));
+            //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
+            const subscriptionNFC = eventEmitter.addListener('onNFCDataReceived', (data) => {
+                console.log('MRZ Data:', data.nfcData);
+                const parsedNFCData = parseMRZ(data.nfcData)
+                console.log(parsedNFCData)
+                //Update the state about the current Check with the scanned MRZ Data
+                dispatch(setNFCData(parsedNFCData));
+                //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
+            });
         });
 
         // Cleanup subscription on unmount
         return () => {
-            subscription.remove();
+            subscriptionMRZ.remove();
+            subscriptionNFC.remove();
         };
         // Empty dependency array means this effect runs once when the component mounts
     }, []);

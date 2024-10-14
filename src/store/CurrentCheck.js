@@ -18,6 +18,14 @@ export const currentCheckSlice = createSlice({
             state.value.dateOfExpiry =  action.payload.dateOfExpiry
             state.value.mrzChecked =  true
         },
+        //Sets the data captured from the MRZ
+        setNFCData: (state, action) => {
+            //Change this code to reflect the actual NFC Data
+            // state.value.documentNumber =  action.payload.documentNumber
+            // state.value.dateOfBirth =  action.payload.dateOfBirth
+            // state.value.dateOfExpiry =  action.payload.dateOfExpiry
+            state.value.chipChecked =  true
+        },
     },
 })
 

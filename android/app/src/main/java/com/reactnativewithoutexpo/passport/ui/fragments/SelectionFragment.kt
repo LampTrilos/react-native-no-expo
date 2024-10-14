@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
-import com.jillaraz.passportreader.databinding.FragmentSelectionBinding
+import com.reactnativewithoutexpo.databinding.FragmentSelectionBinding
 import com.jillaraz.passportreader.network.MasterListService
 import com.jillaraz.passportreader.utils.KeyStoreUtils
 import com.mobsandgeeks.saripaar.ValidationError

@@ -17,7 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.jillaraz.passportreader.common.IntentData
 import com.jillaraz.passportreader.data.Passport
-import com.jillaraz.passportreader.databinding.FragmentNfcBinding
+import com.reactnativewithoutexpo.databinding.FragmentNfcBinding
 import com.jillaraz.passportreader.utils.KeyStoreUtils
 import com.jillaraz.passportreader.utils.NFCDocumentTag
 

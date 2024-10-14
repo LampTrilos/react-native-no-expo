@@ -106,6 +106,10 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
 
 }
 
@@ -141,6 +145,7 @@ dependencies {
     }
     //This one was added from scratch because the CardView library was missing
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.8.0'
     //End of libraries needed for UI of passport-reader-app
 
 
@@ -173,22 +178,6 @@ dependencies {
     implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
     implementation (name:'neurotec-licensing-gui-android', ext:'aar')
 
-
-
-    //To include ndf databases that are needed for the neurotec sample Activities
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetect45.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetect90.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetect180.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsAttributes.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsOrientation.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsOrientation90.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsFeaturePointsTrack.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsLiveness.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesCreateTemplateSmall.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesCreateTemplateMedium.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesDetectSegmentsFeaturePointsDetect.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['FacesCreateTemplateQuality.ndf'])
-//    implementation fileTree(dir: '../libs/ndfs', include: ['Fingers.ndf'])
 
 
 

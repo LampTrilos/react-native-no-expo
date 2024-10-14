@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.jillaraz.passportreader.common.IntentData
 import com.jillaraz.passportreader.data.Passport
-import com.jillaraz.passportreader.databinding.FragmentPassportDetailsBinding
+import com.reactnativewithoutexpo.databinding.FragmentPassportDetailsBinding
 import com.jillaraz.passportreader.utils.StringUtils
 import org.jmrtd.FeatureStatus
 import org.jmrtd.VerificationStatus

@@ -32,7 +32,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.mlkit.vision.text.Text
-import com.jillaraz.passportreader.databinding.FragmentCameraMrzBinding
+import com.reactnativewithoutexpo.databinding.FragmentCameraMrzBinding
 import com.jillaraz.passportreader.mlkit.FrameMetadata
 import com.jillaraz.passportreader.mlkit.GraphicOverlay
 import com.jillaraz.passportreader.mlkit.OcrMrzDetectorProcessor

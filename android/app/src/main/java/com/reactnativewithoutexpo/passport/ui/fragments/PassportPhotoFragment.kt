@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jillaraz.passportreader.common.IntentData
-import com.jillaraz.passportreader.databinding.FragmentPhotoBinding
+import com.reactnativewithoutexpo.databinding.FragmentPhotoBinding
 
 
 class PassportPhotoFragment : androidx.fragment.app.Fragment() {

@@ -6,7 +6,7 @@ import CheckIcon from "../../../components/CheckIcon.tsx";
 //This is much more recent but only has 1 star https://github.com/LongNguyen2312/react-native-nfc-passport-info
 //Try this even though it is old: https://github.com/tradle/react-native-passport-reader/tree/master
 
-export default function PersonInformationNFC({style, person}) {
+export default function PersonInformationNFC({style, travelDocument}) {
     // Assuming person is passed as a prop with name, surname, and dateOfBirth properties
 
     //------------------------------------Section to check if the passport valid until date is past today-----------------------------//
@@ -17,14 +17,14 @@ export default function PersonInformationNFC({style, person}) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         // Create a date object from person.date2
-        const passportExpiry = new Date(person.validUntil);
+        const passportExpiry = new Date(travelDocument.dateOfExpiry);
         // Check if date2 is before today
         setIsPassportExpired(passportExpiry < today);
     }
     // useEffect to run the check when the component mounts or when person.date2 changes
     useEffect(() => {
         checkDate();
-    }, [person.validUntil]); // Dependency array: check whenever person.validUntil changes
+    }, [travelDocument.dateOfExpiry]); // Dependency array: check whenever person.validUntil changes
     //------------------------------------End of section to check if the passport valid until date is past today-----------------------------//
 
     return (
@@ -39,43 +39,43 @@ export default function PersonInformationNFC({style, person}) {
                                 source={{uri: 'https://thumbs.mugshots.com/gallery/images/f0/ef/JONATHAN-XAVIER-CABRAL-mugshot-50338840.400x800.jpg'}}
                                 style={styles.image}
                             />
-                            <CheckIcon textShown={"Chip"} attributeChecked={person.chipChecked}/>
-                            <CheckIcon textShown={"MRZ"} attributeChecked={person.mrzChecked}/>
+                            <CheckIcon textShown={"Chip"} attributeChecked={travelDocument.chipChecked}/>
+                            <CheckIcon textShown={"MRZ"} attributeChecked={travelDocument.mrzChecked}/>
                         </View>
                         <View style={styles.containerColumn}>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Family Name:</Text>
-                                <Text>{person.familyName}</Text>
+                                <Text>{travelDocument.familyName}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>First Name:</Text>
-                                <Text>{person.firstName}</Text>
+                                <Text>{travelDocument.firstName}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Nationality:</Text>
-                                <Text>{person.nationality}</Text>
+                                <Text>{travelDocument.nationality}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Date of Birth:</Text>
-                                <Text>{person.dateOfBirth}</Text>
+                                <Text>{travelDocument.dateOfBirth}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Gender:</Text>
-                                <Text>{person.gender}</Text>
+                                <Text>{travelDocument.gender}</Text>
                             </View>
                         </View>
                         <View style={styles.containerColumn}>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Issue Country:</Text>
-                                <Text>{person.issueCountry}</Text>
+                                <Text>{travelDocument.issueCountry}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Document Number:</Text>
-                                <Text>{person.documentNumber}</Text>
+                                <Text>{travelDocument.documentNumber}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Valid until:</Text>
-                                <Text>{person.dateOfExpiry}</Text>
+                                <Text>{travelDocument.dateOfExpiry}</Text>
                             </View>
                         </View>
                     </View>

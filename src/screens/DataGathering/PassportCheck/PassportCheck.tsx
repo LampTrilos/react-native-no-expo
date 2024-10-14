@@ -21,7 +21,7 @@ export default function PassportCheck() {
         <View style={styles.containerColumn}>
             <View style={styles.containerRow}>
                 <PassportScan style={styles.subscreen}/>
-                <PersonInformationNFC person={currentCheck} style={styles.subscreen}/>
+                <PersonInformationNFC travelDocument={currentCheck} style={styles.subscreen}/>
             </View>
         </View>
     )

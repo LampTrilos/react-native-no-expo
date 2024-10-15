@@ -36,6 +36,7 @@ export enum ControlStatusTypes {
 //--------------End of the business flow of the PassportCheck procedure------------------------//
 //------------------------The data scanned from the nfc of Passport-------------------//
 export interface PassportData {
+    faceImage: string; // Base64-encoded string
     familyName: string;
     firstName:  string;
     nationality:  string;
@@ -54,7 +55,8 @@ export enum GenderTypes {
     FEMALE = "Female",
 }
 // Factory function for nfc data
-export const newPassportData = (familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({
+export const newPassportData = (faceImage: string, familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({
+    faceImage,
     familyName,
     firstName,
     nationality,

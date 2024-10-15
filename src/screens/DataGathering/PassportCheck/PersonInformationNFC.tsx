@@ -36,7 +36,11 @@ export default function PersonInformationNFC({style, travelDocument}) {
                     <View style={styles.containerRow}>
                         <View style={styles.containerColumn}>
                             <Image
-                                source={{uri: 'https://thumbs.mugshots.com/gallery/images/f0/ef/JONATHAN-XAVIER-CABRAL-mugshot-50338840.400x800.jpg'}}
+                                source={{ uri: `data:image/png;base64,${travelDocument.faceImage}` }}
+                                style={styles.image}
+                            />
+                            <Image
+                                source={{uri: travelDocument.faceImage}}
                                 style={styles.image}
                             />
                             <CheckIcon textShown={"Chip"} attributeChecked={travelDocument.chipChecked}/>

@@ -137,7 +137,6 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
     if (passport != null) {
         emitNFCScanResult(passport)
     }
-
     //With finish it will return to Main Activity, where the listener awaits
     finish()
     }
@@ -146,11 +145,36 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
     private fun emitNFCScanResult(passportInfo: Passport) {
         // Convert the passportInfo to JSON string
         val gson = Gson()
-        val passportJson = gson.toJson(passportInfo)
+        //val passportJson = gson.toJson(passportInfo)
+        //The class responsible for showing the data in the original app is PassportDetailsFragment
+        val passportJson = Gson()
+        passportJson.put("faceImage", bitmapToBase64(passportInfo?.face))
+        passportJson.put("nationality", passportInfo?.personDetails?.nationality)
+        passportJson.put("dateOfBirth", passportInfo?.personDetails?.dateOfBirth)
+        passportJson.put("gender", passportInfo?.personDetails?.gender.name)
+        //This code is from class PassportDetailsFragment
+        val name = personDetails.primaryIdentifier!!.replace("<", "")
+        passportJson.put("firstName", passportInfo?.personDetails?.name) //Doesn't exist?
+        val surname = personDetails.secondaryIdentifier!!.replace("<", "")
+        passportJson.put("familyName", passportInfo?.personDetails?.surname) //Doesn't exist?
+
+        jsonObject.put("issueCountry", passportInfo?.personDetails?.issuingState)
+        jsonObject.put("documentNumber", passportInfo?.personDetails?.documentNumber)
+        jsonObject.put("dateOfExpiry", passportInfo?.personDetails?.dateOfExpiry)
+
+        //jsonObject.put("type", sodFile?.type)
+
+        //Perhaps implement later
+//        passportJson.put("type", sodFile?.type)
+//        passportJson.put("issueCountry", sodFile?.issueCountry)
+//        passportJson.put("documentNumber", sodFile?.documentNumber)
+//        passportJson.put("dateOfExpiry", sodFile?.dateOfExpiry)
+//        passportJson.put("chipChecked", sodFile?.chipChecked)
+//        passportJson.put("mrzChecked", sodFile?.mrzChecked)
 
         // Create a params map
         val params = Arguments.createMap()
-        params.putString("nfcData", passportJson)
+        params.putString("nfcData", passportJson.toString())
 
 
         val reactNativeHost = (application as MainApplication).reactNativeHost
@@ -162,7 +186,14 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
             ?.emit("onNFCDataReceived", params)
     }
 
-
+    //Convert Image to Base64
+    fun bitmapToBase64(bitmap: Bitmap?): String? {
+        if (bitmap == null) return null
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    }
 
 
     override fun onCardException(cardException: Exception?) {

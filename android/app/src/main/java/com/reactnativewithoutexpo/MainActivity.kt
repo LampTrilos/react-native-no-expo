@@ -82,25 +82,6 @@ class MainActivity : ReactActivity() {
                         .emit("onMRZDataReceived", params)
                 }
             }
-            //Else if we sent passport data, send the corresponding event
-            else if (passportInfo != null) {
-                //Create a json for the passport object
-                val gson = Gson()
-                val passportJson = gson.toJson(passportInfo)
-                // Pass it back to JavaScript
-                val params = Arguments.createMap()
-                params.putString(
-                        "nfcData",
-                    passportJson
-                )
-                val reactContext = reactApplicationContext()
-                if (reactContext.hasActiveCatalystInstance()) {
-                    reactContext
-                            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                            .emit("onNFCDataReceived", params)
-                }
-            }
         }
-        //}
     }
 }

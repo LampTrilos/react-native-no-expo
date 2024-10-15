@@ -8,14 +8,22 @@ const defaultCheck= newPassportData('https://thumbs.mugshots.com/gallery/images/
 export const currentCheckSlice = createSlice({
     name: 'PassportCheck',
     initialState: {
-        value:  defaultCheck
+        //Just the first step of scanning mrz data, we keep it to compare it to the NFC Scan later
+        mrzData: {},
+        //The overall check of a person
+        value:  defaultCheck,
     },
     reducers: {
         //Sets the data captured from the MRZ
         setMRZData: (state, action) => {
-            state.value.documentNumber =  action.payload.documentNumber
-            state.value.dateOfBirth =  action.payload.dateOfBirth
-            state.value.dateOfExpiry =  action.payload.dateOfExpiry
+            //First we save the MRZ Dara object that will be shown in Passport Scan
+            state.mrzData.documentNumber =  action.payload.documentNumber
+            state.mrzData.dateOfBirth =  action.payload.dateOfBirth
+            state.mrzData.dateOfExpiry =  action.payload.dateOfExpiry
+            //Then we save the values for the overall Check
+            // state.value.documentNumber =  action.payload.documentNumber
+            // state.value.dateOfBirth =  action.payload.dateOfBirth
+            // state.value.dateOfExpiry =  action.payload.dateOfExpiry
             state.value.mrzChecked =  true
         },
         //Sets the data captured from the MRZ

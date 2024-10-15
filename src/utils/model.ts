@@ -51,8 +51,8 @@ export interface PassportData {
 }
 //The allowed gender
 export enum GenderTypes {
-    MALE = "Male",
-    FEMALE = "Female",
+    MALE = "MALE",
+    FEMALE = "FEMALE",
 }
 // Factory function for nfc data
 export const newPassportData = (faceImage: string, familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({

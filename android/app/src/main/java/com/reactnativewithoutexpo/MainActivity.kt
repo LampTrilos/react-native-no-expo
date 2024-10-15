@@ -65,10 +65,7 @@ class MainActivity : ReactActivity() {
         if (resultCode == RESULT_OK) {
             // Get MRZ data from the Intent, if it exists
             val mrzInfo = data?.getSerializableExtra(IntentData.KEY_MRZ_INFO) as? MRZInfo
-            // Get MRZ data from the Intent, if it exists
-            val passportInfo = data?.getSerializableExtra(IntentData.KEY_PASSPORT) as? Passport
             //If we sent mrz data, send the corresponding event
-            if (mrzInfo != null) {
                 // Pass it back to JavaScript
                 val params = Arguments.createMap()
                 params.putString(
@@ -76,12 +73,11 @@ class MainActivity : ReactActivity() {
                     mrzInfo.toString()
                 )
                 val reactContext = reactApplicationContext()
-                if (reactContext.hasActiveCatalystInstance()) {
+                if (reactContext.hasActiveReactInstance()) {
                     reactContext
                         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
                         .emit("onMRZDataReceived", params)
                 }
-            }
         }
     }
 }

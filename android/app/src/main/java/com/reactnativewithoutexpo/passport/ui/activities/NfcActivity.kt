@@ -36,6 +36,9 @@ import java.io.Serializable
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactInstanceManager
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
+import android.util.Base64
 
 class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFragmentListener, PassportDetailsFragment.PassportDetailsFragmentListener, PassportPhotoFragment.PassportPhotoFragmentListener {
 
@@ -144,23 +147,24 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
     //The passport cannot be sent back to MainActivity cause of the size, so we emit it directly to Javascript
     private fun emitNFCScanResult(passportInfo: Passport) {
         // Convert the passportInfo to JSON string
-        val gson = Gson()
+        //val gson = Gson()
         //val passportJson = gson.toJson(passportInfo)
         //The class responsible for showing the data in the original app is PassportDetailsFragment
-        val passportJson = Gson()
-        passportJson.put("faceImage", bitmapToBase64(passportInfo?.face))
-        passportJson.put("nationality", passportInfo?.personDetails?.nationality)
-        passportJson.put("dateOfBirth", passportInfo?.personDetails?.dateOfBirth)
-        passportJson.put("gender", passportInfo?.personDetails?.gender.name)
+        //val passportJson = Gson()
+        val passportJson = JSONObject()
+        passportJson.put("faceImage", bitmapToBase64(passportInfo.face))
+        passportJson.put("nationality", passportInfo.personDetails?.nationality)
+        passportJson.put("dateOfBirth", passportInfo.personDetails?.dateOfBirth)
+        passportJson.put("gender", passportInfo.personDetails?.gender?.name)
         //This code is from class PassportDetailsFragment
-        val name = personDetails.primaryIdentifier!!.replace("<", "")
-        passportJson.put("firstName", passportInfo?.personDetails?.name) //Doesn't exist?
-        val surname = personDetails.secondaryIdentifier!!.replace("<", "")
-        passportJson.put("familyName", passportInfo?.personDetails?.surname) //Doesn't exist?
+        val name =  passportInfo.personDetails?.primaryIdentifier!!.replace("<", "")
+        passportJson.put("firstName",name) //Doesn't exist?
+        val surname =  passportInfo.personDetails?.secondaryIdentifier!!.replace("<", "")
+        passportJson.put("familyName", surname) //Doesn't exist?
 
-        jsonObject.put("issueCountry", passportInfo?.personDetails?.issuingState)
-        jsonObject.put("documentNumber", passportInfo?.personDetails?.documentNumber)
-        jsonObject.put("dateOfExpiry", passportInfo?.personDetails?.dateOfExpiry)
+        passportJson.put("issueCountry", passportInfo.personDetails?.issuingState)
+        passportJson.put("documentNumber", passportInfo.personDetails?.documentNumber)
+        passportJson.put("dateOfExpiry", passportInfo.personDetails?.dateOfExpiry)
 
         //jsonObject.put("type", sodFile?.type)
 
@@ -177,7 +181,6 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
         params.putString("nfcData", passportJson.toString())
 
 
-        val reactNativeHost = (application as MainApplication).reactNativeHost
         // Get the ReactApplicationContext from your application
         val reactApplicationContext = (application as MainApplication).reactNativeHost.reactInstanceManager.currentReactContext
 

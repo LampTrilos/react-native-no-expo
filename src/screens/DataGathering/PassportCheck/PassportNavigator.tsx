@@ -17,7 +17,7 @@ export default function PassportNavigator() {
         // <View style={styles.containerColumn}>
         //
         //     <View style={styles.containerRow}>
-        //         <PassportScan style={styles.subscreen}/>
+        //         <PersonInformationMRZ style={styles.subscreen}/>
         //         <PersonInformationNFC travelDocument={currentCheck} style={styles.subscreen}/>
         //     </View>
         // </View>

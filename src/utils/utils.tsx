@@ -61,9 +61,10 @@ export const parseMRZ = (mrzData: String) => {
     nationality,
     gender
   };
+};
 
   // Helper function to format date from YYMMDD to a readable format (YYYY-MM-DD)
-  function formatDateString(dateString: String, smartYear: boolean) {
+  export const formatDateString = (dateString: String, smartYear: boolean) => {
     const year = parseInt(dateString.substring(0, 2), 10);
     const month = dateString.substring(2, 4);
     const day = dateString.substring(4, 6);
@@ -74,5 +75,5 @@ export const parseMRZ = (mrzData: String) => {
       fullYear = year > 30 ? `19${year}` : `20${year}`;
     }
     return `${day}/${month}/${fullYear}`;
-  }
-};
+  };
+

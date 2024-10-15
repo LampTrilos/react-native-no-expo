@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {StyleSheet, View} from "react-native";
 import CustomTheme from "../../../assets/Theme"
 import PersonInformationNFC from "./PersonInformationNFC.tsx";
-import PassportScan from "./PassportScan.tsx";
+import PersonInformationMRZ from "./PersonInformationMRZ.tsx";
 //import {GenderTypes, newPassportData} from "../../../utils/model.ts";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -21,8 +21,8 @@ export default function PassportCheck() {
     return (
         <View style={styles.containerColumn}>
             <View style={styles.containerRow}>
-                <PassportScan style={styles.subscreen}/>
-                <PersonInformationNFC travelDocument={currentCheck} style={styles.subscreen}/>
+                <PersonInformationMRZ style={styles.subscreen1}/>
+                <PersonInformationNFC travelDocument={currentCheck} style={styles.subscreen2}/>
             </View>
         </View>
     )
@@ -42,8 +42,13 @@ const styles = StyleSheet.create({
         backgroundColor: CustomTheme.colors.background,
         marginTop: 5,
     },
-    subscreen: {
-        flex: 1,
+    subscreen1: {
+        flex: 2,
+        margin: 6,
+        //marginBottom: 80
+    },
+    subscreen2: {
+        flex: 3,
         margin: 6,
         //marginBottom: 80
     }

@@ -338,7 +338,8 @@
     <string name="status_bar_failure">OCR Read failure - Time required: %1d ms</string>
     <string name="status_bar_tip">Παρακαλώ στοχεύστε την MRZ του εγγράφου </string>
 
-    <string name="nfc_title">Put your phone over your passport and don\'t move it</string>
+<!--    <string name="nfc_title">Put your phone over your passport and don\'t move it</string>-->
+    <string name="nfc_title">Παρακαλώ τοποθετήστε το διαβατήριο στην πίσω πλευρά της συσκευής</string>
 
     <string name="label_document_number">Document Number</string>
     <string name="label_document_expiry">Expiration Date</string>

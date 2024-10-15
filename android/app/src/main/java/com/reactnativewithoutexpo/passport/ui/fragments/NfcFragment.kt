@@ -155,9 +155,9 @@ class NfcFragment : androidx.fragment.app.Fragment() {
     override fun onResume() {
         super.onResume()
 
-        binding?.valuePassportNumber?.text = getString(R.string.doc_number, mrzInfo!!.documentNumber)
-        binding?.valueDOB?.text = getString(R.string.doc_dob, mrzInfo!!.dateOfBirth)
-        binding?.valueExpirationDate?.text = getString(R.string.doc_expiry, mrzInfo!!.dateOfExpiry)
+//        binding?.valuePassportNumber?.text = getString(R.string.doc_number, mrzInfo!!.documentNumber)
+//        binding?.valueDOB?.text = getString(R.string.doc_dob, mrzInfo!!.dateOfBirth)
+//        binding?.valueExpirationDate?.text = getString(R.string.doc_expiry, mrzInfo!!.dateOfExpiry)
 
         if (nfcFragmentListener != null) {
             nfcFragmentListener!!.onEnableNfc()

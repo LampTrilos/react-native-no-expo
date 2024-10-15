@@ -3,9 +3,12 @@ import {View, ScrollView, Image, StyleSheet} from 'react-native';
 import {Text, Card, IconButton} from 'react-native-paper';
 import CustomTheme from "../../../assets/Theme"
 import CheckIcon from "../../../components/CheckIcon.tsx";
+import {NativeModules, NativeEventEmitter} from 'react-native';
+import {useDispatch, useSelector} from "react-redux";
+import {setNFCData} from "../../../store/CurrentCheck";
+import {formatDateString} from "../../../utils/utils.tsx";
 
-
-export default function PersonInformationNFC({style, person}) {
+export default function PersonInformationNFC({style, travelDocument}) {
     // Assuming person is passed as a prop with name, surname, and dateOfBirth properties
 
     //------------------------------------Section to check if the passport valid until date is past today-----------------------------//
@@ -16,65 +19,91 @@ export default function PersonInformationNFC({style, person}) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         // Create a date object from person.date2
-        const passportExpiry = new Date(person.validUntil);
+        const passportExpiry = new Date(travelDocument.dateOfExpiry);
         // Check if date2 is before today
         setIsPassportExpired(passportExpiry < today);
     }
     // useEffect to run the check when the component mounts or when person.date2 changes
     useEffect(() => {
         checkDate();
-    }, [person.validUntil]); // Dependency array: check whenever person.validUntil changes
+    }, [travelDocument.dateOfExpiry]); // Dependency array: check whenever person.validUntil changes
+    const dispatch = useDispatch();
     //------------------------------------End of section to check if the passport valid until date is past today-----------------------------//
+
+
+
+    //When the Page is loaded, it creates a listener that listens to events from the NFCActivity, in this case an onNFCDataReceived event
+    //It also opens the camera for capture
+    useEffect(() => {
+
+        const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
+        // Subscribe to the event from NFCActivity
+        const subscriptionNFC = eventEmitter.addListener('onNFCDataReceived', (data) => {
+            //console.log('NFC Data:', data.nfcData);
+            //const parsedNFCData = parseMRZ(data.nfcData)
+            //console.log(data.nfcData)
+            //Update the state about the current Check with the scanned MRZ Data, while also turning String back to json
+            dispatch(setNFCData(JSON.parse(data.nfcData)));
+            //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
+        });
+
+        // Cleanup subscription on unmount
+        return () => {
+            subscriptionNFC.remove();
+        };
+        // Empty dependency array means this effect runs once when the component mounts
+    }, []);
+
 
     return (
         <View style={style}>
-            <Card style={{height: '97%'}}>
-                <Card.Title title="Person Information from NFC" titleStyle={{fontSize: 17, fontWeight: 'bold'}}
+            <Card style={{height: '100%'}}>
+                <Card.Title title="Πληροφορίες chip διαβατηρίου" titleStyle={{fontSize: 17, fontWeight: 'bold'}}
                             style={{padding: -5}}/>
                 <Card.Content >
                     <View style={styles.containerRow}>
                         <View style={styles.containerColumn}>
                             <Image
-                                source={{uri: 'https://thumbs.mugshots.com/gallery/images/f0/ef/JONATHAN-XAVIER-CABRAL-mugshot-50338840.400x800.jpg'}}
+                                source={{ uri: `data:image/png;base64,${travelDocument.faceImage}` }}
                                 style={styles.image}
                             />
-                            <CheckIcon textShown={"Chip"} attributeChecked={person.chipChecked}/>
-                            <CheckIcon textShown={"MRZ"} attributeChecked={person.mrzChecked}/>
+                            <CheckIcon textShown={"Chip"} attributeChecked={travelDocument.chipChecked}/>
+                            <CheckIcon textShown={"MRZ"} attributeChecked={travelDocument.mrzChecked}/>
                         </View>
                         <View style={styles.containerColumn}>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Family Name:</Text>
-                                <Text>{person.familyName}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Επώνυμο:</Text>
+                                <Text>{travelDocument.familyName}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>First Name:</Text>
-                                <Text>{person.firstName}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Όνομα:</Text>
+                                <Text>{travelDocument.firstName}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Nationality:</Text>
-                                <Text>{person.nationality}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Υπηκοότητα:</Text>
+                                <Text>{travelDocument.nationality}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Date of Birth:</Text>
-                                <Text>{person.dateOfBirth.toLocaleDateString()}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Ημ/νία Γέννησης:</Text>
+                                <Text>{formatDateString(travelDocument.dateOfBirth, true)}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Gender:</Text>
-                                <Text>{person.gender}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Φύλο:</Text>
+                                <Text>{travelDocument.gender}</Text>
                             </View>
                         </View>
                         <View style={styles.containerColumn}>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Issue Country:</Text>
-                                <Text>{person.issueCountry}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Χώρα Έκδοσης:</Text>
+                                <Text>{travelDocument.issueCountry}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Document Number:</Text>
-                                <Text>{person.documentNumber}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Αριθμός Εγγράφου:</Text>
+                                <Text>{travelDocument.documentNumber}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
-                                <Text style={{fontWeight: 'bold'}}>Valid until:</Text>
-                                <Text>{person.validUntil.toLocaleDateString()}</Text>
+                                <Text style={{fontWeight: 'bold'}}>Έγκυρο μέχρι:</Text>
+                                <Text>{formatDateString(travelDocument.dateOfExpiry, false)}</Text>
                             </View>
                         </View>
                     </View>
@@ -83,7 +112,7 @@ export default function PersonInformationNFC({style, person}) {
                         {isPassportExpired && (
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <IconButton icon="alert-circle" iconColor="red" size={24} />
-                                <Text style={{ color: 'red', fontSize: 14 }}>Document is invalid due to expiration date</Text>
+                                <Text style={{ color: 'red', fontSize: 14 }}>Το έγγραφο έχει λήξει</Text>
                             </View>
                         )}
                     </View>

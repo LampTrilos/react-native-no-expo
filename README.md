@@ -1,6 +1,42 @@
 1) To be able to use the finger scanner on T80:
    Open the T80 Hub and enable T80 HUB and T80 FP
 
+!!!!!!!
+Removed lib++ from android/libs as it caused a mismatch problem
+
+Error when photo
+FATAL EXCEPTION: main
+Process: com.reactnativewithoutexpo, PID: 5791
+android.content.res.Resources$NotFoundException: String resource ID #0x7f020020
+at android.content.res.Resources.getText(Resources.java:444)
+at android.content.res.Resources.getString(Resources.java:537)
+at android.content.Context.getString(Context.java:705)
+at com.neurotec.biometrics.view.NFaceView.loadStrings(NFaceView.java:349)
+at com.neurotec.biometrics.view.NFaceView.initComponents(NFaceView.java:429)
+at com.neurotec.biometrics.view.NFaceView.<init>(NFaceView.java:304)
+at com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity.startCapturing(FaceActivity.java:92)
+at com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity.onLicensesObtained(FaceActivity.java:238)
+at com.reactnativewithoutexpo.multibiometric.multimodal.BiometricActivity$InitializationTask.onPostExecute(BiometricActivity.java:549)
+at com.reactnativewithoutexpo.multibiometric.multimodal.BiometricActivity$InitializationTask.onPostExecute(BiometricActivity.java:518)
+at android.os.AsyncTask.finish(AsyncTask.java:771)
+at android.os.AsyncTask.access$900(AsyncTask.java:199)
+at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:788)
+at android.os.Handler.dispatchMessage(Handler.java:106)
+at android.os.Looper.loopOnce(Looper.java:201)
+at android.os.Looper.loop(Looper.java:288)
+at android.app.ActivityThread.main(ActivityThread.java:7881)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:568)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1045)
+
+
+and then 
+
+
+Unable to instantiate fragment com.swmansion.rnscreens.ScreenFragment: calling Fragment constructor caused an exception
+
+
+
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 

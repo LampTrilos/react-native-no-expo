@@ -35,26 +35,28 @@ export enum ControlStatusTypes {
 }
 //--------------End of the business flow of the PassportCheck procedure------------------------//
 //------------------------The data scanned from the nfc of Passport-------------------//
-export interface NFCData {
+export interface PassportData {
+    faceImage: string; // Base64-encoded string
     familyName: string;
     firstName:  string;
     nationality:  string;
-    dateOfBirth: Date;
+    dateOfBirth: String;
     gender:  GenderTypes;
     type:  string;
     issueCountry:  string;
     documentNumber:  string;
-    validUntil: Date;
+    dateOfExpiry: String;
     chipChecked: boolean;
     mrzChecked: boolean;
 }
 //The allowed gender
 export enum GenderTypes {
-    MALE = "Male",
-    FEMALE = "Female",
+    MALE = "MALE",
+    FEMALE = "FEMALE",
 }
 // Factory function for nfc data
-export const newNFCData = (familyName: string,firstName:  string,nationality:  string,dateOfBirth: Date,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string,validUntil: Date,chipChecked: boolean,mrzChecked: boolean): NFCData => ({
+export const newPassportData = (faceImage: string, familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({
+    faceImage,
     familyName,
     firstName,
     nationality,
@@ -63,7 +65,7 @@ export const newNFCData = (familyName: string,firstName:  string,nationality:  s
     type,
     issueCountry,
     documentNumber,
-    validUntil,
+    dateOfExpiry,
     chipChecked,
     mrzChecked
 });

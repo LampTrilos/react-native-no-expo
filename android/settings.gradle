@@ -3,4 +3,10 @@ plugins { id("com.facebook.react.settings") }
 extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
 rootProject.name = 'ReactNativeWithoutExpo'
 include ':app'
+//To incorporate classes from the neurotec sample app and passport-reader-app
+//You also need to declare this in app/build.gradle
+include ':neurotec-sample-app'
+include ':passport-reader-app'
+
+
 includeBuild('../node_modules/@react-native/gradle-plugin')

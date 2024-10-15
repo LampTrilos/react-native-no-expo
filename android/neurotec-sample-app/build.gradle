@@ -1,0 +1,109 @@
+description = "Samples utils"
+//This signals it is not the main application
+apply plugin: 'com.android.library'
+
+//def productRootDir = ".."
+//def productBinDir = new File(productRootDir, "Bin")
+//def productBinAndroidDir = new File(productBinDir, "Android")
+
+buildscript {
+	System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
+	repositories {
+		google()
+		jcenter()
+	}
+//	dependencies {
+//		classpath 'com.android.tools.build:gradle:3.2.1'
+//	}
+}
+
+android {
+	//Because native .so libraries mismatched
+	ndkVersion rootProject.ext.ndkVersion
+	buildToolsVersion rootProject.ext.buildToolsVersion
+	//ndkVersion = "26.1.10909125"
+
+
+	//Error In order to compile Java 9+ source, please set compileSdkVersion to 30 or above
+	//So change
+	//compileSdkVersion 27
+	compileSdkVersion 34
+
+	defaultConfig {
+//		minSdkVersion 19
+//		targetSdkVersion 26
+		minSdkVersion 29
+		targetSdkVersion 34
+
+		ndk {
+			abiFilters 'x86', 'armeabi-v7a', 'arm64-v8a'
+		}
+	}
+	compileOptions {
+//		sourceCompatibility JavaVersion.VERSION_1_6
+//		targetCompatibility JavaVersion.VERSION_1_6
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
+	}
+	lintOptions {
+		abortOnError false
+	}
+	//Because it clashes with the same jar that is also in the libs or neurotec-sample, perhaps just remove it alltogether from app/libs
+//    configurations {
+//        all*.exclude group: 'com.neurotec.biometrics', module: 'neurotec-biometrics-android'
+//    }
+}
+
+gradle.projectsEvaluated {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs << "-Xlint:deprecation"
+	}
+}
+
+dependencies {
+//	api ":neurotec-core-android"
+//	api ":neurotec-licensing-android"
+//	api ":neurotec-gui-android"
+//	api ":neurotec-media-android"
+//	api ":neurotec-media-processing-android"
+//	api ":jna"
+//	api(name:'neurotec-licensing-gui-android', ext:'aar')
+	//Maybe this is needed
+	//api "com.android.support:support-v4:27.1.1"
+
+	//To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
+	//implementation fileTree(dir: '../libs', include: ['*.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-core-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-licensing-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-gui-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-media-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['neurotec-media-processing-android.jar'])
+	implementation fileTree(dir: '../libs', include: ['jna.jar'])
+	//implementation fileTree(dir: '../libs', include: ['neurotec-licensing-gui-android.jar']) //Not since we are impementing the .aar and both cant coexist
+
+	implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
+	implementation (name:'neurotec-licensing-gui-android', ext:'aar')
+	//implementation fileTree(dir: '../libs', include: ['neurotec-licensing-gui-android.aar'])
+//	api ":neurotec-core-android"
+//	api ":neurotec-licensing-android"
+//	api ":neurotec-gui-android"
+//	api ":neurotec-media-android"
+//	api ":neurotec-media-processing-android"
+//	api ":jna"
+	//api "com.android.support:support-v4:27.1.1"
+	//api(name:'neurotec-licensing-gui-android', ext:'aar')
+
+
+}
+
+repositories {
+	mavenLocal()
+	google()
+	jcenter()
+	mavenCentral()
+	flatDir {
+		//dirs "${productBinAndroidDir}/"
+		dirs "../libs" // This points to the directory one level up
+	}
+}
+

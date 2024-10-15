@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userDataReducer from "./userData";
 import controlStatusReducer from "./controlStatus";
+import currentCheckReducer from "./CurrentCheck";
 // import groceryListReducer from "./groceryList";
 // import groceryHistReducer from "./groceryHist";
 // import recipeListReducer from "./recipeList";
@@ -12,8 +13,7 @@ export default configureStore({
           userDataStore: userDataReducer,
           //The current status of the border check
           controlStatusStore: controlStatusReducer,
-          // groceryList: groceryListReducer,
-          // groceryHist: groceryHistReducer,
-          // recipeList: recipeListReducer,
+          //The current check that is ongoing (Person that is being checked)
+          currentCheckStore: currentCheckReducer,
      },
 })

@@ -1,3 +1,4 @@
+//This signals it is the main application
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
@@ -105,15 +106,90 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
 }
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    //To make available the neurotec sample classes in utils folder
+    //Besides this, you also need to declare it in the root settings.gradle
+    implementation project(":neurotec-sample-app")
+    implementation project(':passport-reader-app')
+
+
+    //Libraries needed for UI of passport-reader-app that was moved to the main app
+    implementation 'com.madgag.spongycastle:prov:1.58.0.0'
+    implementation ('org.ejbca.cvc:cert-cvc:1.4.13'){
+        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
+    }
+    implementation 'org.jmrtd:jmrtd:0.7.35'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
+    //Camera
+    implementation 'io.fotoapparat:fotoapparat:2.7.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation 'net.sf.scuba:scuba-sc-android:0.0.23'
+    //Input data Validator
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
+    // ML Kit dependencies
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    //End of libraries needed for UI of passport-reader-app
+    implementation 'com.google.code.gson:gson:2.8.9' // or the latest version
+
+
+
+    //To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
+    //implementation fileTree(dir: '../libs', include: ['*.jar'])
+    //implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
+    implementation fileTree(dir: '../libs', include: [
+            'acssmc.jar',
+            'androidSCardV1.2.jar',
+            'jna.jar',
+            'neurotec-biometrics-android.jar',
+            'neurotec-biometrics-client-android.jar',
+            'neurotec-core-android.jar',
+            'neurotec-devices-android.jar',
+            'neurotec-devices-fscanners-ekemp-android.jar',
+            'neurotec-devices-fscanners-greenbit-android.jar',
+            'neurotec-devices-fscanners-secugen-android.jar',
+            'neurotec-devices-fscanners-suprema-biomini-android.jar',
+            'neurotec-devices-media-android.jar',
+            'neurotec-devices-multimodal-credenceid-android.jar',
+            'neurotec-gui-android.jar',
+            'neurotec-licensing-android.jar',
+            'neurotec-media-android.jar',
+            'neurotec-media-processing-android.jar'
+            //'neurotec-licensing-gui-android.jar', //Not since we are impementing the .aar and both cant coexist
+            //'neurotec-biometrics-gui-android.jar', //Not since we are impementing the .aar and both cant coexist
+    ])
+    implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
+    implementation (name:'neurotec-licensing-gui-android', ext:'aar')
+
+
+
+
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
         implementation jscFlavor
+    }
+}
+
+//To copy the libs of dependent projects to its own
+task copyDownloadableDepsToLibs(type: Copy) {
+    from configurations.implementation
+    into 'libs'
+}
+// To detect the aars in the parent folder
+repositories {
+    flatDir {
+        dirs '../libs'  // Pointing to the parent libs directory
     }
 }

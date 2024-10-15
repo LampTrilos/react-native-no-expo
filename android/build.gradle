@@ -10,12 +10,19 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        //Sometimes the library is not in maven but jitpack
+        maven { url 'https://jitpack.io' }
+//        flatDir {
+//            dirs '../libs'
+//        }
     }
 
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        //For passport-reader-app
+        classpath ("com.google.gms:google-services:4.3.15")
     }
 }
 

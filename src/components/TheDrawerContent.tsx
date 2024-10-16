@@ -28,7 +28,7 @@ export default function CustomDrawerContent(props) {
                     active={active === 'first'}
                     onPress={() => {
                         setActive('first');
-                        props.navigation.navigate('FakeScreen');
+                        props.navigation.navigate('PassportCheck');
                     }}
                 />
                 <PaperDrawer.Item

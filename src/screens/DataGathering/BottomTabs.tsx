@@ -3,12 +3,11 @@ import React, {useEffect} from "react";
 import PassportCheck from "./PassportCheck/PassportCheck.tsx";
 import SearchResults from "./SearchResults/SearchResults.tsx";
 import FaceCapture from "../FaceCapture.tsx";
-import FakeScreen2 from "../FakeScreen2.tsx";
-import PassportNavigator from "./PassportCheck/PassportNavigator.tsx";
+
 
 export default function BottomTabs() {
     //This sets the first page of the tabs of the check
-    const [index, setIndex] = React.useState(0);
+    const [index, setIndex] = React.useState(1);
     //Run only once when the component renders
     useEffect(() => {
         console.log('Bottom tabs is beginning..')

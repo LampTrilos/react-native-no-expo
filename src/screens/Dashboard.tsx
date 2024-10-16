@@ -52,6 +52,7 @@ export default function Dashboard({navigation}: Props) {
                               <CustomDrawerContent {...props} />}>
             {/*This is the first screen of our app*/}
             <Drawer.Screen name="BottomTabs" component={BottomTabs} options={({navigation}) => ({
+                headerTitle: 'Διαβατηριακός Έλεγχος',
                 headerShown: true,
                 headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),

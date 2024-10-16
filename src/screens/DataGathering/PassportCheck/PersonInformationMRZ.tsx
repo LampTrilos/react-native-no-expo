@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Image, StyleSheet, View} from 'react-native';
 import {Text, Card, IconButton} from 'react-native-paper';
 import {parseMRZ} from "../../../utils/utils.tsx";
@@ -17,6 +17,9 @@ const PersonInformationMRZ = ({style}) => {
     const scannedMRZData = useSelector(state => state.currentCheckStore.mrzData);
     const dispatch = useDispatch();
     //-------------End of store section about the currentCheck(Person)---------------------//
+    // Function to check if the capture has already started, in order to prevent a subsequent run without the first having finished
+    //const [isCaptureRunning, setIsCaptureRunning] = useState(false);
+
 
     // Function to open the camera, it calls the PassportModule
     const openCamera = () => {
@@ -28,27 +31,33 @@ const PersonInformationMRZ = ({style}) => {
     //When the Page is loaded, it creates a listener that listens to events from the MainActivity, in this case an onMRZDataReceived event with MRZ data
     //It also opens the camera for capture
     useEffect(() => {
-        // Open the camera immediately when the component mounts
-        openCamera();
+        console.log('New MRZ Page..')
+        //to prevent a subsequent run without the first having finished
+        //if (!isCaptureRunning) {
+            // Open the camera immediately when the component mounts
+            console.log('Opening camera..')
+            //setIsCaptureRunning(true)
+            openCamera();
 
-        const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
-        // Subscribe to the event from MainActivity
-        const subscriptionMRZ = eventEmitter.addListener('onMRZDataReceived', (data) => {
-            //console.log('MRZ Data:', data.mrzData);
-            const parsedMRZData = parseMRZ(data.mrzData)
-            //console.log(parsedMRZData)
-            //Update the state about the current Check with the scanned MRZ Data
-            dispatch(setMRZData(parsedMRZData));
-            //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
-            PassportModule.navigateToNFCActivity(data.mrzData);
-        });
+            const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
+            // Subscribe to the event from MainActivity
+            const subscriptionMRZ = eventEmitter.addListener('onMRZDataReceived', (data) => {
+                //console.log('MRZ Data:', data.mrzData);
+                const parsedMRZData = parseMRZ(data.mrzData)
+                //console.log(parsedMRZData)
+                //Update the state about the current Check with the scanned MRZ Data
+                dispatch(setMRZData(parsedMRZData));
+                //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
+                PassportModule.navigateToNFCActivity(data.mrzData);
+            });
 
-        // Cleanup subscription on unmount
-        return () => {
-            subscriptionMRZ.remove();
-        };
-        // Empty dependency array means this effect runs once when the component mounts
-    }, []);
+            // Cleanup subscription on unmount
+            return () => {
+                subscriptionMRZ.remove();
+            };
+            // Empty dependency array means this effect runs once when the component mounts
+        //}
+        }, []);
 
 
     return (

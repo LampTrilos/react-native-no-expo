@@ -1,11 +1,19 @@
 import {BottomNavigation, Text} from "react-native-paper";
-import React from "react";
+import React, {useEffect} from "react";
 import PassportCheck from "./PassportCheck/PassportCheck.tsx";
 import SearchResults from "./SearchResults/SearchResults.tsx";
 import FaceCapture from "../FaceCapture.tsx";
 import FakeScreen2 from "../FakeScreen2.tsx";
+import PassportNavigator from "./PassportCheck/PassportNavigator.tsx";
 
 export default function BottomTabs() {
+    //This sets the first page of the tabs of the check
+    const [index, setIndex] = React.useState(0);
+    //Run only once when the component renders
+    useEffect(() => {
+        console.log('Bottom tabs is beginning..')
+    }, []);
+
 
     //Bottom navigation attributes
     const PassportRoute = () => <PassportCheck/>;
@@ -13,7 +21,7 @@ export default function BottomTabs() {
     const BiometricsRoute = () => <FaceCapture/>;
     const ResultsRoute = () => <SearchResults/>;
 
-    const [index, setIndex] = React.useState(0);
+
     const routes = [
         {key: 'Passport', title: 'Passport', focusedIcon: 'passport-biometric',},
         {key: 'Photo', title: 'Photo', focusedIcon: 'camera'},
@@ -32,8 +40,10 @@ export default function BottomTabs() {
     return (
         <BottomNavigation
             navigationState={{index, routes}}
-            onIndexChange={setIndex}
+            onIndexChange={() => {}} //We don't want the user to change tabs at will, only with controlled actions
+            //onIndexChange={setIndex}
             renderScene={renderScene}
+
         />
     )
 }

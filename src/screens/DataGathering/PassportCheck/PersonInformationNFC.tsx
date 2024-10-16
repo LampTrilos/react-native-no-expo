@@ -35,7 +35,7 @@ export default function PersonInformationNFC({style, travelDocument}) {
     //When the Page is loaded, it creates a listener that listens to events from the NFCActivity, in this case an onNFCDataReceived event
     //It also opens the camera for capture
     useEffect(() => {
-
+        console.log('Starting NFC...')
         const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
         // Subscribe to the event from NFCActivity
         const subscriptionNFC = eventEmitter.addListener('onNFCDataReceived', (data) => {
@@ -52,7 +52,7 @@ export default function PersonInformationNFC({style, travelDocument}) {
             subscriptionNFC.remove();
         };
         // Empty dependency array means this effect runs once when the component mounts
-    }, []);
+    }, [travelDocument]);
 
 
     return (

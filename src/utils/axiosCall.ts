@@ -11,9 +11,9 @@ export async function login(credentials: LoginCredentials) {
     return newUser('Telikos user', '234532', '08:00 - 19:00');
 }
 
-
-export function axiosGet(url: string, timeout: number) {
-    return  axios.get(firebaseUrl + url + '.json', {
+//Search in EES
+export async function eesSearch(url: string, timeout: number) {
+    return  await axios.get(baseUrl + url + '.json', {
         timeout: timeout // timeout in milliseconds (5000ms = 5s)
     })
 }

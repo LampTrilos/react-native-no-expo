@@ -21,7 +21,7 @@ type Props = {
 const LoginScreen = ({ navigation }: Props) => {
     //Necessary state for user input
     const [username, setUsername] = useState('sadfasdf');
-    const [password, setPassword] = useState('asdfasf';
+    const [password, setPassword] = useState('asdfasf');
     const dispatch = useDispatch();
     const onLoginPressed = () => {
         const usernameError = usernameValidator(username);

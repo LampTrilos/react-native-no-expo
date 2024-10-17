@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../utils/axiosCall";
+import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../utils/axiosCalls";
 import {ControlStatusTypes} from "../utils/model";
 
 export const controlStatusSlice = createSlice({

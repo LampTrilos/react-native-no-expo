@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../utils/axiosCall";
+import {axiosGet, axiosPost, axiosPut, axiosDelete} from "../utils/axiosCalls";
 import {newUser, UserClass} from "../utils/model";
 
 export const userDataSlice = createSlice({

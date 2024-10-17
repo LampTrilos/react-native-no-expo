@@ -11,7 +11,7 @@ import { Navigation } from '../utils/types.tsx';
 import {useDispatch} from "react-redux";
 import {newLoginCredentials, newUser} from "../utils/model.ts";
 import {setUser} from "../store/userData";
-import {login} from "../utils/axiosCall.ts";
+import {login} from "../utils/axiosCalls.ts";
 
 
 type Props = {
@@ -58,10 +58,8 @@ const LoginScreen = ({ navigation }: Props) => {
             <TextInput
                 label="Username"
                 returnKeyType="next"
-                value={username.value}
-                onChangeText={text => setUsername({ value: text, error: '' })}
-                error={!!username.error}
-                errorText={username.error}
+                value={username}
+                onChangeText={text => setUsername(text)}
                 autoCapitalize="none"
                 textContentType="username"
                 keyboardType="default"
@@ -70,10 +68,8 @@ const LoginScreen = ({ navigation }: Props) => {
             <TextInput
                 label="Password"
                 returnKeyType="done"
-                value={password.value}
-                onChangeText={text => setPassword({ value: text, error: '' })}
-                error={!!password.error}
-                errorText={password.error}
+                value={password}
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
             <Button mode="contained" onPress={onLoginPressed}>

@@ -21,7 +21,7 @@ export default function PassportCheck() {
     };
     //const nfcData = newNFCData('Doe','John','Armenian',new Date(1985, 9, 14),GenderTypes.FEMALE, 'PP','ISR','GTS3850245',new Date(1975, 3, 14),false,true);
     //-------------Store section about the currentCheck(Person)---------------------//
-     const currentCheck = useSelector(state => state.currentCheckStore.value);
+     const currentCheck = useSelector(state => state.currentCheckStore);
     // const dispatch = useDispatch();
     //-------------End of store section about the currentCheck(Person)---------------------//
 
@@ -39,7 +39,7 @@ export default function PassportCheck() {
                 ( <View style={styles.containerColumn}>
             <View style={styles.containerRow}>
                 <PersonInformationMRZ style={styles.subscreen1}/>
-                <PersonInformationNFC travelDocument={currentCheck} style={styles.subscreen2}/>
+                <PersonInformationNFC currentCheck={currentCheck} style={styles.subscreen2}/>
             </View>
         </View> )}
         </>

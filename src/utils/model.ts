@@ -56,9 +56,7 @@ export interface PassportData {
     type:  string;
     issueCountry:  string;
     documentNumber:  string;
-    dateOfExpiry: String;
-    chipChecked: boolean;
-    mrzChecked: boolean;
+    dateOfExpiry: String
 }
 //The allowed gender
 export enum GenderTypes {
@@ -66,7 +64,7 @@ export enum GenderTypes {
     FEMALE = "FEMALE",
 }
 // Factory function for nfc data
-export const newPassportData = (faceImage: string, familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String,chipChecked: boolean,mrzChecked: boolean): PassportData => ({
+export const newPassportData = (faceImage: string, familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String): PassportData => ({
     faceImage,
     familyName,
     firstName,
@@ -76,10 +74,36 @@ export const newPassportData = (faceImage: string, familyName: string,firstName:
     type,
     issueCountry,
     documentNumber,
-    dateOfExpiry,
-    chipChecked,
-    mrzChecked
+    dateOfExpiry
 });
 
-
 //------------------------End of the data scanned from the nfc of Passport-------------------//
+//------------------------The entire current check object-------------------//
+export interface BorderCheck {
+    mrzData: MRZData; // Base64-encoded string
+    familyName: string;
+    firstName:  string;
+    nationality:  string;
+    dateOfBirth: String;
+    gender:  GenderTypes;
+    type:  string;
+    issueCountry:  string;
+    documentNumber:  string;
+    dateOfExpiry: String
+}
+
+// Factory function for nfc data
+export const newBorderCheck = (faceImage: string, familyName: string,firstName:  string,nationality:  string,dateOfBirth: String,gender:  GenderTypes,type:  string,issueCountry:  string,documentNumber:  string, dateOfExpiry: String): PassportData => ({
+    faceImage,
+    familyName,
+    firstName,
+    nationality,
+    dateOfBirth,
+    gender,
+    type,
+    issueCountry,
+    documentNumber,
+    dateOfExpiry
+});
+
+//------------------------End of the the entire current check object-------------------//

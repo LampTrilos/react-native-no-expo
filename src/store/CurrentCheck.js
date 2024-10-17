@@ -13,7 +13,11 @@ export const currentCheckSlice = createSlice({
         mrzChecked: false,
         //The data scanned via nfc from passport
         nfcData:  defaultNFCData,
-        chipChecked: false
+        chipChecked: false,
+        //The face image of the checked person
+        faceImage: "",
+        //The fingerprint file of the checked person
+        fingerprints: ""
     },
     reducers: {
         //Sets the data captured from the MRZ

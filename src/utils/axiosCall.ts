@@ -1,6 +1,16 @@
 import axios from 'axios';
+import {LoginCredentials, newUser} from "./model.ts";
+//Contains all the axios call that are needed by the application
 
-const firebaseUrl = 'https://test-f94ee-default-rtdb.europe-west1.firebasedatabase.app/';
+
+const baseUrl = 'https://XXXXYYYYY/';
+
+//Log in
+export async function login(credentials: LoginCredentials) {
+    //return  await axios.post(baseUrl + 'PLACEHOLDER', credentials)
+    return newUser('Telikos user', '234532', '08:00 - 19:00');
+}
+
 
 export function axiosGet(url: string, timeout: number) {
     return  axios.get(firebaseUrl + url + '.json', {

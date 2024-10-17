@@ -1,5 +1,16 @@
 //This file contains the models for the various object that are used in the frontend
 //------------------------The loggedIn user------------------------//
+export interface LoginCredentials {
+    username: string;
+    password: string;
+}
+
+// new Credentials function
+export const newLoginCredentials = (username: string, password: string): LoginCredentials => ({
+    username,
+    password,
+});
+
 export interface User {
     fullName: string;
     userId: string;

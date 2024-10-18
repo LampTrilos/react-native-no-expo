@@ -11,12 +11,12 @@ export default function SearchResults({style}) {
         numberOfItemsPerPageList[0]
     );
 
-    const [items] = React.useState([
-        newPoliceCheckResult("1", null, 'Test1', 'Petros', 'ΓΣΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
-        newPoliceCheckResult("2", null, 'Test2', 'Petros', 'GRC', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία1' ),
-        newPoliceCheckResult("3", null, 'Test3', 'Petros', 'ΞΒΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
-        newPoliceCheckResult("4", null, 'Test4', 'Petros', 'GRC', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία3' ),
-        newPoliceCheckResult("5", null, 'Test5', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' )
+    const [items, setItems] = React.useState([
+        // newPoliceCheckResult("1", null, 'Test1', 'Petros', 'ΓΣΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+        // newPoliceCheckResult("2", null, 'Test2', 'Petros', 'GRC', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία1' ),
+        // newPoliceCheckResult("3", null, 'Test3', 'Petros', 'ΞΒΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+        // newPoliceCheckResult("4", null, 'Test4', 'Petros', 'GRC', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία3' ),
+        // newPoliceCheckResult("5", null, 'Test5', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' )
     ]);
 
     const from = page * itemsPerPage;

@@ -1,4 +1,11 @@
 //This file contains the models for the various object that are used in the frontend
+
+//------------------------The Response object returned to any axios calls, we added an error field for better error handling on-page ------------------------//
+export interface ApiResponse<T> {
+    payload?: T;
+    error?: string;
+}
+//------------------------End of the Response object returned to any axios calls, we added an error field for better error handling on-page ------------------------//
 //------------------------The loggedIn user------------------------//
 export interface LoginCredentials {
     username: string;

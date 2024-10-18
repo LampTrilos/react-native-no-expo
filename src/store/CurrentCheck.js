@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {PassportData, newPassportData, GenderTypes} from "../utils/model";
+import {PassportData, newPassportData, GenderTypes, BorderCheck} from "../utils/model";
 
 //Default test data
 const defaultNFCData= newPassportData('https://thumbs.mugshots.com/gallery/images/f0/ef/JONATHAN-XAVIER-CABRAL-mugshot-50338840.400x800.jpg', 'Doe','John','Armenian',new Date(1985, 9, 14).toISOString(),GenderTypes.FEMALE, 'PP','ISR','GTS3850245',new Date(1975, 3, 14).toISOString(),false,false);
@@ -14,10 +14,10 @@ export const currentCheckSlice = createSlice({
         //The data scanned via nfc from passport
         nfcData:  defaultNFCData,
         chipChecked: false,
-        //The face image of the checked person
+        //The face image of the checked person, in  Base64-encoded string
         faceImage: "",
-        //The fingerprint file of the checked person
-        fingerprints: ""
+        //The fingerprint file of the checked person, in  Base64-encoded string
+        fingerprints: "",
     },
     reducers: {
         //Sets the data captured from the MRZ

@@ -7,7 +7,7 @@ import FaceCapture from "../FaceCapture.tsx";
 
 export default function BottomTabs() {
     //This sets the first page of the tabs of the check
-    const [index, setIndex] = React.useState(0);
+    const [index, setIndex] = React.useState(3);
     //Run only once when the component renders
     useEffect(() => {
         console.log('Bottom tabs is beginning..')

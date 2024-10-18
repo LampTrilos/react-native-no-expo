@@ -1,7 +1,8 @@
 import React from "react";
 import {ScrollView, View} from "react-native";
 import {Card, DataTable} from 'react-native-paper';
-import {GenderTypes, newPoliceCheckResult} from "../../../utils/model.ts";
+import {ApiResponse, GenderTypes, newPoliceCheckResult, PoliceCheckResult} from "../../../utils/model.ts";
+import {policeSearch} from "../../../utils/axiosCalls.ts";
 
 export default function SearchResults({style}) {
     const [page, setPage] = React.useState<number>(0);
@@ -19,6 +20,18 @@ export default function SearchResults({style}) {
         // newPoliceCheckResult("5", null, 'Test5', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' )
     ]);
 
+    //When the component first loads, make an axios call and fetch the results
+    React.useEffect(() => {
+        policeSearch("1").then((res: ApiResponse<PoliceCheckResult[]>) => {
+            if (res.payload) {
+                setItems(res.payload);
+            } else {
+                console.error("Error:", res.error);
+            }
+        }).catch(error => {
+            console.error("Error during police search:", error);
+        })
+    }, []);
     const from = page * itemsPerPage;
     const to = Math.min((page + 1) * itemsPerPage, items.length);
 

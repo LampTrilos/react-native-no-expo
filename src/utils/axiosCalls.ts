@@ -72,7 +72,17 @@ export async function policeSearch(currentCheck: string) : Promise<ApiResponse<P
             newPoliceCheckResult("2", null, 'Test22', 'Petros', 'GRC', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία1' ),
             newPoliceCheckResult("3", null, 'Test33', 'Petros', 'ΞΒΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
             newPoliceCheckResult("4", null, 'Test44', 'Petros', 'GRC', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία3' ),
-            newPoliceCheckResult("5", null, 'Test55', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' )
+            newPoliceCheckResult("5", null, 'Test55', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' ),
+            newPoliceCheckResult("11", null, 'Test11', 'Petros', 'ΓΣΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+            newPoliceCheckResult("12", null, 'Test22', 'Petros', 'GRC', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία1' ),
+            newPoliceCheckResult("13", null, 'Test33', 'Petros', 'ΞΒΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+            newPoliceCheckResult("14", null, 'Test44', 'Petros', 'GRC', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία3' ),
+            newPoliceCheckResult("15", null, 'Test55', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' ),
+            newPoliceCheckResult("21", null, 'Test11', 'Petros', 'ΓΣΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+            newPoliceCheckResult("22", null, 'Test22', 'Petros', 'GRC', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία1' ),
+            newPoliceCheckResult("23", null, 'Test33', 'Petros', 'ΞΒΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+            newPoliceCheckResult("24", null, 'Test44', 'Petros', 'GRC', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία3' ),
+            newPoliceCheckResult("25", null, 'Test55', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' )
         ]
     };
 }

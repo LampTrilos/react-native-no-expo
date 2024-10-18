@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }: Props) => {
 
         //TODO Make an axios call to fetch the currentUser
         login(newLoginCredentials(username, password)).then((res) => {
-            const currentUser =res;
+            const currentUser =res.payload;
             //const currentUser = newUser('Telikos user', '234532', '08:00 - 19:00');
             dispatch(setUser(currentUser));
             //If all is well, navigate to the next Screen

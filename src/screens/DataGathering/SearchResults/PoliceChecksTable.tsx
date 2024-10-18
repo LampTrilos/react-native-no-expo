@@ -1,6 +1,7 @@
 import React from "react";
 import {ScrollView, View} from "react-native";
 import {Card, DataTable} from 'react-native-paper';
+import {GenderTypes, newPoliceCheckResult} from "../../../utils/model.ts";
 
 export default function SearchResults({style}) {
     const [page, setPage] = React.useState<number>(0);
@@ -11,54 +12,11 @@ export default function SearchResults({style}) {
     );
 
     const [items] = React.useState([
-        {
-            key: 1,
-            name: 'Cupcake',
-            calories: 356,
-            fat: 16,
-        },
-        {
-            key: 2,
-            name: 'Eclair',
-            calories: 262,
-            fat: 16,
-        },
-        {
-            key: 3,
-            name: 'Frozen yogurt',
-            calories: 159,
-            fat: 6,
-        },
-        {
-            key: 4,
-            name: 'Gingerbread',
-            calories: 305,
-            fat: 3.7,
-        },
-        {
-            key: 11,
-            name: 'Cupcake',
-            calories: 356,
-            fat: 16,
-        },
-        {
-            key: 12,
-            name: 'Eclair',
-            calories: 262,
-            fat: 16,
-        },
-        {
-            key: 13,
-            name: 'Frozen yogurt',
-            calories: 159,
-            fat: 6,
-        },
-        {
-            key: 14,
-            name: 'Gingerbread',
-            calories: 305,
-            fat: 3.7,
-        },
+        newPoliceCheckResult("1", null, 'Test11', 'Petros', 'ΓΣΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+        newPoliceCheckResult("2", null, 'Test22', 'Petros', 'GRC', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία1' ),
+        newPoliceCheckResult("3", null, 'Test33', 'Petros', 'ΞΒΔ', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία' ),
+        newPoliceCheckResult("4", null, 'Test44', 'Petros', 'GRC', '15/09/2021', GenderTypes.MALE, 'Οπλοφορία3' ),
+        newPoliceCheckResult("5", null, 'Test55', 'Petros', 'ΦΤΔ', '15/09/2021', GenderTypes.FEMALE, 'Οπλοφορία4' )
     ]);
 
     const from = page * itemsPerPage;
@@ -77,16 +35,16 @@ export default function SearchResults({style}) {
                     <ScrollView>
                             <DataTable>
                                 <DataTable.Header>
-                                    <DataTable.Title>Dessert</DataTable.Title>
-                                    <DataTable.Title numeric>Calories</DataTable.Title>
-                                    <DataTable.Title numeric>Fat</DataTable.Title>
+                                    <DataTable.Title>Επώνυμο</DataTable.Title>
+                                    <DataTable.Title numeric>Όνομα</DataTable.Title>
+                                    <DataTable.Title numeric>Αδίκημα</DataTable.Title>
                                 </DataTable.Header>
 
                                 {items.slice(from, to).map((item) => (
-                                    <DataTable.Row key={item.key}>
-                                        <DataTable.Cell>{item.name}</DataTable.Cell>
-                                        <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-                                        <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+                                    <DataTable.Row key={item.id}>
+                                        <DataTable.Cell>{item.familyName}</DataTable.Cell>
+                                        <DataTable.Cell numeric>{item.firstName}</DataTable.Cell>
+                                        <DataTable.Cell numeric>{item.crime}</DataTable.Cell>
                                     </DataTable.Row>
                                 ))}
 

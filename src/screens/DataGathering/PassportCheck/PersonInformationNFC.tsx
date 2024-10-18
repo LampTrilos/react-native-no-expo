@@ -5,7 +5,7 @@ import CustomTheme from "../../../assets/Theme"
 import CheckIcon from "../../../components/CheckIcon.tsx";
 import {NativeModules, NativeEventEmitter} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
-import {setNFCData} from "../../../store/CurrentCheck";
+import {setNFCData} from "../../../store/CurrentCheck.ts";
 import {formatDateString} from "../../../utils/utils.tsx";
 
 export default function PersonInformationNFC({style, currentCheck}) {

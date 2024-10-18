@@ -111,3 +111,27 @@ export const newBorderCheck = (mrzData: MRZData, mrzChecked: boolean, nfcData:  
     fingerprints
 });
 //------------------------End of the the entire current Border check object-------------------//
+//------------------------The search results from Police Operation-------------------//
+export interface PoliceCheckResult {
+    id: string;
+    faceImage: string | null; // Base64-encoded string
+    familyName: string;
+    firstName:  string;
+    nationality:  string;
+    dateOfBirth: string;
+    gender:  GenderTypes;
+    crime: string //This is a placeholder
+}
+// Factory function for nfc data
+export const newPoliceCheckResult = (id: string, faceImage: string | null, familyName: string, firstName:  string, nationality:  string, dateOfBirth: string, gender:  GenderTypes, crime:  string): PoliceCheckResult => ({
+    id,
+    faceImage,
+    familyName,
+    firstName,
+    nationality,
+    dateOfBirth,
+    gender,
+    crime
+});
+
+//------------------------End of the data scanned from the NFC of Passport-------------------//

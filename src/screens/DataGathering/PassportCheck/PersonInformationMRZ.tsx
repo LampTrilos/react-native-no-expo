@@ -4,7 +4,7 @@ import {Text, Card, IconButton} from 'react-native-paper';
 import {parseMRZ} from "../../../utils/utils.tsx";
 import {NativeModules, NativeEventEmitter} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
-import {setMRZData, setNFCData} from "../../../store/CurrentCheck";
+import {setMRZData, setNFCData} from "../../../store/CurrentCheck.ts";
 
 const {PassportModule} = NativeModules;
 import CustomTheme from "../../../assets/Theme"

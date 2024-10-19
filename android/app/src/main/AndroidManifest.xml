@@ -91,15 +91,13 @@
         <activity
             android:name=".multibiometric.multimodal.FingerActivity"
             android:label="@string/finger_app_name"
-            android:screenOrientation="portrait"
             android:hardwareAccelerated="true">
         </activity>
 
         <!-- Preferences -->
         <activity
             android:name=".multibiometric.preferences.MultimodalPreferences"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" >
+            android:parentActivityName=".multibiometric.multimodal.MultiModalActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" />
@@ -108,31 +106,30 @@
         <activity
             android:name=".multibiometric.preferences.ConnectionPreferences"
             android:label="@string/face_app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" >
+            android:parentActivityName=".multibiometric.multimodal.MultiModalActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity" />
+                android:value=".multibiometric.multimodal.MultiModalActivity" />
         </activity>
 
         <activity
             android:name=".multibiometric.preferences.FacePreferences"
             android:label="@string/face_app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity" >
+            android:parentActivityName=".multibiometric.multimodal.FaceActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity" />
+                android:value=".multibiometric.multimodal.FaceActivity" />
         </activity>
 
         <activity
             android:name=".multibiometric.preferences.FingerPreferences"
             android:label="@string/finger_app_name"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.reactnativewithoutexpo.multibiometric.multimodal.FingerActivity" >
+            android:parentActivityName=".multibiometric.multimodal.FingerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.reactnativewithoutexpo.multibiometric.multimodal.FingerActivity" />
+                android:value=".multibiometric.multimodal.FingerActivity" />
         </activity>
+
+
     </application>
 </manifest>

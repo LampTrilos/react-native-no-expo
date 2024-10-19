@@ -89,8 +89,8 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 
 	private TextView mFaceCounter;
 	private TextView mFingerCounter;
-	private TextView mIrisCounter;
-	private TextView mVoiceCounter;
+//	private TextView mIrisCounter;
+//	private TextView mVoiceCounter;
 
 	// ===========================================================
 	// Private methods
@@ -173,12 +173,12 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 		if (fingers != null) {
 			mFingerCounter.setText(String.valueOf(fingers.size()));
 		}
-		if (iris != null) {
-			mIrisCounter.setText(String.valueOf(iris.size()));
-		}
-		if (voice != null) {
-			mVoiceCounter.setText(String.valueOf(voice.size()));
-		}
+//		if (iris != null) {
+//			mIrisCounter.setText(String.valueOf(iris.size()));
+//		}
+//		if (voice != null) {
+//			mVoiceCounter.setText(String.valueOf(voice.size()));
+//		}
 	}
 
 	private void showDialogOK(String message, DialogInterface.OnClickListener okListener) {
@@ -496,11 +496,19 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 
 		mFaceCounter = (TextView) findViewById(R.id.face_counter);
 		mFingerCounter = (TextView) findViewById(R.id.finger_counter);
-		mIrisCounter = (TextView) findViewById(R.id.iris_counter);
-		mVoiceCounter = (TextView) findViewById(R.id.voice_counter);
+//		mIrisCounter = (TextView) findViewById(R.id.iris_counter);
+//		mVoiceCounter = (TextView) findViewById(R.id.voice_counter);
 
 		mSubjectId = (EditText) findViewById(R.id.subject_id);
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+		//Experiment
+		Intent activation = new Intent(this, ActivationActivity.class);
+		Bundle params = new Bundle();
+		params.putStringArrayList(ActivationActivity.LICENSES, new ArrayList<>(getAllComponentsInternal()));
+		activation.putExtras(params);
+		startActivity(activation);
+
 
 		ImageView imageFace = (ImageView) findViewById(R.id.face);
 		imageFace.setOnClickListener(new View.OnClickListener() {

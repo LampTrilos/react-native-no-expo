@@ -34,8 +34,9 @@ public final class DirectoryViewer extends BaseListActivity {
 	// ===========================================================
 	// Public static fields
 	// ===========================================================
-
+	//Experiment
 	public static final String ASSET_DIRECTORY_LOCATION = DirectoryViewer.class.getPackage().getName() + ".extra_directory";
+	//public static final String ASSET_DIRECTORY_LOCATION = "com.neurotec.samples.app" + ".extra_directory";
 	public static final String EXTRA_RETURNED_BUNDLE_DATA = "extra_bundle_data";
 	public static final String EXTRA_RETURNED_URL_PATH = "extra_url_path";
 	public static final String FILE_TYPE = "*/*";

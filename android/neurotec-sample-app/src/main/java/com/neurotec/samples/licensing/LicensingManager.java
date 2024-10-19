@@ -298,6 +298,7 @@ public final class LicensingManager {
 
 		boolean result = false;
 		for (String license : licenses) {
+			System.out.println("Licensing Managet 301: Address:" + address + "port: " + port + ", " +  license);
 			boolean available = NLicense.obtain(address, port, license);
 			//Experiment cause Operation is not activated, so we just add all the licenses
 			//if (available) {

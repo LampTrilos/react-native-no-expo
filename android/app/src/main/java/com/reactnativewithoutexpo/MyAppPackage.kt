@@ -16,7 +16,6 @@ class MyAppPackage : ReactPackage {
     override fun createNativeModules(
         reactContext: ReactApplicationContext
     ): MutableList<NativeModule> = listOf(
-        CalendarModule(reactContext),  // Existing module
         BiometricModule(reactContext) ,
         PassportModule(reactContext)// Add your new module here
     ).toMutableList()

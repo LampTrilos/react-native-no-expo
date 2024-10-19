@@ -3,6 +3,7 @@
 2) For license Activation, i tested with Mutlimodal app and placed the .sn serial files in sdcard0.Neurotechnology
    From licensing menu disable trial mode, then chose activate and pick the folder with the serial number files
    It seems that Multimodal app has created two .lic files, but for now i can't find them
+3) Prior to opening the app, create this folder: sdcard/Neurotechnology/Licenses
 
 !!!!!!!
 Removed lib++ from android/libs as it caused a mismatch problem

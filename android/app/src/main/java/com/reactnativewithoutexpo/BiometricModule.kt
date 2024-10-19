@@ -20,7 +20,10 @@ class BiometricModule internal constructor(reactContext: ReactApplicationContext
         if (activity != null) {
             Log.d("CalendarModule", "Called Biometric Module!!SADFASDF asfdASDAFAF asdFSADFSAFsad.. Activity is  not null")
             val intent =
-                Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity::class.java)
+                //Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity::class.java)
+                Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity::class.java)
+               // Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
+                //Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
             activity.startActivity(intent)
         }
     }

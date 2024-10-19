@@ -6,9 +6,7 @@ import {NativeModules} from 'react-native';
 
 
 export default function FaceCapture() {
-    const {CalendarModule} = NativeModules;
     const {BiometricModule} = NativeModules;
-    CalendarModule.createCalendarEvent('testName', 'testLocation');
     console.log('Calling Biometric Module.........................ASDFASDFSADFASDFSAFD')
     BiometricModule.navigateToMultiModalActivity();
     const onPress = () => {

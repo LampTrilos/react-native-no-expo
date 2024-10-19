@@ -194,9 +194,10 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (mLicensesObtained && mStatus == Status.CAPTURING) {
+		//Experiment
+		//if (mLicensesObtained && mStatus == Status.CAPTURING) {
 			startCapturing();
-		}
+		//}
 	}
 
 	@Override

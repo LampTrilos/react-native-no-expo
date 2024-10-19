@@ -16,7 +16,8 @@ public final class InfoActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android.app.ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
+        assert actionBar != null;
+        actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
 		android.app.ActionBar.Tab tab1 = actionBar.newTab().setText(R.string.msg_about);
 		android.app.ActionBar.Tab tab2 = actionBar.newTab().setText(R.string.msg_activation);
 		android.app.ActionBar.Tab tab3 = actionBar.newTab().setText(R.string.msg_connection);

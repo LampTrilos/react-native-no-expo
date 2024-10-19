@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ControlStatusTypes} from "../utils/model.ts";
 import {setUser} from "../store/userData";
 import ControlStatus, {setStatus} from "../store/controlStatus";
+import BottomTabs from "./DataGathering/BottomTabs.tsx";
 
 type Props = {
     navigation: Navigation;
@@ -46,10 +47,12 @@ export default function Dashboard({navigation}: Props) {
             drawerType: 'slide',
             drawerStyle: styles.drawer
         }}
-                          initialRouteName="FaceCapture"
+                          initialRouteName="BottomTabs"
                           drawerContent={(props) =>
                               <CustomDrawerContent {...props} />}>
-            <Drawer.Screen name="PassportNavigator" component={PassportNavigator} options={({navigation}) => ({
+            {/*This is the first screen of our app*/}
+            <Drawer.Screen name="BottomTabs" component={BottomTabs} options={({navigation}) => ({
+                headerTitle: 'Διαβατηριακός Έλεγχος',
                 headerShown: true,
                 headerLeft: () => (<Button icon="menu"
                                            onPress={() => navigation.toggleDrawer()}/>),

@@ -5,10 +5,10 @@ import CustomTheme from "../../../assets/Theme"
 import CheckIcon from "../../../components/CheckIcon.tsx";
 import {NativeModules, NativeEventEmitter} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
-import {setNFCData} from "../../../store/CurrentCheck";
+import {setNFCData} from "../../../store/CurrentCheck.ts";
 import {formatDateString} from "../../../utils/utils.tsx";
 
-export default function PersonInformationNFC({style, travelDocument}) {
+export default function PersonInformationNFC({style, currentCheck}) {
     // Assuming person is passed as a prop with name, surname, and dateOfBirth properties
 
     //------------------------------------Section to check if the passport valid until date is past today-----------------------------//
@@ -19,14 +19,14 @@ export default function PersonInformationNFC({style, travelDocument}) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         // Create a date object from person.date2
-        const passportExpiry = new Date(travelDocument.dateOfExpiry);
+        const passportExpiry = new Date(currentCheck.nfcData.dateOfExpiry);
         // Check if date2 is before today
         setIsPassportExpired(passportExpiry < today);
     }
     // useEffect to run the check when the component mounts or when person.date2 changes
     useEffect(() => {
         checkDate();
-    }, [travelDocument.dateOfExpiry]); // Dependency array: check whenever person.validUntil changes
+    }, [currentCheck.nfcData.dateOfExpiry]); // Dependency array: check whenever person.validUntil changes
     const dispatch = useDispatch();
     //------------------------------------End of section to check if the passport valid until date is past today-----------------------------//
 
@@ -35,7 +35,7 @@ export default function PersonInformationNFC({style, travelDocument}) {
     //When the Page is loaded, it creates a listener that listens to events from the NFCActivity, in this case an onNFCDataReceived event
     //It also opens the camera for capture
     useEffect(() => {
-
+        console.log('Starting NFC...')
         const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
         // Subscribe to the event from NFCActivity
         const subscriptionNFC = eventEmitter.addListener('onNFCDataReceived', (data) => {
@@ -52,7 +52,7 @@ export default function PersonInformationNFC({style, travelDocument}) {
             subscriptionNFC.remove();
         };
         // Empty dependency array means this effect runs once when the component mounts
-    }, []);
+    }, [currentCheck.nfcData]);
 
 
     return (
@@ -64,46 +64,46 @@ export default function PersonInformationNFC({style, travelDocument}) {
                     <View style={styles.containerRow}>
                         <View style={styles.containerColumn}>
                             <Image
-                                source={{ uri: `data:image/png;base64,${travelDocument.faceImage}` }}
+                                source={{ uri: `data:image/png;base64,${currentCheck.nfcData.faceImage}` }}
                                 style={styles.image}
                             />
-                            <CheckIcon textShown={"Chip"} attributeChecked={travelDocument.chipChecked}/>
-                            <CheckIcon textShown={"MRZ"} attributeChecked={travelDocument.mrzChecked}/>
+                            <CheckIcon textShown={"Chip"} attributeChecked={currentCheck.chipChecked}/>
+                            <CheckIcon textShown={"MRZ"} attributeChecked={currentCheck.mrzChecked}/>
                         </View>
                         <View style={styles.containerColumn}>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Επώνυμο:</Text>
-                                <Text>{travelDocument.familyName}</Text>
+                                <Text>{currentCheck.nfcData.familyName}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Όνομα:</Text>
-                                <Text>{travelDocument.firstName}</Text>
+                                <Text>{currentCheck.nfcData.firstName}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Υπηκοότητα:</Text>
-                                <Text>{travelDocument.nationality}</Text>
+                                <Text>{currentCheck.nfcData.nationality}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Ημ/νία Γέννησης:</Text>
-                                <Text>{formatDateString(travelDocument.dateOfBirth, true)}</Text>
+                                <Text>{formatDateString(currentCheck.nfcData.dateOfBirth, true)}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Φύλο:</Text>
-                                <Text>{travelDocument.gender}</Text>
+                                <Text>{currentCheck.nfcData.gender}</Text>
                             </View>
                         </View>
                         <View style={styles.containerColumn}>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Χώρα Έκδοσης:</Text>
-                                <Text>{travelDocument.issueCountry}</Text>
+                                <Text>{currentCheck.nfcData.issueCountry}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Αριθμός Εγγράφου:</Text>
-                                <Text>{travelDocument.documentNumber}</Text>
+                                <Text>{currentCheck.nfcData.documentNumber}</Text>
                             </View>
                             <View style={{marginBottom: 8}}>
                                 <Text style={{fontWeight: 'bold'}}>Έγκυρο μέχρι:</Text>
-                                <Text>{formatDateString(travelDocument.dateOfExpiry, false)}</Text>
+                                <Text>{formatDateString(currentCheck.nfcData.dateOfExpiry, false)}</Text>
                             </View>
                         </View>
                     </View>

@@ -64,16 +64,21 @@ export const parseMRZ = (mrzData: String) => {
 };
 
   // Helper function to format date from YYMMDD to a readable format (YYYY-MM-DD)
-  export const formatDateString = (dateString: String, smartYear: boolean) => {
-    const year = parseInt(dateString.substring(0, 2), 10);
-    const month = dateString.substring(2, 4);
-    const day = dateString.substring(4, 6);
+  export const formatDateString = (dateString: string, smartYear: boolean) => {
+    if (dateString) {
+      const year = parseInt(dateString.substring(0, 2), 10);
+      const month = dateString.substring(2, 4);
+      const day = dateString.substring(4, 6);
 
-    // Assume 1900s for years greater than 30, otherwise 2000s
-    let fullYear = `20${year}`;
-    if (smartYear) {
-      fullYear = year > 30 ? `19${year}` : `20${year}`;
+      // Assume 1900s for years greater than 30, otherwise 2000s
+      let fullYear = `20${year}`;
+      if (smartYear) {
+        fullYear = year > 30 ? `19${year}` : `20${year}`;
+      }
+      return `${day}/${month}/${fullYear}`;
     }
-    return `${day}/${month}/${fullYear}`;
+    else {
+      return "-"
+    }
   };
 

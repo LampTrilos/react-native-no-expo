@@ -5,14 +5,13 @@ import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
-import BackButton from '../components/BackButton';
-//import { theme } from '../core/theme';
 import  customTheme  from '../assets/Theme';
 import { usernameValidator, passwordValidator } from '../utils/utils';
 import { Navigation } from '../utils/types.tsx';
 import {useDispatch} from "react-redux";
-import {newUser} from "../utils/model.ts";
+import {newLoginCredentials, newUser} from "../utils/model.ts";
 import {setUser} from "../store/userData";
+import {login} from "../utils/axiosCalls.ts";
 
 
 type Props = {
@@ -21,26 +20,29 @@ type Props = {
 
 const LoginScreen = ({ navigation }: Props) => {
     //Necessary state for user input
-    const [username, setUsername] = useState({ value: 'sadfasdf', error: '' });
-    const [password, setPassword] = useState({ value: 'asdfasf', error: '' });
+    const [username, setUsername] = useState('sadfasdf');
+    const [password, setPassword] = useState('asdfasf');
     const dispatch = useDispatch();
     const onLoginPressed = () => {
-        const usernameError = usernameValidator(username.value);
-        const passwordError = passwordValidator(password.value);
+        const usernameError = usernameValidator(username);
+        const passwordError = passwordValidator(password);
 
-        if (usernameError || passwordError) {
-            setUsername({ ...username, error: usernameError });
-            setPassword({ ...password, error: passwordError });
-            return;
-        }
+        //Delete this if it's not needed
+        // if (usernameError || passwordError) {
+        //     setUsername({ ...username, error: usernameError });
+        //     setPassword({ ...password, error: passwordError });
+        //     return;
+        // }
 
 
         //TODO Make an axios call to fetch the currentUser
-        //const currentUser = new UserClass('Telikos user', '234532', '08:00 - 19:00')
-        const currentUser = newUser('Telikos user', '234532', '08:00 - 19:00');
-        dispatch(setUser(currentUser));
-        //If all is well, navigate to the next Screen
-        navigation.navigate('Dashboard');
+        login(newLoginCredentials(username, password)).then((res) => {
+            const currentUser =res.payload;
+            //const currentUser = newUser('Telikos user', '234532', '08:00 - 19:00');
+            dispatch(setUser(currentUser));
+            //If all is well, navigate to the next Screen
+            navigation.navigate('Dashboard');
+        });
     };
 
     //The image our Screen will pass to the Background component
@@ -56,10 +58,8 @@ const LoginScreen = ({ navigation }: Props) => {
             <TextInput
                 label="Username"
                 returnKeyType="next"
-                value={username.value}
-                onChangeText={text => setUsername({ value: text, error: '' })}
-                error={!!username.error}
-                errorText={username.error}
+                value={username}
+                onChangeText={text => setUsername(text)}
                 autoCapitalize="none"
                 textContentType="username"
                 keyboardType="default"
@@ -68,10 +68,8 @@ const LoginScreen = ({ navigation }: Props) => {
             <TextInput
                 label="Password"
                 returnKeyType="done"
-                value={password.value}
-                onChangeText={text => setPassword({ value: text, error: '' })}
-                error={!!password.error}
-                errorText={password.error}
+                value={password}
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
             <Button mode="contained" onPress={onLoginPressed}>

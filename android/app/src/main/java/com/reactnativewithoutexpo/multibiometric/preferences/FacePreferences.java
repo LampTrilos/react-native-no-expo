@@ -66,32 +66,33 @@ public final class FacePreferences extends PreferenceActivity {
 		client.setFacesMatchingSpeed(NMatchingSpeed.get(Integer.valueOf(preferences.getString(MATCHING_SPEED, String.valueOf(NMatchingSpeed.LOW.getValue())))));
 		client.setMatchingThreshold(Integer.valueOf(preferences.getString(MATCHING_THRESHOLD, "48")));
 
-		client.setFacesMinimalInterOcularDistance(preferences.getInt(MIN_IOD, 40));
 		client.setFacesConfidenceThreshold((byte) preferences.getInt(CONFIDENCE_THRESHOLD, 50));
-		client.setFacesQualityThreshold((byte) preferences.getInt(QUALITY_THRESHOLD, 50));
+		//Quality threshold
+		client.setFacesQualityThreshold((byte) preferences.getInt(QUALITY_THRESHOLD, 40));
+		//Anti-2D photo mechanism
+		client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.NONE.getValue())))));
+		//client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.ACTIVE.getValue())))));
+		client.setFacesLivenessThreshold((byte) preferences.getInt(LIVENESS_THRESHOLD, 75));
+		//Distance between the eyes
+		client.setFacesMinimalInterOcularDistance(preferences.getInt(MIN_IOD, 40));
 
 		client.setFacesMaximalYaw(Float.valueOf(preferences.getInt(MAXIMAL_YAW, 15)));
 		client.setFacesMaximalRoll(Float.valueOf(preferences.getInt(MAXIMAL_ROLL, 15)));
 
 		client.setFacesDetectAllFeaturePoints(preferences.getBoolean(DETECT_ALL_FEATURE_POINTS, false));
-		client.setFacesDetermineGender(preferences.getBoolean(DETERMINE_GENDER, false));
-		client.setFacesDetectProperties(preferences.getBoolean(DETECT_PROPERTIES, false));
-		//My change because this method doesn't exist anymore
-		//client.setFacesRecognizeExpression(preferences.getBoolean(RECOGNIZE_EXPRESSION, false));
+		client.setFacesDetermineGender(preferences.getBoolean(DETERMINE_GENDER, true));
+		client.setFacesDetectProperties(preferences.getBoolean(DETECT_PROPERTIES, true));
 		client.setFacesRecognizeEmotion(preferences.getBoolean(RECOGNIZE_EMOTION, false));
-
-		client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.NONE.getValue())))));
-		client.setFacesLivenessThreshold((byte) preferences.getInt(LIVENESS_THRESHOLD, 50));
-
-		client.setFacesDetermineAge(!isUseLiveness(context) && preferences.getBoolean(DETERMINE_AGE, false));
-
+		client.setFacesDetermineAge(!isUseLiveness(context) && preferences.getBoolean(DETERMINE_AGE, true));
 		client.setFacesCreateThumbnailImage(preferences.getBoolean(CREATE_THUMBNAIL, false));
 		client.setFacesThumbnailImageWidth(preferences.getInt(THUMBNAIL_WIDTH, 90));
-		client.setFacesCheckIcaoCompliance(preferences.getBoolean(ICAO_SHOW_WARNINGS, false));
+		client.setFacesCheckIcaoCompliance(preferences.getBoolean(ICAO_SHOW_WARNINGS, true));
+		//My change because this method doesn't exist anymore
+		//client.setFacesRecognizeExpression(preferences.getBoolean(RECOGNIZE_EXPRESSION, false));
 	}
 	
 	public static boolean isShowIcaoTextWarnings(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(ICAO_SHOW_WARNING_TEXT, false);
+		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(ICAO_SHOW_WARNING_TEXT, true);
 	}
 	
 	public static boolean isShowIcaoWarnings(Context context) {

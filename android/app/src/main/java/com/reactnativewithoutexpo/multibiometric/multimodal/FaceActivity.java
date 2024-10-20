@@ -185,15 +185,21 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	// ===========================================================
 
 	private void startCapturing() {
+		//Face Preferences are changed in the file /preferences/FacePreferences
 		NSubject subject = new NSubject();
 
 		NFace face = new NFace();
 		face.addPropertyChangeListener(biometricPropertyChanged);
-		EnumSet<NBiometricCaptureOption> options = EnumSet.of(NBiometricCaptureOption.MANUAL);
+		//Experiment - changed to stream so it auto takes a photo that meets the criteria
+		//EnumSet<NBiometricCaptureOption> options = EnumSet.of(NBiometricCaptureOption.MANUAL);
+		EnumSet<NBiometricCaptureOption> options = EnumSet.of(NBiometricCaptureOption.STREAM);
+
 		if (FacePreferences.isShowIcaoWarnings(this) || FacePreferences.isShowIcaoTextWarnings(this)) {
 			options.add(NBiometricCaptureOption.STREAM);
 			mFaceView.setShowIcaoArrows(FacePreferences.isShowIcaoWarnings(this));
 			mFaceView.setShowIcaoTextWarnings(FacePreferences.isShowIcaoTextWarnings(this));
+//			mFaceView.setShowIcaoArrows(true);
+//			mFaceView.setShowIcaoTextWarnings(true);
 		}
 		if (FacePreferences.isUseLiveness(this)) {
 			if (!options.contains(NBiometricCaptureOption.STREAM)) {

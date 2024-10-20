@@ -55,7 +55,7 @@ public class CameraControlsView extends LinearLayout {
 
 	}
 	//Change the camera because by default it uses the bad one
-	@Override
+//	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
 		// Change the camera when the view is attached to the window

@@ -191,20 +191,20 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 			captureControls = (LinearLayout) findViewById(R.id.multimodal_capture_controls);
 			successControls = (LinearLayout) findViewById(R.id.multimodal_success_controls);
 			stopControls = (LinearLayout) findViewById(R.id.multimodal_stop_controls);
-			Button mLoadButton = (Button) findViewById(R.id.multimodal_button_load);
-			mLoadButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onLoad();
-				}
-			});
-			Button mCaptureButton = (Button) findViewById(R.id.multimodal_button_capture);
-			mCaptureButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onStartCapturing();
-				}
-			});
+//			Button mLoadButton = (Button) findViewById(R.id.multimodal_button_load);
+//			mLoadButton.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					onLoad();
+//				}
+//			});
+//			Button mCaptureButton = (Button) findViewById(R.id.multimodal_button_capture);
+//			mCaptureButton.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					onStartCapturing();
+//				}
+//			});
 			Button mStopButton = (Button) findViewById(R.id.multimodal_button_stop);
 			mStopButton.setOnClickListener(new View.OnClickListener() {
 				@Override

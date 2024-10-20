@@ -609,6 +609,14 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 		}
 	}
 
+	//Experiment
+//	@Override
+//	protected void onResume() {
+//        super.onResume();
+//        Intent faceActivity = new Intent(MultiModalActivity.this, FaceActivity.class);
+//		startActivityForResult(faceActivity, MODALITY_CODE_FACE);
+//	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {

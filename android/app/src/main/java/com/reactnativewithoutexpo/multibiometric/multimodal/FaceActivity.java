@@ -84,15 +84,49 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 
 
 	//Experiment to get license when bypassing Multimodal Activity
+//	private static List<String> getRequiredPermissions() {
+//		List<String> permissions = new ArrayList<String>();
+//		permissions.add(Manifest.permission.INTERNET);
+//		permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
+//		permissions.add(Manifest.permission.CAMERA);
+//		permissions.add(Manifest.permission.RECORD_AUDIO);
+//		permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+//		if (android.os.Build.VERSION.SDK_INT < 23) {
+//			permissions.add(Manifest.permission.WRITE_SETTINGS);
+//		}
+//		return permissions;
+//	}
+//	private String[] getNotGrantedPermissions() {
+//		List<String> neededPermissions = new ArrayList<String>();
+//
+//		for (String permission : getRequiredPermissions()) {
+//			//if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+//				neededPermissions.add(permission);
+//			//}
+//		}
+//		return neededPermissions.toArray(new String[neededPermissions.size()]);
+//	}
+//
+//
+//	private void requestPermissions(String[] permissions) {
+//		ActivityCompat.requestPermissions(this, permissions,REQUEST_ID_MULTIPLE_PERMISSIONS);
+//	}
+
+
+
 	//@Override
     private Boolean getLicensesAndPermissions(Object... params) {
 		//Get permission for camera
 		List<String> permissions = new ArrayList<>();
 		permissions.add(Manifest.permission.CAMERA);
 		ActivityCompat.requestPermissions(this, permissions.toArray(new String[1]), REQUEST_ID_MULTIPLE_PERMISSIONS);
-//		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-//		}
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+		}
+		//String[] neededPermissions = getNotGrantedPermissions();
+
+		//requestPermissions(neededPermissions);
 
 		showProgress(R.string.msg_obtaining_licenses);
 
@@ -398,6 +432,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 				//if (!device.equals(currentCamera) && currentCamera.isCapturing()) {
 					cancel();
 					//Explicitly set the camera to the good one, 0 is Microphone, 1 is the bad camera, 3 does not exist
+				System.out.println("CHANGING CAMERA TO THE BEST OF THE TWO");
 				client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
 				//	client.setFaceCaptureDevice((NCamera) device);
 				//	startCapturing();

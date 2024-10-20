@@ -48,7 +48,7 @@ android {
 	lintOptions {
 		abortOnError false
 	}
-	//Because it clashes with the same jar that is also in the libs or neurotec-sample, perhaps just remove it alltogether from app/libs
+	//Because it clashes with the same jar that is also in the libs or neurotec-sample, perhaps just remove it alltogether from app/libs/jars
 //    configurations {
 //        all*.exclude group: 'com.neurotec.biometrics', module: 'neurotec-biometrics-android'
 //    }
@@ -71,19 +71,19 @@ dependencies {
 	//Maybe this is needed
 	//api "com.android.support:support-v4:27.1.1"
 
-	//To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
-	//implementation fileTree(dir: '../libs', include: ['*.jar'])
-	implementation fileTree(dir: '../libs', include: ['neurotec-core-android.jar'])
-	implementation fileTree(dir: '../libs', include: ['neurotec-licensing-android.jar'])
-	implementation fileTree(dir: '../libs', include: ['neurotec-gui-android.jar'])
-	implementation fileTree(dir: '../libs', include: ['neurotec-media-android.jar'])
-	implementation fileTree(dir: '../libs', include: ['neurotec-media-processing-android.jar'])
-	implementation fileTree(dir: '../libs', include: ['jna.jar'])
-	//implementation fileTree(dir: '../libs', include: ['neurotec-licensing-gui-android.jar']) //Not since we are impementing the .aar and both cant coexist
+	//To detect the neurotechnology jar in app/libs/jars, perhaps they are not need for /app and only needed for /neurotec-sample-android
+	//implementation fileTree(dir: '../libs/jars', include: ['*.jar'])
+	implementation fileTree(dir: '../libs/jars', include: ['neurotec-core-android.jar'])
+	implementation fileTree(dir: '../libs/jars', include: ['neurotec-licensing-android.jar'])
+	implementation fileTree(dir: '../libs/jars', include: ['neurotec-gui-android.jar'])
+	implementation fileTree(dir: '../libs/jars', include: ['neurotec-media-android.jar'])
+	implementation fileTree(dir: '../libs/jars', include: ['neurotec-media-processing-android.jar'])
+	implementation fileTree(dir: '../libs/jars', include: ['jna.jar'])
+	//implementation fileTree(dir: '../libs/jars', include: ['neurotec-licensing-gui-android.jar']) //Not since we are impementing the .aar and both cant coexist
 
 	implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
 	implementation (name:'neurotec-licensing-gui-android', ext:'aar')
-	//implementation fileTree(dir: '../libs', include: ['neurotec-licensing-gui-android.aar'])
+	//implementation fileTree(dir: '../libs/jars', include: ['neurotec-licensing-gui-android.aar'])
 //	api ":neurotec-core-android"
 //	api ":neurotec-licensing-android"
 //	api ":neurotec-gui-android"
@@ -103,7 +103,7 @@ repositories {
 	mavenCentral()
 	flatDir {
 		//dirs "${productBinAndroidDir}/"
-		dirs "../libs" // This points to the directory one level up
+		dirs "../libs/jars" // This points to the directory one level up
 	}
 }
 

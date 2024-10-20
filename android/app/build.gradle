@@ -144,10 +144,10 @@ dependencies {
 
 
 
-    //To detect the neurotechnology jar in app/libs, perhaps they are not need for /app and only needed for /neurotec-sample-android
-    //implementation fileTree(dir: '../libs', include: ['*.jar'])
+    //To detect the neurotechnology jar in app/libs/jars, perhaps they are not need for /app and only needed for /neurotec-sample-android
+    //implementation fileTree(dir: '../libs/jars', include: ['*.jar'])
     //implementation (name:'neurotec-biometrics-gui-android', ext:'aar')
-    implementation fileTree(dir: '../libs', include: [
+    implementation fileTree(dir: '../libs/jars', include: [
             'acssmc.jar',
             'androidSCardV1.2.jar',
             'jna.jar',
@@ -190,6 +190,33 @@ task copyDownloadableDepsToLibs(type: Copy) {
 // To detect the aars in the parent folder
 repositories {
     flatDir {
-        dirs '../libs'  // Pointing to the parent libs directory
+        dirs '../libs/jars'  // Pointing to the parent libs directory
     }
 }
+
+//--------------NDF Face detection models part---------------------------//
+//This code became obsolete as i copied these files directly into assets/data
+//The models needed for the app to function//
+//def usedNdfList = ["FacesDetect45.ndf",
+//                   "FacesDetect180.ndf",
+//                   "FacesDetectSegmentsAttributes.ndf",
+//                   "FacesDetectSegmentsOrientation.ndf",
+//                   "FacesDetectSegmentsFeaturePointsTrack.ndf",
+//                   "FacesDetectSegmentsLiveness.ndf",
+//                   "FacesCreateTemplateSmall.ndf",
+//                   "FacesCreateTemplateMedium.ndf",
+//                   "FacesDetect90.ndf",
+//                   "FacesDetectSegmentsFeaturePointsDetect.ndf",
+//                   "FacesDetectSegmentsOrientation90.ndf",
+//                   "FacesCreateTemplateQuality.ndf",
+//                   "Fingers.ndf"]
+//
+////Copy the above files in the /assets/data directory so the app can pick them up
+//task prepareNdfFiles(type: Copy) {
+//    from "${productBinDir}/Data"
+//    includes = usedNdfList
+//    rename { String fileName ->
+//        fileName.replace('.ndf', '.ndf.jet')
+//    }
+//    into "${android.sourceSets.main.assets.srcDirs[0]}/data"
+//}

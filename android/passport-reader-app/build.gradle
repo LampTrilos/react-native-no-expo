@@ -129,8 +129,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
-    //Its native jar was moved to android/libs
-    implementation fileTree(dir: '../libs', include: ['jj2000_imageutil.jar'])
+    //Its native jar was moved to android/libs/jars
+    implementation fileTree(dir: '../libs/jars', include: ['jj2000_imageutil.jar'])
 }
 
 //Disabled as it required firebase??
@@ -144,6 +144,6 @@ repositories {
     google()
     flatDir {
         //dirs "${productBinAndroidDir}/"
-        dirs "../libs" // This points to the directory one level up
+        dirs "../libs/jars" // This points to the directory one level up
     }
 }

@@ -95,6 +95,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 //		}
 
 		showProgress(R.string.msg_obtaining_licenses);
+
 		try {
 			LicensingManager.getInstance().obtain(FaceActivity.this, getAdditionalComponentsInternal());
 			if (LicensingManager.getInstance().obtain(FaceActivity.this, getMandatoryComponentsInternal())) {
@@ -126,7 +127,6 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		super.onCreate(savedInstanceState);
 		//Experiment to get the activation Licenses when skipping the Multimodal screen that normally handles it
 		//getLicensesAndPermissions();
-
 
 		try {
 			PreferenceManager.setDefaultValues(this, R.xml.face_preferences, false);
@@ -388,19 +388,23 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		}).start();
 	}
 
+	//this method was changed so that when called from CameraControlsView, it always switches to the 3d device, as it has better quality
 	@Override
 	public void onSwitchCamera() {
-		NCamera currentCamera = client.getFaceCaptureDevice();
-		for (NDevice device : client.getDeviceManager().getDevices()) {
-			if (device.getDeviceType().contains(NDeviceType.CAMERA)) {
-				if (!device.equals(currentCamera) && currentCamera.isCapturing()) {
+		//NCamera currentCamera = client.getFaceCaptureDevice();
+		//for (NDevice device : client.getDeviceManager().getDevices()) {
+			//if (device.getDeviceType().contains(NDeviceType.CAMERA)) {
+				//Expreriment because it wouldn't change camera when called from  CameraControlsView
+				//if (!device.equals(currentCamera) && currentCamera.isCapturing()) {
 					cancel();
-					client.setFaceCaptureDevice((NCamera) device);
-					startCapturing();
-					break;
-				}
-			}
-		}
+					//Explicitly set the camera to the good one, 0 is Microphone, 1 is the bad camera, 3 does not exist
+				client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
+				//	client.setFaceCaptureDevice((NCamera) device);
+				//	startCapturing();
+					//break;
+				//}
+			//}
+		//}
 	}
 
 	@Override

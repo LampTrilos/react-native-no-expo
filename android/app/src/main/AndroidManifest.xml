@@ -1,8 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="true" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- NFC Permission -->
 <!--    <uses-feature android:name="android.hardware.nfc" android:required="true" />-->

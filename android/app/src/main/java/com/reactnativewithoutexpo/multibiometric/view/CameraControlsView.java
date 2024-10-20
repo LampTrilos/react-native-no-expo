@@ -33,6 +33,8 @@ public class CameraControlsView extends LinearLayout {
 		super(context);
 		if (listener == null) throw new NullPointerException("listener");
 		mListener = listener;
+
+
 		LayoutInflater  mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = mInflater.inflate(R.layout.camera_controls, this, true);
 		ImageView switchCamera = (ImageView) view.findViewById(R.id.switch_camera);
@@ -50,6 +52,14 @@ public class CameraControlsView extends LinearLayout {
 				mListener.onChangeFormat();
 			}
 		});
+
+	}
+	//Change the camera because by default it uses the bad one
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		// Change the camera when the view is attached to the window
+		mListener.onSwitchCamera();
 	}
 
 }

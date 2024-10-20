@@ -96,7 +96,7 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 	// Private methods
 	// ===========================================================
 
-	private static List<String> getMandatoryComponentsInternal() {
+	public static List<String> getMandatoryComponentsInternal() {
 		List<String> components = new ArrayList<String>();
 		for (String component : FaceActivity.mandatoryComponents()) {
 			if (!components.contains(component)) {
@@ -121,7 +121,7 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 		return components;
 	}
 
-	private static List<String> getAdditionalComponentsInternal() {
+	public static List<String> getAdditionalComponentsInternal() {
 		List<String> components = new ArrayList<String>();
 		for (String component : FaceActivity.additionalComponents()) {
 			if (!components.contains(component)) {
@@ -502,12 +502,12 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 		mSubjectId = (EditText) findViewById(R.id.subject_id);
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-		//Experiment
-		Intent activation = new Intent(this, ActivationActivity.class);
-		Bundle params = new Bundle();
-		params.putStringArrayList(ActivationActivity.LICENSES, new ArrayList<>(getAllComponentsInternal()));
-		activation.putExtras(params);
-		startActivity(activation);
+		//Experiment to start activation tab
+//		Intent activation = new Intent(this, ActivationActivity.class);
+//		Bundle params = new Bundle();
+//		params.putStringArrayList(ActivationActivity.LICENSES, new ArrayList<>(getAllComponentsInternal()));
+//		activation.putExtras(params);
+//		startActivity(activation);
 
 
 		ImageView imageFace = (ImageView) findViewById(R.id.face);

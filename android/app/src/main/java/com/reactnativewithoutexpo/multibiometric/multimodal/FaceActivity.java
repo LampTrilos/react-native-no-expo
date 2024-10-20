@@ -1,6 +1,11 @@
 package com.reactnativewithoutexpo.multibiometric.multimodal;
 
+import static com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity.getAdditionalComponentsInternal;
+import static com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity.getMandatoryComponentsInternal;
+
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,6 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
 
 import com.neurotec.biometrics.NBiometricCaptureOption;
 import com.neurotec.biometrics.NBiometricOperation;
@@ -26,6 +35,7 @@ import com.neurotec.devices.NCamera;
 import com.neurotec.devices.NDevice;
 import com.neurotec.devices.NDeviceType;
 import com.neurotec.images.NImage;
+import com.neurotec.licensing.gui.ActivationActivity;
 import com.neurotec.media.NMediaFormat;
 import com.neurotec.samples.licensing.LicensingManager;
 import com.reactnativewithoutexpo.multibiometric.Model;
@@ -39,11 +49,15 @@ import com.neurotec.samples.util.IOUtils;
 import com.neurotec.samples.util.NImageUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
 public final class FaceActivity extends BiometricActivity implements CameraControlsListener, CameraFormatSelectionListener {
+
+	private static final int REQUEST_CAMERA_PERMISSION = 1;
+	private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
 	private enum Status {
 		CAPTURING,
@@ -68,12 +82,111 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	private boolean mLicensesObtained = false;
 	private Status mStatus = Status.CAPTURING;
 
+
+	//Experiment to get license when bypassing Multimodal Activity
+	//@Override
+    private Boolean getLicensesAndPermissions(Object... params) {
+		//Get permission for camera
+		List<String> permissions = new ArrayList<>();
+		permissions.add(Manifest.permission.CAMERA);
+		ActivityCompat.requestPermissions(this, permissions.toArray(new String[1]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+//		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+//		}
+
+		showProgress(R.string.msg_obtaining_licenses);
+		try {
+			LicensingManager.getInstance().obtain(FaceActivity.this, getAdditionalComponentsInternal());
+			if (LicensingManager.getInstance().obtain(FaceActivity.this, getMandatoryComponentsInternal())) {
+				showToast(R.string.msg_licenses_obtained);
+			} else {
+				showToast(R.string.msg_licenses_partially_obtained);
+			}
+		} catch (Exception e) {
+			showError(e.getMessage(), false);
+		}
+		showProgress(R.string.msg_initializing_client);
+
+		try {
+			NBiometricClient client = Model.getInstance().getClient();
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage(), e);
+			return false;
+		}
+		return true;
+	}
+
+
+	// ===========================================================
+	// Protected methods
+	// ===========================================================
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//Experiment to get the activation Licenses when skipping the Multimodal screen that normally handles it
+		//getLicensesAndPermissions();
+
+
+		try {
+			PreferenceManager.setDefaultValues(this, R.xml.face_preferences, false);
+			LinearLayout layout = (LinearLayout) findViewById(R.id.multimodal_biometric_layout);
+
+			controlsView = new CameraControlsView(this, this);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+
+			controlsView.setLayoutParams(params);
+			layout.addView(controlsView);
+
+			mFaceView = new NFaceView(this);
+			mFaceView.setShowAge(true);
+			layout.addView(mFaceView);
+
+			Button backButton = (Button) findViewById(R.id.multimodal_button_retry);
+			backButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startCapturing();
+					onBack();
+					mStatus = Status.CAPTURING;
+				}
+			});
+
+			Button add = (Button) findViewById(R.id.multimodal_button_add);
+			add.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					Bundle b = new Bundle();
+					byte[] nLTemplate = subject.getTemplate().getFaces().save().toByteArray();
+					b.putByteArray(RECORD_REQUEST_FACE , Arrays.copyOf(nLTemplate, nLTemplate.length));
+					intent.putExtras(b);
+					setResult(RESULT_OK, intent);
+					finish();
+				}
+			});
+		} catch (Exception e) {
+			showError(e);
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//Experiment
+		if (mLicensesObtained && mStatus == Status.CAPTURING) {
+			startCapturing();
+		}
+	}
+
+
 	// ===========================================================
 	// Private methods
 	// ===========================================================
 
 	private void startCapturing() {
 		NSubject subject = new NSubject();
+
 		NFace face = new NFace();
 		face.addPropertyChangeListener(biometricPropertyChanged);
 		EnumSet<NBiometricCaptureOption> options = EnumSet.of(NBiometricCaptureOption.MANUAL);
@@ -142,63 +255,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		return subject;
 	}
 
-	// ===========================================================
-	// Protected methods
-	// ===========================================================
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		try {
-			PreferenceManager.setDefaultValues(this, R.xml.face_preferences, false);
-			LinearLayout layout = (LinearLayout) findViewById(R.id.multimodal_biometric_layout);
-
-			controlsView = new CameraControlsView(this, this);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-
-			controlsView.setLayoutParams(params);
-			layout.addView(controlsView);
-
-			mFaceView = new NFaceView(this);
-			mFaceView.setShowAge(true);
-			layout.addView(mFaceView);
-
-			Button backButton = (Button) findViewById(R.id.multimodal_button_retry);
-			backButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					startCapturing();
-					onBack();
-					mStatus = Status.CAPTURING;
-				}
-			});
-
-			Button add = (Button) findViewById(R.id.multimodal_button_add);
-			add.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent();
-					Bundle b = new Bundle();
-					byte[] nLTemplate = subject.getTemplate().getFaces().save().toByteArray();
-					b.putByteArray(RECORD_REQUEST_FACE , Arrays.copyOf(nLTemplate, nLTemplate.length));
-					intent.putExtras(b);
-					setResult(RESULT_OK, intent);
-					finish();
-				}
-			});
-		} catch (Exception e) {
-			showError(e);
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		//Experiment
-		if (mLicensesObtained && mStatus == Status.CAPTURING) {
-			startCapturing();
-		}
-	}
 
 	@Override
 	protected List<String> getAdditionalComponents() {

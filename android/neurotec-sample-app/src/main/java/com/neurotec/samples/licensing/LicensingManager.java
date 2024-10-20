@@ -101,14 +101,14 @@ public final class LicensingManager {
 
 	public static boolean isActivated(String license) {
 		//Experiment cause Operation is not activated
-		return true;
-//		if (license == null) throw new NullPointerException("license");
-//		try {
-//			return NLicense.isComponentActivated(license);
-//		} catch (IOException e) {
-//			Log.e(TAG, "IOException", e);
-//			return false;
-//		}
+//		return true;
+		if (license == null) throw new NullPointerException("license");
+		try {
+			return NLicense.isComponentActivated(license);
+		} catch (IOException e) {
+			Log.e(TAG, "IOException", e);
+			return false;
+		}
 	}
 
 	public static boolean isFaceExtractionActivated() {
@@ -281,8 +281,8 @@ public final class LicensingManager {
 			Log.i(TAG, String.format("Obtaining '%s' license %s.", component, available ? "succeeded" : "failed"));
 		}
 		//Experiment cause Operation is not activated
-		//return result;
-		return true;
+		return result;
+		//return true;
 	}
 
 	public List<String> obtainLicenses(Context context, String[] licenses) throws IOException {
@@ -301,9 +301,9 @@ public final class LicensingManager {
 			System.out.println("Licensing Managet 301: Address:" + address + "port: " + port + ", " +  license);
 			boolean available = NLicense.obtain(address, port, license);
 			//Experiment cause Operation is not activated, so we just add all the licenses
-			//if (available) {
+			if (available) {
 				obtainedLicenses.add(license);
-			//}
+			}
 			Log.i(TAG, String.format("Obtaining '%s' license %s.", license, available ? "succeeded" : "failed"));
 		}
 		return obtainedLicenses;

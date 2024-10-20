@@ -24,6 +24,7 @@ class BiometricModule internal constructor(reactContext: ReactApplicationContext
                 Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity::class.java)
                // Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
                 //Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
+                //Intent(activity, com.reactnativewithoutexpo.multibiometric.preferences.FacePreferences::class.java)
             activity.startActivity(intent)
         }
     }

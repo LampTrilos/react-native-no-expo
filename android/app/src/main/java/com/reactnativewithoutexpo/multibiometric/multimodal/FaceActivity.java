@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.FaceDetector;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -37,6 +38,7 @@ import com.neurotec.devices.NDeviceType;
 import com.neurotec.images.NImage;
 import com.neurotec.licensing.gui.ActivationActivity;
 import com.neurotec.media.NMediaFormat;
+import com.neurotec.samples.app.BaseActivity;
 import com.neurotec.samples.licensing.LicensingManager;
 import com.reactnativewithoutexpo.multibiometric.Model;
 import com.reactnativewithoutexpo.R;
@@ -54,7 +56,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
-public final class FaceActivity extends BiometricActivity implements CameraControlsListener, CameraFormatSelectionListener {
+public final class FaceActivity extends BiometricActivity implements CameraControlsListener, CameraFormatSelectionListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
 	private static final int REQUEST_CAMERA_PERMISSION = 1;
 	private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
@@ -84,52 +86,49 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 
 
 	//Experiment to get license when bypassing Multimodal Activity
-//	private static List<String> getRequiredPermissions() {
-//		List<String> permissions = new ArrayList<String>();
-//		permissions.add(Manifest.permission.INTERNET);
-//		permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
-//		permissions.add(Manifest.permission.CAMERA);
-//		permissions.add(Manifest.permission.RECORD_AUDIO);
-//		permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+	private static List<String> getRequiredPermissions() {
+		List<String> permissions = new ArrayList<String>();
+		permissions.add(Manifest.permission.INTERNET);
+		permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
+		permissions.add(Manifest.permission.CAMERA);
+		permissions.add(Manifest.permission.RECORD_AUDIO);
+		permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+		return permissions;
+	}
+	private String[] getNotGrantedPermissions() {
+		List<String> neededPermissions = new ArrayList<String>();
 
-//		if (android.os.Build.VERSION.SDK_INT < 23) {
-//			permissions.add(Manifest.permission.WRITE_SETTINGS);
-//		}
-//		return permissions;
-//	}
-//	private String[] getNotGrantedPermissions() {
-//		List<String> neededPermissions = new ArrayList<String>();
-//
-//		for (String permission : getRequiredPermissions()) {
-//			//if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-//				neededPermissions.add(permission);
-//			//}
-//		}
-//		return neededPermissions.toArray(new String[neededPermissions.size()]);
-//	}
-//
-//
-//	private void requestPermissions(String[] permissions) {
-//		ActivityCompat.requestPermissions(this, permissions,REQUEST_ID_MULTIPLE_PERMISSIONS);
-//	}
+		for (String permission : getRequiredPermissions()) {
+			//if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+				neededPermissions.add(permission);
+			//}
+		}
+		return neededPermissions.toArray(new String[neededPermissions.size()]);
+	}
+
+
+	private void requestPermissions(String[] permissions) {
+		ActivityCompat.requestPermissions(this, permissions,REQUEST_ID_MULTIPLE_PERMISSIONS);
+	}
 
 
 
 	//@Override
     private Boolean getLicensesAndPermissions(Object... params) {
-		//Get permission for camera
-		List<String> permissions = new ArrayList<>();
-		permissions.add(Manifest.permission.CAMERA);
-		ActivityCompat.requestPermissions(this, permissions.toArray(new String[1]), REQUEST_ID_MULTIPLE_PERMISSIONS);
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-		}
-		//String[] neededPermissions = getNotGrantedPermissions();
+		//// We don't have permission so prompt the user to Get permission for camera
+//		List<String> permissions = new ArrayList<>();
+//		permissions.add(Manifest.permission.CAMERA);
+//		ActivityCompat.requestPermissions(this, permissions.toArray(new String[1]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+//		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+//		}
 
-		//requestPermissions(neededPermissions);
+		String[] neededPermissions = getNotGrantedPermissions();
 
-		showProgress(R.string.msg_obtaining_licenses);
+		requestPermissions(neededPermissions);
 
+//		showProgress(R.string.msg_obtaining_licenses);
+//
 		try {
 			LicensingManager.getInstance().obtain(FaceActivity.this, getAdditionalComponentsInternal());
 			if (LicensingManager.getInstance().obtain(FaceActivity.this, getMandatoryComponentsInternal())) {
@@ -143,7 +142,8 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		showProgress(R.string.msg_initializing_client);
 
 		try {
-			NBiometricClient client = Model.getInstance().getClient();
+			//NBiometricClient client = Model.getInstance().getClient();
+			client = Model.getInstance().getClient();
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage(), e);
 			return false;
@@ -202,13 +202,66 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		} catch (Exception e) {
 			showError(e);
 		}
+		new InitializationTask().execute();
+    }
+
+
+	final class InitializationTask extends AsyncTask<Object, Boolean, Boolean> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showProgress(R.string.msg_initializing);
+		}
+
+		@Override
+		protected Boolean doInBackground(Object... params) {
+			showProgress(R.string.msg_obtaining_licenses);
+			try {
+				LicensingManager.getInstance().obtain(FaceActivity.this, getAdditionalComponentsInternal());
+				if (LicensingManager.getInstance().obtain(FaceActivity.this, getMandatoryComponentsInternal())) {
+					showToast(R.string.msg_licenses_obtained);
+				} else {
+					showToast(R.string.msg_licenses_partially_obtained);
+				}
+			} catch (Exception e) {
+				showError(e.getMessage(), false);
+			}
+			showProgress(R.string.msg_initializing_client);
+
+			try {
+				//Experiment to see what makes it click
+				//NBiometricClient client = Model.getInstance().getClient();
+				client = Model.getInstance().getClient();
+				client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage(), e);
+				return false;
+			}
+			return true;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			hideProgress();
+		}
 	}
+
+
+
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		//Experiment
 		if (mLicensesObtained && mStatus == Status.CAPTURING) {
+//			try {
+//				Thread.sleep(12000); // Delay for 2 seconds
+//				startCapturing();
+//			} catch (InterruptedException e) {
+//				throw new RuntimeException(e);
+//			}
 			startCapturing();
 		}
 	}
@@ -219,7 +272,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	// ===========================================================
 
 	private void startCapturing() {
-		//Face Preferences are changed in the file /preferences/FacePreferences
+		//Face Preferences are changed in the file /preferences/FacePreferences// Delay for 2 seconds
 		NSubject subject = new NSubject();
 
 		NFace face = new NFace();
@@ -243,7 +296,12 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		face.setCaptureOptions(options);
 		mFaceView.setFace(face);
 		subject.getFaces().add(face);
+		try {
+			Thread.sleep(1000);
 		capture(subject, (FacePreferences.isShowIcaoWarnings(this) || FacePreferences.isShowIcaoTextWarnings(this)) ? EnumSet.of(NBiometricOperation.ASSESS_QUALITY) : null);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void setCameraControlsVisible(final boolean value) {
@@ -422,7 +480,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		}).start();
 	}
 
-	//this method was changed so that when called from CameraControlsView, it always switches to the 3d device, as it has better quality
+	//Τhis method was changed so that it always switches to the 3d device, as it has better quality
 	@Override
 	public void onSwitchCamera() {
 		//NCamera currentCamera = client.getFaceCaptureDevice();
@@ -433,7 +491,8 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 					cancel();
 					//Explicitly set the camera to the good one, 0 is Microphone, 1 is the bad camera, 3 does not exist
 				System.out.println("CHANGING CAMERA TO THE BEST OF THE TWO");
-				client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
+				//Experiment
+				//client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
 				//	client.setFaceCaptureDevice((NCamera) device);
 				//	startCapturing();
 					//break;

@@ -1,11 +1,12 @@
 package com.reactnativewithoutexpo
 
+import android.Manifest
 import android.content.Intent
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity
 
 
 class BiometricModule internal constructor(reactContext: ReactApplicationContext?) :
@@ -21,16 +22,16 @@ class BiometricModule internal constructor(reactContext: ReactApplicationContext
         if (activity != null) {
             Log.d("CalendarModule", "Called Biometric Module!!SADFASDF asfdASDAFAF asdFSADFSAFsad.. Activity is  not null")
             val intent =
-                //Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity::class.java, 1)
+             Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity::class.java)
+            activity.startActivity(intent)
+
 //            val faceActivity = Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity::class.java)
 //            activity.startActivityForResult(faceActivity, 1)
-                Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity::class.java)
                // Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
                 //Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
                 //Intent(activity, com.reactnativewithoutexpo.multibiometric.preferences.FacePreferences::class.java)
 
 
-            activity.startActivity(intent)
         }
     }
 }

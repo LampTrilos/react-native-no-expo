@@ -21,7 +21,7 @@ public abstract class BaseActivity extends Activity {
 	// Protected methods
 	// ===========================================================
 
-	protected void showProgress(int messageId) {
+	public void showProgress(int messageId) {
 		showProgress(getString(messageId));
 	}
 

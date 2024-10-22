@@ -202,7 +202,8 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 	}
 
 	private void requestPermissions(String[] permissions) {
-		ActivityCompat.requestPermissions(this, permissions,REQUEST_ID_MULTIPLE_PERMISSIONS);
+		//Experiment to test how to make FaceACtivity run on its own
+		//ActivityCompat.requestPermissions(this, permissions,REQUEST_ID_MULTIPLE_PERMISSIONS);
 	}
 
 	private void verify() {
@@ -600,12 +601,12 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 		});
 
 		updateRecordCount(mFaces, mFingers, mIris, mVoice);
-
+//Experiment to check where the actual camera permission is loaded and why FaceActivity can't start on its own
 		String[] neededPermissions = getNotGrantedPermissions();
 		if(neededPermissions.length == 0) {
-			new InitializationTask().execute();
+			//new InitializationTask().execute();
 		} else {
-			requestPermissions(neededPermissions);
+		//	requestPermissions(neededPermissions);
 		}
 	}
 
@@ -700,37 +701,7 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//Code bitches about the cases when the attirubute is not final, so i replaced it with if-else
-//		switch (item.getItemId()) {
-//			case R.id.action_clear_db: {
-//				new AlertDialog.Builder(this)
-//				.setTitle("Clear database")
-//				.setMessage("Are you sure you want to clear database?")
-//				.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						Model.getInstance().getClient().clear();
-//					}
-//				}).setNegativeButton("Cancel", null).show();
-//			} break;
-//			case R.id.action_view_db: {
-//				showDatabase();
-//			} break;
-//			case R.id.action_activation: {
-//				Intent activation = new  Intent(this, ActivationActivity.class);
-//				Bundle params = new Bundle();
-//				params.putStringArrayList(ActivationActivity.LICENSES, new ArrayList<String>(getAllComponentsInternal()));
-//				activation.putExtras(params);
-//				startActivity(activation);
-//			} break;
-//			case R.id.action_preferences: {
-//				startActivity(new Intent(this, MultimodalPreferences.class));
-//			} break;
-//			case R.id.action_connection: {
-//				startActivity(new Intent(this, ConnectionPreferences.class));
-//			} break;
-//		}
 		int itemId = item.getItemId();  // Get the item ID once
-
 		if (itemId == R.id.action_clear_db) {
 			new AlertDialog.Builder(this)
 					.setTitle("Clear database")
@@ -760,41 +731,42 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 	}
 
 	public void onRequestPermissionsResult(int requestCode, final String permissions[], final int[] grantResults) {
-		switch (requestCode) {
-			case REQUEST_ID_MULTIPLE_PERMISSIONS: {
-				if (grantResults.length > 0) {
-
-					// Check if all permissions granted
-					if (!ifAllPermissionsGranted(grantResults)) {
-						showDialogOK(WARNING_PROCEED_WITH_NOT_GRANTED_PERMISSIONS,
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										switch (which) {
-											case DialogInterface.BUTTON_POSITIVE:
-												Log.w(TAG, WARNING_NOT_ALL_GRANTED);
-												for(int i = 0; i < permissions.length;i++) {
-													if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-														Log.w(TAG, permissions[i] + ": PERMISSION_DENIED");
-													}
-												}
-												new InitializationTask().execute();
-												break;
-											case DialogInterface.BUTTON_NEGATIVE:
-												requestPermissions(permissions);
-												break;
-											default:
-												throw new AssertionError("Unrecognised permission dialog parameter value");
-										}
-									}
-								});
-					} else {
-						Log.i(TAG, MESSAGE_ALL_PERMISSIONS_GRANTED);
-						new InitializationTask().execute();
-					}
-				}
-			}
-		}
+		//Experiment to check where the actual camera permission is loaded and why FaceActivity can't start on its own
+//		switch (requestCode) {
+//			case REQUEST_ID_MULTIPLE_PERMISSIONS: {
+//				if (grantResults.length > 0) {
+//
+//					// Check if all permissions granted
+//					if (!ifAllPermissionsGranted(grantResults)) {
+//						showDialogOK(WARNING_PROCEED_WITH_NOT_GRANTED_PERMISSIONS,
+//								new DialogInterface.OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog, int which) {
+//										switch (which) {
+//											case DialogInterface.BUTTON_POSITIVE:
+//												Log.w(TAG, WARNING_NOT_ALL_GRANTED);
+//												for(int i = 0; i < permissions.length;i++) {
+//													if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+//														Log.w(TAG, permissions[i] + ": PERMISSION_DENIED");
+//													}
+//												}
+//												new InitializationTask().execute();
+//												break;
+//											case DialogInterface.BUTTON_NEGATIVE:
+//												requestPermissions(permissions);
+//												break;
+//											default:
+//												throw new AssertionError("Unrecognised permission dialog parameter value");
+//										}
+//									}
+//								});
+//					} else {
+//						Log.i(TAG, MESSAGE_ALL_PERMISSIONS_GRANTED);
+//						new InitializationTask().execute();
+//					}
+//				}
+//			}
+//		}
 	}
 
 	final class InitializationTask extends AsyncTask<Object, Boolean, Boolean> {
@@ -821,6 +793,7 @@ public final class MultiModalActivity extends BaseActivity implements ActivityCo
 			showProgress(R.string.msg_initializing_client);
 
 			try {
+				//Experiment to see what makes it click
 				NBiometricClient client = Model.getInstance().getClient();
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage(), e);

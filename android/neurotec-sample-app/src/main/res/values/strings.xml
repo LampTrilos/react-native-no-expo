@@ -134,7 +134,7 @@
 	<string name="msg_error">Error</string>
 	<string name="msg_format_license_directory_not_available">Can not find license files. License files should be placed on SDCard in %s directory.</string>
 	<string name="msg_initializing">Initializing...</string>
-	<string name="msg_obtaining_licenses">Obtaining licenses...</string>
+	<string name="msg_obtaining_licenses">Έλεγχος αδειών χρήσης...</string>
 	<string name="msg_protection_governor_not_started">Protection governor not started</string>
 	<string name="msg_sdcard_not_ready_for_reading">SD card is not ready for reading. Please unmounted it from PC and try again.</string>
 	<string name="msg_question_manage_networks">Would you like to manage your network connections now?</string>

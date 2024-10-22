@@ -298,7 +298,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		subject.getFaces().add(face);
 		try {
 			//We use sleep because the device needs a little more time to initialize
-			Thread.sleep(1000);
+			Thread.sleep(1300);
 			//Explicitly set the camera to the good one, 0 is Microphone, 1 is the bad camera, 3 does not exist
 			client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
 		capture(subject, (FacePreferences.isShowIcaoWarnings(this) || FacePreferences.isShowIcaoTextWarnings(this)) ? EnumSet.of(NBiometricOperation.ASSESS_QUALITY) : null);

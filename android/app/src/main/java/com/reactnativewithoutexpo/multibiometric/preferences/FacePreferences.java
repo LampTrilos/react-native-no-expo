@@ -64,15 +64,15 @@ public final class FacePreferences extends PreferenceActivity {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
 		client.setFacesMatchingSpeed(NMatchingSpeed.get(Integer.valueOf(preferences.getString(MATCHING_SPEED, String.valueOf(NMatchingSpeed.LOW.getValue())))));
-		client.setMatchingThreshold(Integer.valueOf(preferences.getString(MATCHING_THRESHOLD, "48")));
+		client.setMatchingThreshold(Integer.valueOf(preferences.getString(MATCHING_THRESHOLD, "20")));
 
 		client.setFacesConfidenceThreshold((byte) preferences.getInt(CONFIDENCE_THRESHOLD, 40));
 		//Quality threshold
-		client.setFacesQualityThreshold((byte) preferences.getInt(QUALITY_THRESHOLD, 30));
+		client.setFacesQualityThreshold((byte) preferences.getInt(QUALITY_THRESHOLD, 10));
 		//Anti-2D photo mechanism
 		client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.NONE.getValue())))));
 		//client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.ACTIVE.getValue())))));
-		client.setFacesLivenessThreshold((byte) preferences.getInt(LIVENESS_THRESHOLD, 50));
+		client.setFacesLivenessThreshold((byte) preferences.getInt(LIVENESS_THRESHOLD, 20));
 		//Distance between the eyes
 		client.setFacesMinimalInterOcularDistance(preferences.getInt(MIN_IOD, 40));
 
@@ -86,7 +86,8 @@ public final class FacePreferences extends PreferenceActivity {
 		client.setFacesDetermineAge(!isUseLiveness(context) && preferences.getBoolean(DETERMINE_AGE, true));
 		client.setFacesCreateThumbnailImage(preferences.getBoolean(CREATE_THUMBNAIL, false));
 		client.setFacesThumbnailImageWidth(preferences.getInt(THUMBNAIL_WIDTH, 90));
-		client.setFacesCheckIcaoCompliance(preferences.getBoolean(ICAO_SHOW_WARNINGS, true));
+		//Live warnings also prevent the photo to be taken if something is wrong
+		client.setFacesCheckIcaoCompliance(preferences.getBoolean(ICAO_SHOW_WARNINGS, false));
 		//My change because this method doesn't exist anymore
 		//client.setFacesRecognizeExpression(preferences.getBoolean(RECOGNIZE_EXPRESSION, false));
 	}

@@ -15,7 +15,7 @@
     <string name="msg_extract">Extract</string>
     <string name="msg_id_requirements">User id must be non-empty and unique</string>
     <string name="msg_initializing">Initializing…</string>
-    <string name="msg_initializing_client">Initializing client…</string>
+    <string name="msg_initializing_client">Παραμετροποίηση συσκευής…</string>
     <string name="msg_copying_resources">Copying resources…</string>
     <string name="msg_load">Load</string>
     <string name="msg_please_wait">Please wait…</string>
@@ -306,7 +306,7 @@
     <string name="preferences_iris_maximal_rotation">Maximal rotation</string>
     <string name="title_activity_activation">ActivationActivity</string>
 
-    <string name="msg_obtaining_licenses">Obtaining licenses...</string>
+    <string name="msg_obtaining_licenses">Έλεγχος αδειών χρήσης...</string>
     <string name="msg_license_file_is_not_selected">License file is not selected</string>
     <string name="msg_licenses_not_obtained">Licenses were not obtained</string>
     <string name="msg_licenses_partially_obtained">Not all Licenses were obtained</string>

@@ -216,6 +216,7 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 					}
 				}
 			});
+			//Retry button
 			Button mRetryButton = (Button) findViewById(R.id.multimodal_button_retry);
 			mRetryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -224,6 +225,7 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 				}
 			});
 			Button mAddButton = (Button) findViewById(R.id.multimodal_button_add);
+			mAddButton.setVisibility(View.GONE);
 			mAddButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -231,6 +233,7 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 				}
 			});
 			Button mDiscardButton = (Button) findViewById(R.id.multimodal_button_discard);
+			mDiscardButton.setVisibility(View.GONE);
 			mDiscardButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -238,8 +241,9 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 					finish();
 				}
 			});
+			//Save button
 			Button mUnboundButton = (Button) findViewById(R.id.multimodal_button_unbound);
-			mUnboundButton.setVisibility(View.INVISIBLE);
+			mUnboundButton.setVisibility(View.VISIBLE);
 			new InitializationTask().execute(savedInstanceState == null);
 		} catch (Exception e) {
 			showError(e);

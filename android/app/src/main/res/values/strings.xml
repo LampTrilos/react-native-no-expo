@@ -309,8 +309,8 @@
     <string name="msg_obtaining_licenses">Έλεγχος αδειών χρήσης...</string>
     <string name="msg_license_file_is_not_selected">License file is not selected</string>
     <string name="msg_licenses_not_obtained">Licenses were not obtained</string>
-    <string name="msg_licenses_partially_obtained">Not all Licenses were obtained</string>
-    <string name="msg_licenses_obtained">Licenses were obtained</string>
+    <string name="msg_licenses_partially_obtained">Δεν πιστοποιήθηκαν οι άδειες</string>
+    <string name="msg_licenses_obtained">Οι άδειες πιστοποιήθηκαν</string>
     <string name="msg_cancel">Cancel</string>
 
 

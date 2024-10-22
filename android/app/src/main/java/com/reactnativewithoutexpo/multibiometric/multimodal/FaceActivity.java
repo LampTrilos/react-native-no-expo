@@ -110,48 +110,6 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	private void requestPermissions(String[] permissions) {
 		ActivityCompat.requestPermissions(this, permissions,REQUEST_ID_MULTIPLE_PERMISSIONS);
 	}
-
-
-
-	//@Override
-    private Boolean getLicensesAndPermissions(Object... params) {
-		//// We don't have permission so prompt the user to Get permission for camera
-//		List<String> permissions = new ArrayList<>();
-//		permissions.add(Manifest.permission.CAMERA);
-//		ActivityCompat.requestPermissions(this, permissions.toArray(new String[1]), REQUEST_ID_MULTIPLE_PERMISSIONS);
-//		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-//		}
-
-		String[] neededPermissions = getNotGrantedPermissions();
-
-		requestPermissions(neededPermissions);
-
-//		showProgress(R.string.msg_obtaining_licenses);
-//
-		try {
-			LicensingManager.getInstance().obtain(FaceActivity.this, getAdditionalComponentsInternal());
-			if (LicensingManager.getInstance().obtain(FaceActivity.this, getMandatoryComponentsInternal())) {
-				showToast(R.string.msg_licenses_obtained);
-			} else {
-				showToast(R.string.msg_licenses_partially_obtained);
-			}
-		} catch (Exception e) {
-			showError(e.getMessage(), false);
-		}
-		showProgress(R.string.msg_initializing_client);
-
-		try {
-			//NBiometricClient client = Model.getInstance().getClient();
-			client = Model.getInstance().getClient();
-		} catch (Exception e) {
-			Log.e(TAG, e.getMessage(), e);
-			return false;
-		}
-		return true;
-	}
-
-
 	// ===========================================================
 	// Protected methods
 	// ===========================================================
@@ -202,10 +160,11 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		} catch (Exception e) {
 			showError(e);
 		}
+		//On create, we initialize the client(devices etc..) and the permissions
 		new InitializationTask().execute();
     }
 
-
+	//On create, we initialize the client(devices etc..) and the permissions
 	final class InitializationTask extends AsyncTask<Object, Boolean, Boolean> {
 
 		@Override
@@ -254,14 +213,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//Experiment
 		if (mLicensesObtained && mStatus == Status.CAPTURING) {
-//			try {
-//				Thread.sleep(12000); // Delay for 2 seconds
-//				startCapturing();
-//			} catch (InterruptedException e) {
-//				throw new RuntimeException(e);
-//			}
 			startCapturing();
 		}
 	}
@@ -512,8 +464,10 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	public static List<String> mandatoryComponents() {
 		return Arrays.asList(LicensingManager.LICENSE_DEVICES_CAMERAS,
 				LicensingManager.LICENSE_FACE_DETECTION,
-				LicensingManager.LICENSE_FACE_EXTRACTION,
-				LicensingManager.LICENSE_FACE_MATCHING);
+				LicensingManager.LICENSE_FACE_EXTRACTION
+				//There is no Face Matching capability
+				//LicensingManager.LICENSE_FACE_MATCHING);
+				);
 	}
 
 	public static List<String> additionalComponents() {

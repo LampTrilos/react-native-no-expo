@@ -297,7 +297,7 @@ public final class FingerActivity extends BiometricActivity {
 	public static List<String> mandatoryComponents() {
 		return Arrays.asList(LicensingManager.LICENSE_FINGER_DETECTION,
 				LicensingManager.LICENSE_FINGER_EXTRACTION,
-				LicensingManager.LICENSE_FINGER_MATCHING,
+				//LicensingManager.LICENSE_FINGER_MATCHING,
 				LicensingManager.LICENSE_FINGER_DEVICES_SCANNERS);
 	}
 

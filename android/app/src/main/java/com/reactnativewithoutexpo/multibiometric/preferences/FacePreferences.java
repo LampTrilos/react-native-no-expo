@@ -66,18 +66,18 @@ public final class FacePreferences extends PreferenceActivity {
 		client.setFacesMatchingSpeed(NMatchingSpeed.get(Integer.valueOf(preferences.getString(MATCHING_SPEED, String.valueOf(NMatchingSpeed.LOW.getValue())))));
 		client.setMatchingThreshold(Integer.valueOf(preferences.getString(MATCHING_THRESHOLD, "48")));
 
-		client.setFacesConfidenceThreshold((byte) preferences.getInt(CONFIDENCE_THRESHOLD, 50));
+		client.setFacesConfidenceThreshold((byte) preferences.getInt(CONFIDENCE_THRESHOLD, 40));
 		//Quality threshold
-		client.setFacesQualityThreshold((byte) preferences.getInt(QUALITY_THRESHOLD, 40));
+		client.setFacesQualityThreshold((byte) preferences.getInt(QUALITY_THRESHOLD, 30));
 		//Anti-2D photo mechanism
 		client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.NONE.getValue())))));
 		//client.setFacesLivenessMode(NLivenessMode.get(Integer.valueOf(preferences.getString(LIVENESS_MODE, String.valueOf(NLivenessMode.ACTIVE.getValue())))));
-		client.setFacesLivenessThreshold((byte) preferences.getInt(LIVENESS_THRESHOLD, 75));
+		client.setFacesLivenessThreshold((byte) preferences.getInt(LIVENESS_THRESHOLD, 50));
 		//Distance between the eyes
 		client.setFacesMinimalInterOcularDistance(preferences.getInt(MIN_IOD, 40));
 
-		client.setFacesMaximalYaw(Float.valueOf(preferences.getInt(MAXIMAL_YAW, 15)));
-		client.setFacesMaximalRoll(Float.valueOf(preferences.getInt(MAXIMAL_ROLL, 15)));
+		client.setFacesMaximalYaw(Float.valueOf(preferences.getInt(MAXIMAL_YAW, 10)));
+		client.setFacesMaximalRoll(Float.valueOf(preferences.getInt(MAXIMAL_ROLL, 10)));
 
 		client.setFacesDetectAllFeaturePoints(preferences.getBoolean(DETECT_ALL_FEATURE_POINTS, false));
 		client.setFacesDetermineGender(preferences.getBoolean(DETERMINE_GENDER, true));

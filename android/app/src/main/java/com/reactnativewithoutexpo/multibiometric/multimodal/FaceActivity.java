@@ -233,7 +233,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 				//Experiment to see what makes it click
 				//NBiometricClient client = Model.getInstance().getClient();
 				client = Model.getInstance().getClient();
-				client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
+				//client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(600));
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage(), e);
 				return false;
@@ -297,7 +297,10 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		mFaceView.setFace(face);
 		subject.getFaces().add(face);
 		try {
+			//We use sleep because the device needs a little more time to initialize
 			Thread.sleep(1000);
+			//Explicitly set the camera to the good one, 0 is Microphone, 1 is the bad camera, 3 does not exist
+			client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
 		capture(subject, (FacePreferences.isShowIcaoWarnings(this) || FacePreferences.isShowIcaoTextWarnings(this)) ? EnumSet.of(NBiometricOperation.ASSESS_QUALITY) : null);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);

@@ -36,7 +36,7 @@ public final class Model extends ReactContextBaseJavaModule {
 	// ===========================================================
 	// Public static methods
 	// ===========================================================
-
+	//If the instance has already been created, the constructor will not be called again, and the existing instance will be returned.
 	public static Model getInstance() {
 		synchronized (Model.class) {
 			if (sInstance == null) {
@@ -86,6 +86,7 @@ public final class Model extends ReactContextBaseJavaModule {
 		}
 	}
 
+	//If the instance has already been created, the constructor will not be called again, and the existing instance will be returned.
 	private Model() {
 		super(reactContext);
 		mClient = new NBiometricClient();

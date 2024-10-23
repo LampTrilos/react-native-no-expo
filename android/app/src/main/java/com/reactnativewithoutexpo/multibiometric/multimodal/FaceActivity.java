@@ -190,10 +190,9 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 			showProgress(R.string.msg_initializing_client);
 
 			try {
-				//Experiment to see what makes it click
 				//NBiometricClient client = Model.getInstance().getClient();
+				//Client object is inherited from BiometricActivity, the Model class is final and the client object is static
 				client = Model.getInstance().getClient();
-				//client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(600));
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage(), e);
 				return false;

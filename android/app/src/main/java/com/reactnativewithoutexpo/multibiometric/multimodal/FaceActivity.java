@@ -115,6 +115,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	// ===========================================================
 
 	@Override
+	//At the end of onCreate, we run the InitializationTask, which initializes the user permissions, but most importantly the Client which controls the various devices of the tablet
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//Experiment to get the activation Licenses when skipping the Multimodal screen that normally handles it

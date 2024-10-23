@@ -124,17 +124,16 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		try {
 			PreferenceManager.setDefaultValues(this, R.xml.face_preferences, false);
 			LinearLayout layout = (LinearLayout) findViewById(R.id.multimodal_biometric_layout);
-
 			controlsView = new CameraControlsView(this, this);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-
 			controlsView.setLayoutParams(params);
 			layout.addView(controlsView);
-
 			mFaceView = new NFaceView(this);
 			mFaceView.setShowAge(true);
 			layout.addView(mFaceView);
 
+
+			//Retry button
 			Button backButton = (Button) findViewById(R.id.multimodal_button_retry);
 			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -145,6 +144,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 				}
 			});
 
+			//Save button
 			Button add = (Button) findViewById(R.id.multimodal_button_add);
 			add.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -209,8 +209,6 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	}
 
 
-
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -225,7 +223,8 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 	// ===========================================================
 
 	private void startCapturing() {
-		//Face Preferences are changed in the file /preferences/FacePreferences// Delay for 2 seconds
+		//Face Preferences are changed in the file /preferences/FacePreferences//
+		//Subject is also an object in BiometricActivity
 		NSubject subject = new NSubject();
 
 		NFace face = new NFace();
@@ -254,6 +253,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 			Thread.sleep(1300);
 			//Explicitly set the camera to the good one, 0 is Microphone, 1 is the bad camera, 3 does not exist
 			client.setFaceCaptureDevice((NCamera) client.getDeviceManager().getDevices().get(2));
+			//Capture function is declared in BiometricActivity
 		capture(subject, (FacePreferences.isShowIcaoWarnings(this) || FacePreferences.isShowIcaoTextWarnings(this)) ? EnumSet.of(NBiometricOperation.ASSESS_QUALITY) : null);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
@@ -269,19 +269,19 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		});
 	}
 
-	private NSubject createSubjectFromImage(Uri uri) {
-		NSubject subject = null;
-		try {
-			NImage image = NImageUtils.fromUri(this, uri);
-			subject = new NSubject();
-			NFace face = new NFace();
-			face.setImage(image);
-			subject.getFaces().add(face);
-		} catch (Exception e){
-			Log.i(TAG, "Failed to load file as NImage");
-		}
-		return subject;
-	}
+//	private NSubject createSubjectFromImage(Uri uri) {
+//		NSubject subject = null;
+//		try {
+//			NImage image = NImageUtils.fromUri(this, uri);
+//			subject = new NSubject();
+//			NFace face = new NFace();
+//			face.setImage(image);
+//			subject.getFaces().add(face);
+//		} catch (Exception e){
+//			Log.i(TAG, "Failed to load file as NImage");
+//		}
+//		return subject;
+//	}
 
 	private NSubject createSubjectFromFCRecord(Uri uri) {
 		NSubject subject = null;
@@ -351,30 +351,30 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		stop();
 	}
 
-	@Override
-	protected void onFileSelected(Uri uri) throws Exception {
-		mStatus = Status.OPENING_FILE;
-
-		NSubject subject = createSubjectFromImage(uri);
-
-		if (subject == null) {
-			subject = createSubjectFromFCRecord(uri);
-		}
-
-		if (subject == null) {
-			subject = createSubjectFromMemory(uri);
-		}
-
-		if (subject != null) {
-			if (!subject.getFaces().isEmpty()) {
-				mFaceView.setFace(subject.getFaces().get(0));
-			}
-			extract(subject);
-		} else {
-			mStatus = Status.CAPTURING;
-			showInfo("File did not contain valid information for subject");
-		}
-	}
+//	@Override
+//	protected void onFileSelected(Uri uri) throws Exception {
+//		mStatus = Status.OPENING_FILE;
+//
+//		NSubject subject = createSubjectFromImage(uri);
+//
+//		if (subject == null) {
+//			subject = createSubjectFromFCRecord(uri);
+//		}
+//
+//		if (subject == null) {
+//			subject = createSubjectFromMemory(uri);
+//		}
+//
+//		if (subject != null) {
+//			if (!subject.getFaces().isEmpty()) {
+//				mFaceView.setFace(subject.getFaces().get(0));
+//			}
+//			extract(subject);
+//		} else {
+//			mStatus = Status.CAPTURING;
+//			showInfo("File did not contain valid information for subject");
+//		}
+//	}
 
 	@Override
 	protected void onOperationStarted(NBiometricOperation operation) {
@@ -422,19 +422,19 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		return super.onKeyDown(keyCode, event);
 	}
 
-	@Override
-	public void onCameraFormatSelected(final NMediaFormat format) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				NCamera camera = Model.getInstance().getClient().getFaceCaptureDevice();
-				if (camera != null) {
-					camera.setCurrentFormat(format);
-				}
-
-			}
-		}).start();
-	}
+//	@Override
+//	public void onCameraFormatSelected(final NMediaFormat format) {
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				NCamera camera = Model.getInstance().getClient().getFaceCaptureDevice();
+//				if (camera != null) {
+//					camera.setCurrentFormat(format);
+//				}
+//
+//			}
+//		}).start();
+//	}
 
 	//Τhis method was changed so that it always switches to the 3d device, as it has better quality
 	@Override

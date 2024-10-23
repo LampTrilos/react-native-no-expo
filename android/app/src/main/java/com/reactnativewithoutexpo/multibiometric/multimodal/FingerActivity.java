@@ -247,25 +247,25 @@ public final class FingerActivity extends BiometricActivity {
 		return MODALITY_ASSET_DIRECTORY;
 	}
 
-	@Override
-	protected void onFileSelected(Uri uri) throws Exception {
-		NSubject subject = null;
-		mFingerView.setShownImage(FingerPreferences.isReturnBinarizedImage(this) ? ShownImage.RESULT : ShownImage.ORIGINAL);
-		subject = createSubjectFromImage(uri);
-
-		if (subject == null) {
-			subject = createSubjectFromMemory(uri);
-		}
-
-		if (subject != null) {
-			if (subject.getFingers() != null && subject.getFingers().get(0) != null) {
-				mFingerView.setFinger(subject.getFingers().get(0));
-			}
-			extract(subject);
-		} else {
-			showInfo(R.string.msg_failed_to_load_image_or_standard);
-		}
-	}
+//	@Override
+//	protected void onFileSelected(Uri uri) throws Exception {
+//		NSubject subject = null;
+//		mFingerView.setShownImage(FingerPreferences.isReturnBinarizedImage(this) ? ShownImage.RESULT : ShownImage.ORIGINAL);
+//		subject = createSubjectFromImage(uri);
+//
+//		if (subject == null) {
+//			subject = createSubjectFromMemory(uri);
+//		}
+//
+//		if (subject != null) {
+//			if (subject.getFingers() != null && subject.getFingers().get(0) != null) {
+//				mFingerView.setFinger(subject.getFingers().get(0));
+//			}
+//			extract(subject);
+//		} else {
+//			showInfo(R.string.msg_failed_to_load_image_or_standard);
+//		}
+//	}
 
 	@Override
 	protected void onStartCapturing() {

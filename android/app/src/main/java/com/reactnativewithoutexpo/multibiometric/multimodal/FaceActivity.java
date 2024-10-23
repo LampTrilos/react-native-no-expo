@@ -3,9 +3,6 @@ package com.reactnativewithoutexpo.multibiometric.multimodal;
 import static com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity.getAdditionalComponentsInternal;
 import static com.reactnativewithoutexpo.multibiometric.multimodal.MultiModalActivity.getMandatoryComponentsInternal;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,9 +15,12 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.neurotec.biometrics.NBiometricCaptureOption;
 import com.neurotec.biometrics.NBiometricOperation;
 import com.neurotec.biometrics.NBiometricStatus;
@@ -33,13 +33,8 @@ import com.neurotec.biometrics.standards.FCRFaceImage;
 import com.neurotec.biometrics.standards.FCRecord;
 import com.neurotec.biometrics.view.NFaceView;
 import com.neurotec.devices.NCamera;
-import com.neurotec.devices.NDevice;
-import com.neurotec.devices.NDeviceType;
-import com.neurotec.images.NImage;
-import com.neurotec.licensing.gui.ActivationActivity;
-import com.neurotec.media.NMediaFormat;
-import com.neurotec.samples.app.BaseActivity;
 import com.neurotec.samples.licensing.LicensingManager;
+import com.reactnativewithoutexpo.MainApplication;
 import com.reactnativewithoutexpo.multibiometric.Model;
 import com.reactnativewithoutexpo.R;
 import com.reactnativewithoutexpo.multibiometric.preferences.FacePreferences;
@@ -48,11 +43,16 @@ import com.reactnativewithoutexpo.multibiometric.view.CameraControlsView.CameraC
 import com.reactnativewithoutexpo.multibiometric.view.CameraFormatFragment;
 import com.reactnativewithoutexpo.multibiometric.view.CameraFormatFragment.CameraFormatSelectionListener;
 import com.neurotec.samples.util.IOUtils;
-import com.neurotec.samples.util.NImageUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -145,18 +145,26 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 			});
 
 			//Save button
-			Button add = (Button) findViewById(R.id.multimodal_button_add);
+			Button add = (Button) findViewById(R.id.multimodal_button_unbound);
 			add.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent();
-					Bundle b = new Bundle();
-					//Could this be the bytes of the image file?
-					byte[] nLTemplate = subject.getTemplate().getFaces().save().toByteArray();
-					b.putByteArray(RECORD_REQUEST_FACE , Arrays.copyOf(nLTemplate, nLTemplate.length));
-					intent.putExtras(b);
-					setResult(RESULT_OK, intent);
-					finish();
+//					Intent intent = new Intent();
+//					Bundle b = new Bundle();
+//					//Could this be the bytes of the image file?
+//					byte[] nLTemplate = subject.getTemplate().getFaces().save().toByteArray();
+//					b.putByteArray(RECORD_REQUEST_FACE , Arrays.copyOf(nLTemplate, nLTemplate.length));
+//					intent.putExtras(b);
+//					setResult(RESULT_OK, intent);
+					//Now we will emit the face file to the Javascript screen (FaceCapture.tsx)
+                    try {
+                        //emitFaceCaptureResult(subject.getFaces().get(0));
+						byte[] nLTemplate = subject.getTemplate().getFaces().save().toByteArray();
+                        emitFaceCaptureResult(nLTemplate);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    finish();
 				}
 			});
 		} catch (Exception e) {
@@ -165,6 +173,58 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 		//On create, we initialize the client(devices etc..) and the permissions
 		new InitializationTask().execute();
     }
+
+
+	//private void emitFaceCaptureResult(NFace faceObject) throws JSONException {
+	private void emitFaceCaptureResult(byte[] faceObject) throws JSONException {
+		// Convert the passportInfo to JSON string
+		//val gson = Gson()
+		//val passportJson = gson.toJson(passportInfo)
+		//The class responsible for showing the data in the original app is PassportDetailsFragment
+		//val passportJson = Gson()
+		JSONObject faceJson = new JSONObject();
+		faceJson.put("base64Value", convertToBase64(faceObject));
+
+		// Create a params map
+		com.facebook.react.bridge.WritableMap params = Arguments.createMap();
+		params.putString("faceData", faceJson.toString());
+
+		// Get the ReactApplicationContext from your application
+		ReactApplicationContext reactApplicationContext =
+                (ReactApplicationContext) ((MainApplication) getApplication())
+                        .getReactNativeHost()
+                        .getReactInstanceManager()
+                        .getCurrentReactContext();
+
+		// Emit the event back to JavaScript
+		if (reactApplicationContext != null) {
+			reactApplicationContext
+					.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+					.emit("onFaceDataReceived", params);
+		}
+	}
+
+
+	// Method to convert a Serializable object to a Base64 string
+	//public static String convertToBase64(NFace object) {
+	public static String convertToBase64(byte[] object) {
+		try {
+			// Serialize the object to a byte array
+//			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//			ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+//			objectOutputStream.writeObject(object);
+//			objectOutputStream.close();
+
+//			byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+			// Encode the byte array to a Base64 string
+			return Base64.getEncoder().encodeToString(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 	//On create, we initialize the client(devices etc..) and the permissions
 	final class InitializationTask extends AsyncTask<Object, Boolean, Boolean> {

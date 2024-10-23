@@ -176,7 +176,7 @@ class NfcActivity : androidx.fragment.app.FragmentActivity(), NfcFragment.NfcFra
 //        passportJson.put("chipChecked", sodFile?.chipChecked)
 //        passportJson.put("mrzChecked", sodFile?.mrzChecked)
 
-        // Create a params map
+        // Create a params map that will be the object sent with Intent
         val params = Arguments.createMap()
         params.putString("nfcData", passportJson.toString())
 

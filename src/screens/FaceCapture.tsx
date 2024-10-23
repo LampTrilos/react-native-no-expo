@@ -1,18 +1,44 @@
 
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Text} from "react-native-paper";
-import {NativeModules} from 'react-native';
+import {NativeModules, NativeEventEmitter} from 'react-native';
 
 
 
 export default function FaceCapture() {
     const {BiometricModule} = NativeModules;
     console.log('Calling Biometric Module.........................ASDFASDFSADFASDFSAFD')
-    BiometricModule.navigateToMultiModalActivity();
+    BiometricModule.navigateToFaceActivity() ;
+
+    //Upon press of the button, begin the FaceActivity to capture the image of the person
     const onPress = () => {
         //CalendarModule.createCalendarEvent('testName', 'testLocation');
-
+    console.log('Calling Biometric Module.........................ASDFASDFSADFASDFSAFD')
+    BiometricModule.navigateToFaceActivity() ;
     };
+
+    //When the Page is loaded, it creates a listener that listens to events from the FaceActivity, in this case an onFaceDataReceived event
+    //It also opens the camera for capture
+    useEffect(() => {
+        console.log('Starting FaceActivity...')
+        const eventEmitter = new NativeEventEmitter(NativeModules.DeviceEventManagerModule);
+        // Subscribe to the event from NFCActivity
+        const subscriptionNFC = eventEmitter.addListener('onFaceDataReceived', (data) => {
+            console.log('Face Data:', data.faceData);
+            //const parsedNFCData = parseMRZ(data.nfcData)
+            //console.log(data.faceData)
+            //Update the state about the current Check with the scanned MRZ Data, while also turning String back to json
+            //dispatch(setNFCData(JSON.parse(data.nfcData)));
+            //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
+        });
+
+        // Cleanup subscription on unmount
+        return () => {
+            subscriptionNFC.remove();
+        };
+        // Empty dependency array means this effect runs once when the component mounts
+    }, []);
+
     return (
         <>
             <Card>

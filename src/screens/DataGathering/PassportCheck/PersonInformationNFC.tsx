@@ -52,7 +52,7 @@ export default function PersonInformationNFC({style, currentCheck}) {
             subscriptionNFC.remove();
         };
         // Empty dependency array means this effect runs once when the component mounts
-    }, [currentCheck.nfcData]);
+    }, []);
 
 
     return (

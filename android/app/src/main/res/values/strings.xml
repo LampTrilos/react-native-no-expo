@@ -60,7 +60,7 @@
     <string name="msg_extraction">Extraction</string>
     <string name="msg_extracting">Extracting…</string>
     <string name="msg_extracting_please_wait">Extracting. Please wait…</string>
-    <string name="msg_extraction_succeeded">Extraction succeeded</string>
+    <string name="msg_extraction_succeeded">Η διαδικασία ολοκληρώθηκε επιτυχώς</string>
     <string name="msg_extraction_failed">Template extraction failed: %1$s</string>
     <string name="msg_liveness_check_failed">Liveness check failed</string>
 

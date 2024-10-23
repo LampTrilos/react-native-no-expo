@@ -26,7 +26,7 @@ public class CameraFormatFragment extends BaseDialogFragment {
 	// ===========================================================
 
 	public interface CameraFormatSelectionListener {
-		void onCameraFormatSelected(NMediaFormat format);
+		//void onCameraFormatSelected(NMediaFormat format);
 	}
 
 	// ===========================================================
@@ -88,29 +88,29 @@ public class CameraFormatFragment extends BaseDialogFragment {
 		}
 	}
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		View view = inflater.inflate(R.layout.fragment_list, null);
-		mItems = getArguments().getStringArrayList(EXTRA_FORMATS);
-		mListView = (ListView) view.findViewById(R.id.list);
-		mListView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mItems));
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				for (NMediaFormat format : Model.getInstance().getClient().getFaceCaptureDevice().getFormats()) {
-					if (format.toString().equals(mItems.get(position))) {
-						mListener.onCameraFormatSelected(format);
-						break;
-					}
-				}
-				dismiss();
-			}
-		});
-
-		builder.setView(view);
-		builder.setTitle(R.string.msg_camera_formats);
-		return builder.create();
-	}
+//	@Override
+//	public Dialog onCreateDialog(Bundle savedInstanceState) {
+//		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//		LayoutInflater inflater = getActivity().getLayoutInflater();
+//		View view = inflater.inflate(R.layout.fragment_list, null);
+//		mItems = getArguments().getStringArrayList(EXTRA_FORMATS);
+//		mListView = (ListView) view.findViewById(R.id.list);
+//		mListView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mItems));
+//		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				for (NMediaFormat format : Model.getInstance().getClient().getFaceCaptureDevice().getFormats()) {
+//					if (format.toString().equals(mItems.get(position))) {
+//						mListener.onCameraFormatSelected(format);
+//						break;
+//					}
+//				}
+//				dismiss();
+//			}
+//		});
+//
+//		builder.setView(view);
+//		builder.setTitle(R.string.msg_camera_formats);
+//		return builder.create();
+//	}
 }

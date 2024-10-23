@@ -205,17 +205,17 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 //					onStartCapturing();
 //				}
 //			});
-			Button mStopButton = (Button) findViewById(R.id.multimodal_button_stop);
-			mStopButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					try {
-						onStopCapturing();
-					} catch (Exception e) {
-						showError(e);
-					}
-				}
-			});
+//			Button mStopButton = (Button) findViewById(R.id.multimodal_button_stop);
+//			mStopButton.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					try {
+//						onStopCapturing();
+//					} catch (Exception e) {
+//						showError(e);
+//					}
+//				}
+//			});
 			//Retry button
 			Button mRetryButton = (Button) findViewById(R.id.multimodal_button_retry);
 			mRetryButton.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +224,11 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 					onBack();
 				}
 			});
+			//Save button
+			Button mUnboundButton = (Button) findViewById(R.id.multimodal_button_unbound);
+			mUnboundButton.setVisibility(View.VISIBLE);
+			new InitializationTask().execute(savedInstanceState == null);
+
 			Button mAddButton = (Button) findViewById(R.id.multimodal_button_add);
 			mAddButton.setVisibility(View.GONE);
 			mAddButton.setOnClickListener(new View.OnClickListener() {
@@ -241,10 +246,6 @@ public abstract class BiometricActivity extends BaseActivity implements Enrollme
 					finish();
 				}
 			});
-			//Save button
-			Button mUnboundButton = (Button) findViewById(R.id.multimodal_button_unbound);
-			mUnboundButton.setVisibility(View.VISIBLE);
-			new InitializationTask().execute(savedInstanceState == null);
 		} catch (Exception e) {
 			showError(e);
 		}

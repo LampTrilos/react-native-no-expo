@@ -14,8 +14,8 @@ export const currentCheckSlice = createSlice({
         //The data scanned via nfc from passport
         nfcData:  {},
         chipChecked: false,
-        //The face image of the checked person, in  Base64-encoded string
-        faceImage: "",
+        //The face Data of the checked person, in  Base64-encoded string
+        faceData: "",
         //The fingerprint file of the checked person, in  Base64-encoded string
         fingerprints: "",
     } as BorderCheck,
@@ -48,10 +48,14 @@ export const currentCheckSlice = createSlice({
             //state.value.mrzChecked =  true
             state.chipChecked =  true
         },
+            //Sets the data captured from the MRZ
+            setFaceData: (state, action) => {
+                state.faceData =  action.payload
+            },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMRZData, setNFCData } = currentCheckSlice.actions
+export const { setMRZData, setNFCData, setFaceData } = currentCheckSlice.actions
 
 export default currentCheckSlice.reducer

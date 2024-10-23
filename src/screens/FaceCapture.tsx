@@ -2,13 +2,18 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Text} from "react-native-paper";
 import {NativeModules, NativeEventEmitter} from 'react-native';
-
+import {useDispatch, useSelector} from "react-redux";
+import {setFaceData} from "../store/CurrentCheck.ts";
 
 
 export default function FaceCapture() {
     const {BiometricModule} = NativeModules;
-    console.log('Calling Biometric Module.........................ASDFASDFSADFASDFSAFD')
-    BiometricModule.navigateToFaceActivity() ;
+    //-------------Store section about the currentCheck(Person)---------------------//
+     const currentCheck = useSelector(state => state.currentCheckStore);
+     const dispatch = useDispatch();
+    //-------------End of store section about the currentCheck(Person)---------------------//
+//     console.log('Calling Biometric Module.........................ASDFASDFSADFASDFSAFD')
+//     BiometricModule.navigateToFaceActivity() ;
 
     //Upon press of the button, begin the FaceActivity to capture the image of the person
     const onPress = () => {
@@ -26,9 +31,9 @@ export default function FaceCapture() {
         const subscriptionNFC = eventEmitter.addListener('onFaceDataReceived', (data) => {
             console.log('Face Data:', data.faceData);
             //const parsedNFCData = parseMRZ(data.nfcData)
-            //console.log(data.faceData)
+            console.log(JSON.parse(data.faceData))
             //Update the state about the current Check with the scanned MRZ Data, while also turning String back to json
-            //dispatch(setNFCData(JSON.parse(data.nfcData)));
+            dispatch(setFaceData(JSON.parse(data.faceData)));
             //If the MRZ Scan was successful, begin a new subscription, this time for the NFC Scan
         });
 
@@ -42,10 +47,10 @@ export default function FaceCapture() {
     return (
         <>
             <Card>
-                <Card.Title title="Card Title" subtitle="Card Subtitle"  />
+                <Card.Title title="Title" subtitle="Subtitle"/>
                 <Card.Content>
 
-                    <Text variant="titleLarge">Card title</Text>
+                    <Text variant="titleLarge">{currentCheck.faceData.base64Value}</Text>
                     <Text variant="bodyMedium">Card content</Text>
                 </Card.Content>
                 <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />

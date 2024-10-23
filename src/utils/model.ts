@@ -98,22 +98,22 @@ export interface BorderCheck {
     //The data scanned via nfc from passport
     nfcData:  NFCData,
     chipChecked: boolean,
-    //The face image of the checked person, in  Base64-encoded string
-    faceImage: string,
+    //The face data of the checked person, in  Base64-encoded string
+    faceData: string,
     //The fingerprint file of the checked person, in  Base64-encoded string
     fingerprints: string
 }
 
 // Factory function for nfc data
-export const newBorderCheck = (mrzData: MRZData, mrzChecked: boolean, nfcData:  NFCData, chipChecked:  boolean, faceImage: string, fingerprints:  string): BorderCheck => ({
+export const newBorderCheck = (mrzData: MRZData, mrzChecked: boolean, nfcData:  NFCData, chipChecked:  boolean, faceData: string, fingerprints:  string): BorderCheck => ({
     //Just the first step of scanning mrz data, we keep it to compare it to the NFC Scan later
     mrzData,
     mrzChecked,
     //The data scanned via nfc from passport
     nfcData,
     chipChecked,
-    //The face image of the checked person, in  Base64-encoded string
-    faceImage,
+    //The face data of the checked person, in  Base64-encoded string
+    faceData,
     //The fingerprint file of the checked person, in  Base64-encoded string
     fingerprints
 });

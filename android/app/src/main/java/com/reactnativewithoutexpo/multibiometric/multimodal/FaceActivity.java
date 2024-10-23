@@ -151,6 +151,7 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 				public void onClick(View v) {
 					Intent intent = new Intent();
 					Bundle b = new Bundle();
+					//Could this be the bytes of the image file?
 					byte[] nLTemplate = subject.getTemplate().getFaces().save().toByteArray();
 					b.putByteArray(RECORD_REQUEST_FACE , Arrays.copyOf(nLTemplate, nLTemplate.length));
 					intent.putExtras(b);

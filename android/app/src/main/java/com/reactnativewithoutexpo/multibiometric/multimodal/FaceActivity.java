@@ -190,8 +190,9 @@ public final class FaceActivity extends BiometricActivity implements CameraContr
 			showProgress(R.string.msg_initializing_client);
 
 			try {
-				//NBiometricClient client = Model.getInstance().getClient();
 				//Client object is inherited from BiometricActivity, the Model class is final and the client object is static
+				//This is the first time that it is called, so theoretically
+				//NBiometricClient client = Model.getInstance().getClient();
 				client = Model.getInstance().getClient();
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage(), e);

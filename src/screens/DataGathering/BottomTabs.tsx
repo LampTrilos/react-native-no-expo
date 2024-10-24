@@ -3,6 +3,7 @@ import React, {useEffect} from "react";
 import PassportCheck from "./PassportCheck/PassportCheck.tsx";
 import SearchResults from "./SearchResults/SearchResults.tsx";
 import FaceCapture from "../FaceCapture.tsx";
+import LeftRightButtonsLayout from "../../components/LeftRightButtonsLayout"
 
 
 export default function BottomTabs() {
@@ -16,7 +17,7 @@ export default function BottomTabs() {
 
     //Bottom navigation attributes
     const PassportRoute = () => <PassportCheck/>;
-    const PhotoRoute = () => <FaceCapture/>;
+    const PhotoRoute = () => <LeftRightButtonsLayout><FaceCapture /></LeftRightButtonsLayout>;
     const BiometricsRoute = () => <FaceCapture/>;
     const ResultsRoute = () => <SearchResults/>;
 

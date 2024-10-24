@@ -35,17 +35,17 @@ export default function Dashboard({navigation}: Props) {
         openDrawer();
 
         // Listener for app state changes
-        const appStateListener = AppState.addEventListener('change', (nextAppState) => {
-            if (nextAppState === 'active') {
-                // When the app comes to the foreground, trigger the function
-                openDrawer();
-            }
-        });
-
-        // Cleanup the listener when the component unmounts
-        return () => {
-            appStateListener.remove();
-        };
+        // const appStateListener = AppState.addEventListener('change', (nextAppState) => {
+        //     if (nextAppState === 'active') {
+        //         // When the app comes to the foreground, trigger the function
+        //         openDrawer();
+        //     }
+        // });
+        //
+        // // Cleanup the listener when the component unmounts
+        // return () => {
+        //     appStateListener.remove();
+        // };
     }, [navigation]);
 
     //Store section about the logged in user

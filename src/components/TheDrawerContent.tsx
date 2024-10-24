@@ -51,6 +51,16 @@ export default function CustomDrawerContent(props) {
                         props.navigation.navigate('FakeScreen2');
                     }}
                 />
+                <PaperDrawer.Item
+                    label="Activation"
+                    icon={"passport"}
+                    theme={drawerItemTheme}
+                    active={active === 'fourth'}
+                    onPress={() => {
+                        setActive('third');
+                        props.navigation.navigate('Activation');
+                    }}
+                />
             </PaperDrawer.Section>
         </>
     );

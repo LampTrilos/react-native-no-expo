@@ -6,6 +6,7 @@ import {Navigation} from '../utils/types.tsx';
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import {DrawerActions} from '@react-navigation/native';
 import FaceCapture from "./FaceCapture.tsx";
+import Activation from "./Activation.tsx";
 import customTheme from '../assets/Theme'
 import CustomDrawerContent from "../components/TheDrawerContent.tsx";
 import {StyleSheet, Text, View} from "react-native";
@@ -41,7 +42,7 @@ export default function Dashboard({navigation}: Props) {
         dispatch(setStatus(ControlStatusTypes.None));
     }, []);
     //-------------------End of status store section------------------------//
-
+    //The actual content of the drawer (links) is declared in TheDrawerContent.tsx--//
     return (
         <Drawer.Navigator drawerRef={drawerRef} screenOptions={{
             drawerType: 'slide',
@@ -74,6 +75,7 @@ export default function Dashboard({navigation}: Props) {
             })}
             />
             <Drawer.Screen name="FakeScreen2" component={FaceCapture} options={{headerShown: false}}/>
+            <Drawer.Screen name="Activation" component={Activation} options={{headerShown: false}}/>
             {/*<Drawer.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>*/}
         </Drawer.Navigator>)
 };

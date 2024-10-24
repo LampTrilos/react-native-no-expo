@@ -15,6 +15,7 @@ class BiometricModule internal constructor(reactContext: ReactApplicationContext
         return "BiometricModule"
     }
 
+    //Routes to FaceActivity
     @ReactMethod
     fun navigateToFaceActivity() {
         Log.d("BiometricModule", "Called Biometric Module!!SADFASDF asfdASDAFAF asdFSADFSAFsad fASDFSADFSADF SDAFSAFasdf")
@@ -28,10 +29,26 @@ class BiometricModule internal constructor(reactContext: ReactApplicationContext
             val faceActivity = Intent(activity, com.reactnativewithoutexpo.multibiometric.multimodal.FaceActivity::class.java)
             activity.startActivityForResult(faceActivity, 1)
                // Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
-                //Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
                 //Intent(activity, com.reactnativewithoutexpo.multibiometric.preferences.FacePreferences::class.java)
+        }
+    }
 
-
+    //Routes to ActivationActivity
+    @ReactMethod
+    fun navigateToActivationActivity() {
+        Log.d(
+            "BiometricModule",
+            "Called Biometric Module!!SADFASDF asfdASDAFAF asdFSADFSAFsad fASDFSADFSADF SDAFSAFasdf"
+        )
+        val activity = currentActivity
+        if (activity != null) {
+            Log.d(
+                "BiometricModule",
+                "Called Biometric Module!!SADFASDF asfdASDAFAF asdFSADFSAFsad.. Activity is  not null"
+            )
+            val intent =
+                Intent(activity, com.neurotec.licensing.gui.ActivationActivity::class.java)
+            activity.startActivity(intent)
         }
     }
 }

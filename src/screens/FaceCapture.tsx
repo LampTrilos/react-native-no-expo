@@ -48,14 +48,14 @@ export default function FaceCapture() {
     return (
         <View style={styles.container}>
             <Text >{currentCheck.faceData.base64Value}</Text>
-            <View style={styles.containerRow}>
-            {/*<Button > Cancel </Button>*/}
-            <Button mode="contained"   icon="repeat" onPress={onPress}>Επανάληψη</Button>
-            </View>
             <Image
                 source={require('./../assets/demo-face.jpg')}
                 style={styles.image}
             />
+            <View style={styles.containerRow}>
+            {/*<Button > Cancel </Button>*/}
+            <Button mode="contained"   icon="repeat" onPress={onPress}>Επανάληψη</Button>
+            </View>
         </View>
     );
 };

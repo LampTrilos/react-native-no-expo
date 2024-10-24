@@ -28,7 +28,15 @@ export default function Dashboard({navigation}: Props) {
     const drawerRef = useRef(null);
     useEffect(() => {
         navigation.dispatch(DrawerActions.openDrawer());
-    }, []);
+
+        //To force a trigger when we return to this screen from another screen
+        const unsubscribe = navigation.addListener('focus', () => {
+            navigation.dispatch(DrawerActions.openDrawer());
+        });
+        // Cleanup the listener when the component unmounts
+        return unsubscribe;
+        //Navigation is in the dependencies so as to force a trigger when we return to this screen from another screen
+    }, [navigation]);
 
     //Store section about the logged in user
     const currentUser = useSelector(state => state.userDataStore.value.user);
@@ -74,8 +82,8 @@ export default function Dashboard({navigation}: Props) {
                     </Tooltip>),
             })}
             />
-            <Drawer.Screen name="FakeScreen2" component={FaceCapture} options={{headerShown: false}}/>
-            <Drawer.Screen name="Activation" component={Activation} options={{headerShown: false}}/>
+            <Drawer.Screen name="FakeScreen2" component={FaceCapture} options={{headerShown: true}}/>
+            <Drawer.Screen name="Activation" component={Activation} options={{headerShown: true}}/>
             {/*<Drawer.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>*/}
         </Drawer.Navigator>)
 };

@@ -28,7 +28,7 @@ export default function CustomDrawerContent(props) {
                     active={active === 'first'}
                     onPress={() => {
                         setActive('first');
-                        props.navigation.navigate('PassportCheck');
+                        props.navigation.navigate('BottomTabs');
                     }}
                 />
                 <PaperDrawer.Item

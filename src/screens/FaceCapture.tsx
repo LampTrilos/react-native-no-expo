@@ -1,9 +1,10 @@
 
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Text} from "react-native-paper";
-import {NativeModules, NativeEventEmitter} from 'react-native';
+import {NativeModules, NativeEventEmitter, Image, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {setFaceData} from "../store/CurrentCheck.ts";
+import CustomTheme from "../assets/Theme"
 
 
 export default function FaceCapture() {
@@ -45,20 +46,37 @@ export default function FaceCapture() {
     }, []);
 
     return (
-        <>
-            <Card>
-                <Card.Title title="Title" subtitle="Subtitle"/>
-                <Card.Content>
-
-                    <Text variant="titleLarge">{currentCheck.faceData.base64Value}</Text>
-                    <Text variant="bodyMedium">Card content</Text>
-                </Card.Content>
-                <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-                <Card.Actions>
-                    <Button>Cancel</Button>
-                    <Button onPress={onPress}>Ok</Button>
-                </Card.Actions>
-            </Card>
-        </>
+        <View style={styles.container}>
+            <Text >{currentCheck.faceData.base64Value}</Text>
+            <View style={styles.containerRow}>
+            {/*<Button > Cancel </Button>*/}
+            <Button mode="contained"   icon="repeat" onPress={onPress}>Επανάληψη</Button>
+            </View>
+            <Image
+                source={require('./../assets/demo-face.jpg')}
+                style={styles.image}
+            />
+        </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        padding: 15,
+        borderRadius: 15,
+    },
+    image: {
+        width: '100%',
+        height: '70%',
+        resizeMode: 'contain',
+    },
+    containerRow: {
+        flexDirection: 'row', // This makes the children arrange in a row
+        backgroundColor: CustomTheme.colors.background,
+        marginBottom: 5,
+    },
+});
